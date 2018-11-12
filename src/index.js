@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 
-import configureStore from "./redux";
+import createStore from "./redux";
 
 import Web from "./Web";
 import Header from "./component/header";
@@ -11,7 +11,7 @@ import Footer from "./component/footer";
 
 import "./index.css";
 
-const store = configureStore();
+const store = createStore();
 
 ReactDOM.render(
   <Provider store={store}>
