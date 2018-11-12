@@ -29,7 +29,6 @@ class Header extends React.Component {
   handleClickRegister() {}
   handleClickLogout() {}
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.log(nextProps);
     return false;
   }
   render() {
@@ -44,26 +43,28 @@ class Header extends React.Component {
               onClick={this.handleClickLogin}
               className="djm-header-login-button"
             >
-              {this.props.language.login}
+              {this.props.language.header.login}
               <span />
             </li>
             <li
               onClick={this.handleClickRegister}
               className="djm-header-register-button"
             >
-              {this.props.language.register}
+              {this.props.language.header.register}
               <span />
             </li>
             <li
               onClick={this.handleClickLogout}
               className="djm-header-logout-button"
             >
-              {this.props.language.logout}
+              {this.props.language.header.logout}
               <span />
             </li>
           </ul>
         </div>
-        {this.props.loginStore.login ? <Login /> : null}
+        {this.props.loginStore.login ? (
+          <Login {...this.props.language} />
+        ) : null}
       </header>
     );
   }

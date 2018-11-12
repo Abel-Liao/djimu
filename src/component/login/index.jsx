@@ -2,7 +2,7 @@ import React from "react";
 
 import "./login.css";
 
-const Login = () => {
+const Login = props => {
   return (
     <div className="dji-login">
       <div className="dji-login-nav">
@@ -10,21 +10,21 @@ const Login = () => {
           <label className="djm-login-username" htmlFor="userName">
             <input
               id="userName"
-              autocomplete="off"
+              autoComplete="off"
               type="text"
-              placeholder="请输入用户名"
+              placeholder={props.login.uesrName}
             />
           </label>
           <label className="djm-login-userpaw" htmlFor="userPassword">
             <input
               id="userPassword"
-              autocomplete="off"
+              autoComplete="off"
               type="paw"
-              placeholder="请输入密码"
+              placeholder={props.login.password}
             />
           </label>
           <label className="djm-login-button" htmlFor="loginInput">
-            <input id="loginInput" type="button" value="登录" />
+            <input id="loginInput" type="button" value={props.login.button} />
           </label>
         </form>
       </div>

@@ -22,8 +22,8 @@ let lang = "zh-CN";
 ReactDOM.render(
   <Provider store={store}>
     <React.Fragment>
-      <Header language={language[lang].header} />
-      <Web />
+      <Header language={language[lang]} />
+      <Web language={language[lang]} />
       <Footer />
     </React.Fragment>
   </Provider>,
