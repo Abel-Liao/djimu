@@ -1,0 +1,44 @@
+header {
+  background: #999;
+}
+.djm-header-content {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 10px 0;
+}
+.djm-header-logo {
+  font-weight: normal;
+  font-size: 14px;
+  float: left;
+}
+.dim-header-login {
+  float: right;
+}
+.dim-header-login li {
+  float: left;
+  height: 40px;
+  line-height: 40px;
+  margin-right: 20px;
+  border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+  color: #dadada;
+}
+.dim-header-login li:last-child {
+  margin-right: 0;
+}
+.dim-header-login li span {
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #666;
+  transition: all ease-in 0.3s;
+}
+.dim-header-login li:hover span {
+  width: 100%;
+}
+.djm-header-logout-button {
+  display: none;
+}

@@ -5,9 +5,6 @@ const Footer = props => {
   return (
     <footer>
       <h2>This is footer page!</h2>
-      {props.todos.map((content, index) => (
-        <p key={index}>{content.name}</p>
-      ))}
     </footer>
   );
 };

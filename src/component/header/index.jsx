@@ -1,6 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import Login from "../login";
+
+import "./header.css";
+
 class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -12,22 +16,54 @@ class Header extends React.Component {
       }
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleClickLogin = this.handleClickLogin.bind(this);
+    this.handleClickRegister = this.handleClickRegister.bind(this);
+    this.handleClickLogout = this.handleClickLogout.bind(this);
   }
   handleClick() {
     this.props.dispatch({ type: "ADD_TODO", content: this.state.add });
-    this.setState({ num: this.state.num + 1 });
   }
+  handleClickLogin() {
+    this.props.dispatch({ type: "USER_LOGIN" });
+  }
+  handleClickRegister() {}
+  handleClickLogout() {}
   static getDerivedStateFromProps(nextProps, prevState) {
+    console.log(nextProps);
     return false;
   }
   render() {
     return (
-      <header>
-        <h2>This is header page!</h2>
-        {this.props.todos.map((names, index) => (
-          <p key={index}>{names.name}</p>
-        ))}
-        <input type="button" value="Click Me" onClick={this.handleClick} />
+      <header className="djm-header">
+        <div className="djm-header-content clearfloat">
+          <h1 className="djm-header-logo">
+            <img src="" alt="LOGO" />
+          </h1>
+          <ul className="dim-header-login clearfloat">
+            <li
+              onClick={this.handleClickLogin}
+              className="djm-header-login-button"
+            >
+              {this.props.language.login}
+              <span />
+            </li>
+            <li
+              onClick={this.handleClickRegister}
+              className="djm-header-register-button"
+            >
+              {this.props.language.register}
+              <span />
+            </li>
+            <li
+              onClick={this.handleClickLogout}
+              className="djm-header-logout-button"
+            >
+              {this.props.language.logout}
+              <span />
+            </li>
+          </ul>
+        </div>
+        {this.props.loginStore.login ? <Login /> : null}
       </header>
     );
   }

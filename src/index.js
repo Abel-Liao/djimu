@@ -9,14 +9,20 @@ import Web from "./Web";
 import Header from "./component/header";
 import Footer from "./component/footer";
 
+import language from "./public/language";
+
 import "./index.css";
 
 const store = createStore();
 
+// 获取浏览器语言
+// let lang = navigator.language || navigator.userLanguage;
+let lang = "zh-CN";
+
 ReactDOM.render(
   <Provider store={store}>
     <React.Fragment>
-      <Header />
+      <Header language={language[lang].header} />
       <Web />
       <Footer />
     </React.Fragment>
