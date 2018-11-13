@@ -10,6 +10,8 @@ class Header extends React.Component {
     super(props);
     this.state = {
       num: 1,
+      language: this.props.language.header,
+      islogin: null,
       add: {
         name: "G",
         age: 20
@@ -19,6 +21,7 @@ class Header extends React.Component {
     this.handleClickLogin = this.handleClickLogin.bind(this);
     this.handleClickRegister = this.handleClickRegister.bind(this);
     this.handleClickLogout = this.handleClickLogout.bind(this);
+    this.handleClickChange = this.handleClickChange.bind(this);
   }
   handleClick() {
     this.props.dispatch({ type: "ADD_TODO", content: this.state.add });
@@ -27,38 +30,70 @@ class Header extends React.Component {
     this.props.dispatch({ type: "USER_LOGIN" });
   }
   handleClickRegister() {}
-  handleClickLogout() {}
+  handleClickLogout() {
+    sessionStorage.removeItem("isLogin");
+    this.setState({ isLogin: null });
+  }
+  handleClickChange(language) {
+    console.log(language);
+  }
   static getDerivedStateFromProps(nextProps, prevState) {
-    return false;
+    const isLogin = sessionStorage.getItem("isLogin");
+    if (prevState.islogin !== isLogin) {
+      return {
+        isLogin: isLogin
+      };
+    }
+    return null;
   }
   render() {
     return (
       <header className="djm-header">
         <div className="djm-header-content clearfloat">
           <h1 className="djm-header-logo">
-            <img src="" alt="LOGO" />
+            <img src={require("./images/logo.png")} alt="LOGO" />
           </h1>
           <ul className="dim-header-login clearfloat">
-            <li
-              onClick={this.handleClickLogin}
-              className="djm-header-login-button"
-            >
-              {this.props.language.header.login}
-              <span />
-            </li>
-            <li
-              onClick={this.handleClickRegister}
-              className="djm-header-register-button"
-            >
-              {this.props.language.header.register}
-              <span />
-            </li>
-            <li
-              onClick={this.handleClickLogout}
-              className="djm-header-logout-button"
-            >
-              {this.props.language.header.logout}
-              <span />
+            {!this.state.isLogin ? (
+              <React.Fragment>
+                <li
+                  onClick={this.handleClickLogin}
+                  className="djm-header-login-button"
+                >
+                  {this.state.language.login}
+                  <span />
+                </li>
+                <li
+                  onClick={this.handleClickRegister}
+                  className="djm-header-register-button"
+                >
+                  {this.state.language.register}
+                  <span />
+                </li>
+              </React.Fragment>
+            ) : (
+              <li
+                onClick={this.handleClickLogout}
+                className="djm-header-logout-button"
+              >
+                {this.state.language.logout}
+                <span />
+              </li>
+            )}
+            <li className="djm-header-change-lan">
+              {this.state.language.language[0]}
+              <i />
+              <ul className="djimu-hcl-button">
+                {this.state.language.language.map((language, index) => (
+                  <li
+                    key={index}
+                    onClick={e => this.handleClickChange(language, e)}
+                    className={index === 0 ? "dont-click" : null}
+                  >
+                    {language}
+                  </li>
+                ))}
+              </ul>
             </li>
           </ul>
         </div>

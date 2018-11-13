@@ -58,3 +58,9 @@ input {
 body * {
   box-sizing: border-box;
 }
+
+/* 禁用点击 */
+* .dont-click {
+  cursor: default;
+  pointer-events: none;
+}

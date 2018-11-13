@@ -3,7 +3,8 @@ const language = {
     header: {
       login: "用户登录",
       register: "用户注册",
-      logout: "用户登出"
+      logout: "用户登出",
+      language: ["中文", "English"]
     },
     login: {
       uesrName: "请输入用户名",
@@ -15,7 +16,8 @@ const language = {
     header: {
       login: "USER LOGIN",
       register: "USER REGISTER",
-      logout: "USER LOGOUT"
+      logout: "USER LOGOUT",
+      language: ["English", "中文"]
     },
     login: {
       uesrName: "uesrname",
