@@ -7,7 +7,7 @@ const language = {
       language: ["中文", "English"]
     },
     login: {
-      uesrName: "请输入用户名",
+      uesrName: "请输入邮箱地址",
       password: "请输入密码",
       button: "登录"
     }
@@ -20,8 +20,8 @@ const language = {
       language: ["English", "中文"]
     },
     login: {
-      uesrName: "uesrname",
-      password: "password",
+      uesrName: "Email",
+      password: "Password",
       button: "LOGIN"
     }
   }

@@ -1,7 +1,7 @@
 .dji-login {
   position: fixed;
   left: 0;
-  right: 0;
+  top: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
@@ -20,7 +20,9 @@
 }
 .djm-login-from label {
   display: block;
-  margin-bottom: 10px;
+  margin: 0 auto 10px;
+  position: relative;
+  width: 250px;
 }
 .djm-login-from label:last-child {
   margin-bottom: 0;
@@ -28,10 +30,26 @@
 .djm-login-from input {
   height: 35px;
   line-height: 35px;
-  width: 250px;
+  width: 100%;
   border-radius: 5px;
   border: 1px solid #ccc;
   padding-left: 5px;
+  padding-right: 23px;
+}
+.djm-login-from span {
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  width: 15px;
+  height: 15px;
+  line-height: 12px;
+  border-radius: 50%;
+  color: #999;
+  cursor: pointer;
+  display: none;
+}
+.djm-login-from span:hover {
+  color: #666;
 }
 .djm-login-button input {
   border: none;

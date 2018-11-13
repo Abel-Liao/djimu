@@ -60,7 +60,12 @@ body * {
 }
 
 /* 禁用点击 */
-* .dont-click {
+body .dont-click {
   cursor: default;
   pointer-events: none;
+}
+
+/* 所有元素隐藏后显示 */
+body *.display {
+  display: block;
 }
