@@ -35,7 +35,7 @@ class Header extends React.Component {
     this.setState({ isLogin: null });
   }
   handleClickChange(language) {
-    console.log(language);
+    this.props.dispatch({ type: "CHANGE_LAN", language: language });
   }
   static getDerivedStateFromProps(nextProps, prevState) {
     const isLogin = sessionStorage.getItem("isLogin");
@@ -87,7 +87,11 @@ class Header extends React.Component {
                 {this.state.language.language.map((language, index) => (
                   <li
                     key={index}
-                    onClick={e => this.handleClickChange(language, e)}
+                    // onClick={e => this.handleClickChange(language, e)}
+                    onClick={event => {
+                      this.handleClickChange(language, event);
+                      this.props.languageFun();
+                    }}
                     className={index === 0 ? "dont-click" : null}
                   >
                     {language}

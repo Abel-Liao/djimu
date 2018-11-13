@@ -14,9 +14,9 @@ const language = {
   },
   "en-US": {
     header: {
-      login: "USER LOGIN",
-      register: "USER REGISTER",
-      logout: "USER LOGOUT",
+      login: "LOGIN",
+      register: "REGISTER",
+      logout: "LOGOUT",
       language: ["English", "中文"]
     },
     login: {

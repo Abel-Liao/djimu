@@ -15,15 +15,18 @@ import "./index.css";
 
 const store = createStore();
 
-// 获取浏览器语言
-// let lang = navigator.language || navigator.userLanguage;
-let lang = "zh-CN";
+// 语言
+// const lang = store.getState().headerStore.language;
+function languageFun() {
+  const lang = store.getState().headerStore.language;
+  return lang;
+}
 
 ReactDOM.render(
   <Provider store={store}>
     <React.Fragment>
-      <Header language={language[lang]} />
-      <Web language={language[lang]} />
+      <Header language={language[languageFun()]} languageFun={languageFun} />
+      <Web language={language[languageFun()]} />
       <Footer />
     </React.Fragment>
   </Provider>,
