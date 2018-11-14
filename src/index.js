@@ -5,10 +5,6 @@ import * as serviceWorker from "./serviceWorker";
 
 import createStore from "./redux";
 
-import { BrowserRouter as Router } from "react-router-dom";
-
-import Routers from "./router";
-
 import Webpage from "./Webpage";
 
 import "./index.css";
