@@ -6,9 +6,6 @@ import Login from "../component/login";
 import Register from "../component/register";
 import Header from "../component/header";
 import Footer from "../component/footer";
-// 多言
-import language from "../public/language";
-const lang = navigator.language || navigator.userLanguage;
 
 const routeArr = [
   {

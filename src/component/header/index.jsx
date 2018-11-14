@@ -51,7 +51,6 @@ class Header extends React.Component {
   }
   render() {
     const language = this.props.languageStore.language.header;
-    console.log(language);
     return (
       <header className="djm-header">
         <div className="djm-header-content clearfloat">
@@ -65,7 +64,8 @@ class Header extends React.Component {
             {!this.state.isLogin ? (
               <React.Fragment>
                 <li
-                  onClick={this.handleClickLogin}
+                  // onClick={this.handleClickLogin}
+                  onClick={even => this.handleChangePage("login", even)}
                   className="djm-header-login-button"
                 >
                   {language.login}
@@ -80,13 +80,16 @@ class Header extends React.Component {
                 </li>
               </React.Fragment>
             ) : (
-              <li
-                onClick={this.handleClickLogout}
-                className="djm-header-logout-button"
-              >
-                {language.logout}
-                <span />
-              </li>
+              <React.Fragment>
+                <li className="djm-header-uesename dont-click">Abel</li>
+                <li
+                  onClick={this.handleClickLogout}
+                  className="djm-header-logout-button"
+                >
+                  {language.logout}
+                  <span />
+                </li>
+              </React.Fragment>
             )}
             <li className="djm-header-change-lan">
               {language.language[0]}

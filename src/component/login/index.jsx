@@ -16,7 +16,8 @@ class Login extends React.Component {
   }
   handleClickLogin() {
     sessionStorage.setItem("isLogin", true);
-    this.props.dispatch({ type: "USER_LOGIN" });
+    // this.props.dispatch({ type: "USER_LOGIN" });
+    this.props.history.push("/");
   }
   handleChangeInput(element, event) {
     this.setState({ [element]: event.target.value });

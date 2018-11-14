@@ -1,6 +1,6 @@
-header {
+/* header {
   background: #999;
-}
+} */
 .djm-header-content {
   width: 1200px;
   margin: 0 auto;
@@ -29,7 +29,7 @@ header {
   border-radius: 5px;
   position: relative;
   cursor: pointer;
-  color: #dadada;
+  /* color: #dadada; */
 }
 .dim-header-login li:last-child {
   margin-right: 0;
@@ -64,12 +64,14 @@ header {
 .djm-header-change-lan:hover i {
   transform: rotateX(180deg);
 }
-.djm-header-change-lan:hover .djimu-hcl-button {
-  display: block;
-}
 .djimu-hcl-button {
   background: rgba(144, 144, 144, 1);
   display: none;
+  z-index: 20;
+  position: relative;
+}
+.djm-header-change-lan:hover .djimu-hcl-button {
+  display: block;
 }
 .djimu-hcl-button li {
   height: 30px;
@@ -79,6 +81,12 @@ header {
 .djimu-hcl-button li:hover {
   background: rgba(70, 70, 70, 1);
 }
-li.dont-click {
+.djimu-hcl-button li.dont-click {
   background: rgba(70, 70, 70, 1);
+}
+.djm-header-uesename {
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

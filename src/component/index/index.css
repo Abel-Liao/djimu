@@ -1,0 +1,53 @@
+.djm-index-main {
+  width: 1200px;
+  margin: 0 auto;
+}
+.djm-index-banner {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.djm-index-banner-img {
+  position: relative;
+  width: 100%;
+  height: 350px;
+}
+.djm-index-banner-img li {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity ease-in 0.5s;
+}
+li.djm-ibi-display {
+  z-index: 1;
+  opacity: 1;
+}
+.djm-index-banner-img img {
+  width: 100%;
+  height: 100%;
+}
+.djm-index-banner-indicator {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  transform: translateX(600px);
+  z-index: 10;
+}
+.djm-index-banner-indicator li {
+  float: left;
+  width: 30px;
+  height: 5px;
+  background: #fff;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.djm-index-banner-indicator li:hover,
+li.djm-ibi-choose {
+  background: #aaa;
+}
+.djm-index-banner-indicator li:last-child {
+  margin-right: 0;
+}
