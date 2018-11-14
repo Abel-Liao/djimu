@@ -3,17 +3,28 @@ import { Route } from "react-router-dom";
 
 import Index from "../component/index";
 import Login from "../component/login";
+import Register from "../component/register";
+import Header from "../component/header";
+import Footer from "../component/footer";
+// 多言
+import language from "../public/language";
+const lang = navigator.language || navigator.userLanguage;
 
 const routeArr = [
   {
     path: "/",
     exact: true,
-    component: Index
+    component: [Header, Index, Footer]
   },
   {
     path: "/login",
     exact: false,
-    component: Login
+    component: [Login]
+  },
+  {
+    path: "/register",
+    exact: false,
+    component: [Register]
   }
 ];
 
@@ -23,7 +34,12 @@ function routeFun(arr) {
       key={index}
       exact={route.exact}
       path={route.path}
-      component={route.component}
+      // component={route.component}
+      render={props =>
+        route.component.map((Routeree, index) => (
+          <Routeree key={index} {...props} />
+        ))
+      }
     />
   ));
 }

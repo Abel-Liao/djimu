@@ -5,29 +5,20 @@ import * as serviceWorker from "./serviceWorker";
 
 import createStore from "./redux";
 
-import Webpage from "./Webpage";
-import Header from "./component/header";
-import Footer from "./component/footer";
+import { BrowserRouter as Router } from "react-router-dom";
 
-import language from "./public/language";
+import Routers from "./router";
+
+import Webpage from "./Webpage";
 
 import "./index.css";
 
 const store = createStore();
 
-// 语言
-// const lang = store.getState().headerStore.language;
-function languageFun() {
-  const lang = store.getState().headerStore.language;
-  return lang;
-}
-
 ReactDOM.render(
   <Provider store={store}>
     <React.Fragment>
-      <Header language={language[languageFun()]} languageFun={languageFun} />
-      <Webpage language={language[languageFun()]} />
-      <Footer />
+      <Webpage />
     </React.Fragment>
   </Provider>,
   document.getElementById("root")

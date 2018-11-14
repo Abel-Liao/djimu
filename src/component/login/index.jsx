@@ -28,6 +28,7 @@ class Login extends React.Component {
     return null;
   }
   render() {
+    const language = this.props.languageStore.language.login;
     return (
       <div className="dji-login">
         <div className="dji-login-nav">
@@ -42,7 +43,7 @@ class Login extends React.Component {
                 value={this.state.userName}
                 autoComplete="off"
                 type="text"
-                placeholder={this.props.login.uesrName}
+                placeholder={language.uesrName}
                 ref="userName"
                 onChange={this.handleChangeInput.bind(this, "userName")}
               />
@@ -59,7 +60,7 @@ class Login extends React.Component {
                 value={this.state.password}
                 autoComplete="off"
                 type="password"
-                placeholder={this.props.login.password}
+                placeholder={language.password}
                 ref="password"
                 onChange={this.handleChangeInput.bind(this, "password")}
               />
@@ -74,7 +75,7 @@ class Login extends React.Component {
               <input
                 id="loginInput"
                 type="button"
-                value={this.props.login.button}
+                value={language.button}
                 onClick={this.handleClickLogin}
               />
             </label>
