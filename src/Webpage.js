@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import Routers from "./router";
 
-class App extends Component {
+class Webpage extends Component {
   render() {
     return (
       <Router>
@@ -13,4 +13,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Webpage;

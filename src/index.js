@@ -5,7 +5,7 @@ import * as serviceWorker from "./serviceWorker";
 
 import createStore from "./redux";
 
-import Web from "./Web";
+import Webpage from "./Webpage";
 import Header from "./component/header";
 import Footer from "./component/footer";
 
@@ -26,7 +26,7 @@ ReactDOM.render(
   <Provider store={store}>
     <React.Fragment>
       <Header language={language[languageFun()]} languageFun={languageFun} />
-      <Web language={language[languageFun()]} />
+      <Webpage language={language[languageFun()]} />
       <Footer />
     </React.Fragment>
   </Provider>,
