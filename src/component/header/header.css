@@ -51,11 +51,14 @@
   width: 60px;
 }
 .djm-header-change-lan i {
-  transition: all ease-in 0.2s;
-  background: #ddd;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translate(24px, 17px);
+  transition: all ease-in 0.12s;
 }
 .djm-header-change-lan:hover i {
-  transform: rotateX(180deg);
+  transform: translate(24px, 17px) rotate(180deg);
 }
 .djimu-hcl-button {
   color: #fff;
