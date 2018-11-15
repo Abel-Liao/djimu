@@ -8,6 +8,7 @@ import createStore from "./redux";
 import Webpage from "./Webpage";
 
 import "./index.css";
+import "./fontcss/iconfont.css";
 
 const store = createStore();
 

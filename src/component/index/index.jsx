@@ -52,7 +52,7 @@ class Index extends React.Component {
     return (
       <div className="djm-index">
         <div className="djm-index-main">
-          <div className="djm-index-banner">
+          {/* <div className="djm-index-banner">
             <ul className="djm-index-banner-img clearfloat">
               {this.state.bannerUrl.map((url, index) => (
                 <li
@@ -77,9 +77,26 @@ class Index extends React.Component {
                 />
               ))}
             </ul>
-          </div>
+          </div> */}
           <div className="djm-index-content">
-            <p>This is index content.</p>
+            <ul className="djm-index-uesr-article clearfloat">
+              <li>
+                <img src={require("./images/index_banner1.jpg")} alt="图片" />
+                <p>hsahfhashfasfa</p>
+              </li>
+              <li>
+                <img src={require("./images/index_banner1.jpg")} alt="图片" />
+                <p>hsahfhashfasfa</p>
+              </li>
+              <li>
+                <img src={require("./images/index_banner1.jpg")} alt="图片" />
+                <p>hsahfhashfasfa</p>
+              </li>
+              <li>
+                <img src={require("./images/index_banner1.jpg")} alt="图片" />
+                <p>hsahfhashfasfa</p>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

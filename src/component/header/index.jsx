@@ -12,6 +12,11 @@ class Header extends React.Component {
       num: 1,
       language: props.languageStore.language.header,
       islogin: null,
+      changeLan: false,
+      lanTran: 5,
+      lanOpcation: 0,
+      lanStyle: null,
+      lanTimer: null,
       add: {
         name: "G",
         age: 20
@@ -22,10 +27,43 @@ class Header extends React.Component {
     this.handleChangePage = this.handleChangePage.bind(this);
     this.handleClickLogout = this.handleClickLogout.bind(this);
     this.handleChangeLan = this.handleChangeLan.bind(this);
+    this.handleMouseEnterChangel = this.handleMouseEnterChangel.bind(this);
+    this.handleMouseLeaveChangel = this.handleMouseLeaveChangel.bind(this);
   }
   // test
   handleClick() {
     this.props.dispatch({ type: "ADD_TODO", content: this.state.add });
+  }
+  handleMouseEnterChangel() {
+    this.setState({
+      lanTimer: setInterval(() => {
+        this.setState({ lanTran: this.state.lanTran - 1 });
+        this.setState({ lanOpcation: this.state.lanOpcation + 0.2 });
+        if (this.state.lanTran <= 0) {
+          clearInterval(this.state.lanTimer);
+        }
+        this.setState({
+          lanStyle: {
+            transform: `translateY(${this.state.lanTran}px)`,
+            opacity: this.state.lanOpcation
+          }
+        });
+      }, 24)
+    });
+
+    this.setState({ changeLan: true });
+  }
+  handleMouseLeaveChangel() {
+    this.setState({ lanTran: 5 });
+    this.setState({ lanOpcation: 0 });
+    this.setState({
+      lanStyle: {
+        transform: "translateY(5px)",
+        opacity: 0
+      }
+    });
+    clearInterval(this.state.lanTimer);
+    this.setState({ changeLan: false });
   }
   handleClickLogin() {
     this.props.dispatch({ type: "USER_LOGIN" });
@@ -69,42 +107,49 @@ class Header extends React.Component {
                   className="djm-header-login-button"
                 >
                   {language.login}
-                  <span />
+                  <b />
                 </li>
                 <li
                   onClick={even => this.handleChangePage("register", even)}
                   className="djm-header-register-button"
                 >
                   {language.register}
-                  <span />
+                  <b />
                 </li>
               </React.Fragment>
             ) : (
               <React.Fragment>
-                <li className="djm-header-uesename dont-click">Abel</li>
-                <li
-                  onClick={this.handleClickLogout}
-                  className="djm-header-logout-button"
-                >
-                  {language.logout}
-                  <span />
+                <li className="djm-header-uesename">
+                  <img src={require("./images/logo.png")} alt="headPortrait" />
+                  <span>Abel</span>
+                  <ul className="djm-hu-setting">
+                    <li>个人信息</li>
+                    <li>编辑文章</li>
+                    <li onClick={this.handleClickLogout}>{language.logout}</li>
+                  </ul>
                 </li>
               </React.Fragment>
             )}
-            <li className="djm-header-change-lan">
+            <li
+              className="djm-header-change-lan"
+              onMouseEnter={this.handleMouseEnterChangel}
+              onMouseLeave={this.handleMouseLeaveChangel}
+            >
               {language.language[0]}
-              <i />
-              <ul className="djimu-hcl-button">
-                {language.language.map((changeLan, index) => (
-                  <li
-                    key={index}
-                    onClick={e => this.handleChangeLan(changeLan, e)}
-                    className={index === 0 ? "dont-click" : null}
-                  >
-                    {changeLan}
-                  </li>
-                ))}
-              </ul>
+              <i className="iconfont icon-triangle" />
+              {this.state.changeLan ? (
+                <ul className="djimu-hcl-button" style={this.state.lanStyle}>
+                  {language.language.map((changeLan, index) => (
+                    <li
+                      key={index}
+                      onClick={e => this.handleChangeLan(changeLan, e)}
+                      className={index === 0 ? "dont-click" : null}
+                    >
+                      {changeLan}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
             </li>
           </ul>
         </div>

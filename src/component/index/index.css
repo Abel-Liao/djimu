@@ -38,16 +38,43 @@ li.djm-ibi-display {
 }
 .djm-index-banner-indicator li {
   float: left;
-  width: 30px;
-  height: 5px;
-  background: #fff;
-  margin-right: 10px;
+  width: 20px;
+  height: 4px;
+  background: #aaa;
+  margin-right: 5px;
   cursor: pointer;
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: all ease-in 0.2s;
 }
 .djm-index-banner-indicator li:hover,
 li.djm-ibi-choose {
-  background: #aaa;
+  background: #fff;
+  transform: scaleX(1.3);
+  margin-right: 12px;
 }
 .djm-index-banner-indicator li:last-child {
   margin-right: 0;
+}
+
+/* content */
+.djm-index-uesr-article li {
+  float: left;
+  width: 400px;
+  height: 220px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: transform ease-in-out 0.1s;
+}
+.djm-index-uesr-article li img {
+  height: 180px;
+}
+.djm-index-uesr-article li:hover {
+  box-shadow: 0 3px 20px 1px #ddd;
+  transform: scale(1.01);
+}
+.djm-index-uesr-article li p {
+  height: 40px;
+  line-height: 40px;
 }

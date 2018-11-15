@@ -69,3 +69,8 @@ body .dont-click {
 body *.display {
   display: block;
 }
+
+/* img标签100%显示 */
+* img {
+  width: 100%;
+}
