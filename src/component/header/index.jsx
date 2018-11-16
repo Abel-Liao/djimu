@@ -124,8 +124,8 @@ class Header extends React.Component {
                   <span>Abel</span>
                   <i className="iconfont icon-triangle" />
                   <ul className="djm-hu-setting">
-                    <li>个人信息</li>
-                    <li>编辑文章</li>
+                    <li>{language.YourProfile}</li>
+                    <li>{language.EditArticles}</li>
                     <li onClick={this.handleClickLogout}>{language.logout}</li>
                   </ul>
                 </li>
