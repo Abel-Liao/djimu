@@ -57,8 +57,15 @@
   transform: translate(24px, 17px);
   transition: all ease-in 0.12s;
 }
+.djm-header-change-lan i::before {
+  color: rgba(144, 144, 144, 1);
+}
 .djm-header-change-lan:hover i {
+  z-index: 19;
   transform: translate(24px, 17px) rotate(180deg);
+}
+.djm-header-change-lan:hover i::before {
+  color: rgba(70, 70, 70, 1);
 }
 .djimu-hcl-button {
   color: #fff;
@@ -73,9 +80,7 @@
   line-height: 30px;
   padding: 0 8px;
 }
-.djimu-hcl-button li:hover {
-  background: rgba(70, 70, 70, 1);
-}
+.djimu-hcl-button li:hover,
 .djimu-hcl-button li.dont-click {
   background: rgba(70, 70, 70, 1);
 }
@@ -94,13 +99,20 @@
   position: relative;
   top: -10px;
 }
+.djm-header-uesename {
+  min-width: 80px;
+}
 .djm-hu-setting {
-  position: relative;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 100%;
   opacity: 0;
   z-index: -1;
   transform: translateY(5px);
   transition: all ease-in 0.12s;
-  background: #bababa;
+  background: rgba(144, 144, 144, 1);
+  color: #fff;
 }
 .djm-header-uesename:hover .djm-hu-setting {
   z-index: 20;
@@ -112,5 +124,19 @@
   cursor: pointer;
 }
 .djm-hu-setting li:hover {
-  color: #2e24b5;
+  background: rgba(70, 70, 70, 1);
+}
+.djm-header-uesename i {
+  position: absolute;
+  bottom: -17px;
+  left: 50%;
+  transform: translateX(-6px);
+  transition: all ease-in 0.12s;
+}
+.djm-header-uesename:hover i {
+  z-index: 19;
+  transform: translateX(-6px) rotate(180deg);
+}
+.djm-header-uesename i::before {
+  color: rgba(144, 144, 144, 1);
 }

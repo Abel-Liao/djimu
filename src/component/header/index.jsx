@@ -122,6 +122,7 @@ class Header extends React.Component {
                 <li className="djm-header-uesename">
                   <img src={require("./images/logo.png")} alt="headPortrait" />
                   <span>Abel</span>
+                  <i className="iconfont icon-triangle" />
                   <ul className="djm-hu-setting">
                     <li>个人信息</li>
                     <li>编辑文章</li>
