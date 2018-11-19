@@ -12,25 +12,25 @@ class UserArticle extends React.Component {
           name: "XXX",
           data: "2018-20-11",
           imgUrl: require("./images/index_banner1.jpg"),
-          content: "hsahfhashfasfa"
+          title: "hsahfhashfasfa"
         },
         {
           name: "OOO",
           data: "2018-10-11",
           imgUrl: require("./images/index_banner2.jpg"),
-          content: "ASFSAFAS"
+          title: "ASFSAFAS"
         },
         {
           name: "AAA",
           data: "2014-10-11",
           imgUrl: require("./images/index_banner3.jpg"),
-          content: "阿贾克斯发发"
+          title: "阿贾克斯发发"
         },
         {
           name: "CCCC",
           data: "2016-02-11",
           imgUrl: require("./images/index_banner4.jpg"),
-          content: "safsaffasf"
+          title: "safsaffasf"
         }
       ]
     };
@@ -53,7 +53,7 @@ class UserArticle extends React.Component {
               </p>
               <div className="djm-iua-content">
                 <img src={item.imgUrl} alt="图片" />
-                <p>{item.content}</p>
+                <p>{item.title}</p>
               </div>
             </li>
           ))}
