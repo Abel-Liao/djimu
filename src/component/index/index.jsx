@@ -80,22 +80,59 @@ class Index extends React.Component {
           </div> */}
           <div className="djm-index-content">
             <ul className="djm-index-uesr-article clearfloat">
-              <li>
-                <img src={require("./images/index_banner1.jpg")} alt="图片" />
-                <p>hsahfhashfasfa</p>
+              <li className="djm-iua-left">
+                <p className="djm-iua-line">
+                  <b className="line-one" />
+                  <b className="line-two" />
+                  <i className="round-big" />
+                  <span className="article-author">作者：XXX</span>
+                  <span className="article-data">日期：2018-20-11</span>
+                </p>
+                <div className="djm-iua-content">
+                  <img src={require("./images/index_banner1.jpg")} alt="图片" />
+                  <p>hsahfhashfasfa</p>
+                </div>
               </li>
-              <li>
-                <img src={require("./images/index_banner1.jpg")} alt="图片" />
-                <p>hsahfhashfasfa</p>
+              <li className="djm-iua-right no-margin-right">
+                <p className="djm-iua-line">
+                  <b className="line-one" />
+                  <b className="line-two" />
+                  <i className="round-big" />
+                  <span className="article-author">作者：XXX</span>
+                  <span className="article-data">日期：2018-20-11</span>
+                </p>
+                <div className="djm-iua-content">
+                  <img src={require("./images/index_banner1.jpg")} alt="图片" />
+                  <p>hsahfhashfasfa</p>
+                </div>
               </li>
-              <li>
-                <img src={require("./images/index_banner1.jpg")} alt="图片" />
-                <p>hsahfhashfasfa</p>
+              <li className="djm-iua-left">
+                <p className="djm-iua-line">
+                  <b className="line-one" />
+                  <b className="line-two" />
+                  <i className="round-big" />
+                  <span className="article-author">作者：XXX</span>
+                  <span className="article-data">日期：2018-20-11</span>
+                </p>
+                <div className="djm-iua-content">
+                  <img src={require("./images/index_banner1.jpg")} alt="图片" />
+                  <p>hsahfhashfasfa</p>
+                </div>
               </li>
-              <li>
-                <img src={require("./images/index_banner1.jpg")} alt="图片" />
-                <p>hsahfhashfasfa</p>
+              <li className="djm-iua-right no-margin-right">
+                <p className="djm-iua-line">
+                  <b className="line-one" />
+                  <b className="line-two" />
+                  <i className="round-big" />
+                  <span className="article-author">作者：XXX</span>
+                  <span className="article-data">日期：2018-20-11</span>
+                </p>
+                <div className="djm-iua-content">
+                  <img src={require("./images/index_banner1.jpg")} alt="图片" />
+                  <p>hsahfhashfasfa</p>
+                </div>
               </li>
+              <span className="separated-line" />
             </ul>
           </div>
         </div>
