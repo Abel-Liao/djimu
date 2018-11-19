@@ -6,7 +6,8 @@ const language = {
       logout: "用户登出",
       language: ["中文", "English"],
       YourProfile: "个人信息",
-      EditArticles: "编辑文章"
+      EditArticles: "编辑文章",
+      placeholder: "请输入搜索信息"
     },
     login: {
       uesrName: "请输入邮箱地址",
@@ -21,7 +22,8 @@ const language = {
       logout: "LOGOUT",
       language: ["English", "中文"],
       YourProfile: "Your Profile",
-      EditArticles: "Edit Articles"
+      EditArticles: "Edit Articles",
+      placeholder: "search"
     },
     login: {
       uesrName: "Email",

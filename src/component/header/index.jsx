@@ -153,6 +153,14 @@ class Header extends React.Component {
               ) : null}
             </li>
           </ul>
+          <p className="djm-header-search">
+            <input
+              type="text"
+              placeholder={language.placeholder}
+              onClick={this.handleClickSearch}
+            />
+            <i className="iconfont icon-search" />
+          </p>
         </div>
         {this.props.loginStore.login ? (
           <Login {...this.props.language} />

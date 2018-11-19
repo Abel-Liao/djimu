@@ -74,3 +74,14 @@ body *.display {
 * img {
   width: 100%;
 }
+
+/* 搜索框占位符颜色 */
+::-moz-placeholder {
+  color: #bbb;
+}
+::-webkit-input-placeholder {
+  color: #bbb;
+}
+:-ms-input-placeholder {
+  color: #bbb;
+}
