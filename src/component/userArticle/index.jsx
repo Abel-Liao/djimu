@@ -36,6 +36,7 @@ class UserArticle extends React.Component {
     };
   }
   render() {
+    const language = this.props.languageStore.language.userArticle;
     return (
       <div className="djm-index-content">
         <ul className="djm-index-uesr-article clearfloat">
@@ -48,8 +49,14 @@ class UserArticle extends React.Component {
                 <b className="line-one" />
                 <b className="line-two" />
                 <i className="round-big" />
-                <span className="article-author">作者：{item.name}</span>
-                <span className="article-data">日期：{item.data}</span>
+                <span className="article-author">
+                  {language.author}
+                  {item.name}
+                </span>
+                <span className="article-data">
+                  {language.date}
+                  {item.data}
+                </span>
               </p>
               <div className="djm-iua-content">
                 <img src={item.imgUrl} alt="图片" />

@@ -13,6 +13,10 @@ const language = {
       uesrName: "请输入邮箱地址",
       password: "请输入密码",
       button: "登录"
+    },
+    userArticle: {
+      author: "作者：",
+      date: "日期："
     }
   },
   "en-US": {
@@ -29,6 +33,10 @@ const language = {
       uesrName: "Email",
       password: "Password",
       button: "LOGIN"
+    },
+    userArticle: {
+      author: "Author：",
+      date: "Date："
     }
   }
 };
