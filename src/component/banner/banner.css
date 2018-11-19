@@ -1,0 +1,54 @@
+.djm-index-banner {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.djm-index-banner-img {
+  position: relative;
+  width: 100%;
+  height: 350px;
+}
+.djm-index-banner-img li {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity ease-in 0.5s;
+}
+li.djm-ibi-display {
+  z-index: 1;
+  opacity: 1;
+}
+.djm-index-banner-img img {
+  width: 100%;
+  height: 100%;
+}
+.djm-index-banner-indicator {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  transform: translateX(600px);
+  z-index: 10;
+}
+.djm-index-banner-indicator li {
+  float: left;
+  width: 20px;
+  height: 4px;
+  background: #aaa;
+  margin-right: 5px;
+  cursor: pointer;
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: all ease-in 0.2s;
+}
+.djm-index-banner-indicator li:hover,
+li.djm-ibi-choose {
+  background: #fff;
+  transform: scaleX(1.3);
+  margin-right: 12px;
+}
+.djm-index-banner-indicator li:last-child {
+  margin-right: 0;
+}
