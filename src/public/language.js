@@ -12,7 +12,20 @@ const language = {
     login: {
       uesrName: "请输入邮箱地址",
       password: "请输入密码",
-      button: "登录"
+      button: "登录",
+      forgetPaw: "忘记密码?",
+      emailQuick: "邮箱快捷登录",
+      dynamicCode: "输入动态码",
+      emailPaw: "邮箱密码登录",
+      sendDynamicCode: "发送动态码",
+      error: {
+        emailNull: "请输入邮箱!",
+        passwordNull: "请输入密码!",
+        dynamicCodeNull: "请输入动态码!",
+        emailText: "请输入正确的邮箱!",
+        passwordText: "请输入正确的密码!",
+        dynamicCodeText: "请输入正确的动态码!"
+      }
     },
     userArticle: {
       author: "作者：",
@@ -32,7 +45,20 @@ const language = {
     login: {
       uesrName: "Email",
       password: "Password",
-      button: "LOGIN"
+      button: "LOGIN",
+      forgetPaw: "Forget Password?",
+      emailQuick: "Email Quick",
+      dynamicCode: "Code",
+      emailPaw: "Email Password",
+      sendDynamicCode: "Verification Code",
+      error: {
+        emailNull: "Please enter email address!",
+        passwordNull: "Please enter password!",
+        dynamicCodeNull: "Please enter dynamic code!",
+        emailText: "Please enter the correct mailbox!",
+        passwordText: "Please enter the correct password!",
+        dynamicCodeText: "Please enter the correct dynamic code!"
+      }
     },
     userArticle: {
       author: "Author：",

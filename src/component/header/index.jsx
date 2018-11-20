@@ -1,8 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import Login from "../login";
-
 import "./header.css";
 
 class Header extends React.Component {
@@ -16,23 +14,14 @@ class Header extends React.Component {
       lanTran: 5,
       lanOpcation: 0,
       lanStyle: null,
-      lanTimer: null,
-      add: {
-        name: "G",
-        age: 20
-      }
+      lanTimer: null
     };
-    this.handleClick = this.handleClick.bind(this);
     this.handleClickLogin = this.handleClickLogin.bind(this);
     this.handleChangePage = this.handleChangePage.bind(this);
     this.handleClickLogout = this.handleClickLogout.bind(this);
     this.handleChangeLan = this.handleChangeLan.bind(this);
     this.handleMouseEnterChangel = this.handleMouseEnterChangel.bind(this);
     this.handleMouseLeaveChangel = this.handleMouseLeaveChangel.bind(this);
-  }
-  // test
-  handleClick() {
-    this.props.dispatch({ type: "ADD_TODO", content: this.state.add });
   }
   handleMouseEnterChangel() {
     this.setState({
@@ -102,7 +91,6 @@ class Header extends React.Component {
             {!this.state.isLogin ? (
               <React.Fragment>
                 <li
-                  // onClick={this.handleClickLogin}
                   onClick={even => this.handleChangePage("login", even)}
                   className="djm-header-login-button"
                 >
@@ -162,9 +150,6 @@ class Header extends React.Component {
             <i className="iconfont icon-search" />
           </p>
         </div>
-        {this.props.loginStore.login ? (
-          <Login {...this.props.language} />
-        ) : null}
       </header>
     );
   }
