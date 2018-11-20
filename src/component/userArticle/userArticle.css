@@ -3,7 +3,7 @@
 }
 .djm-index-uesr-article li {
   width: 430px;
-  height: 220px;
+  height: 250px;
   margin-bottom: 20px;
   cursor: pointer;
   transition: transform ease-in-out 0.1s;
@@ -16,7 +16,7 @@ li.djm-iua-right {
   float: right;
 }
 .djm-index-uesr-article li img {
-  height: 180px;
+  height: 210px;
 }
 .djm-iua-content {
   transition: transform ease-in-out 0.1s;
@@ -57,28 +57,28 @@ li.djm-iua-right {
   box-shadow: 3px 3px 20px 0 #333;
 }
 .line-one {
-  height: 50px;
+  height: 49px;
   transform: rotate(45deg);
 }
 .line-two {
   transform: rotate(90deg);
-  height: 155px;
+  height: 152px;
 }
 .djm-iua-left .line-one {
-  left: 450px;
+  left: 449px;
   top: 20px;
 }
 .djm-iua-left .line-two {
-  left: 546px;
-  top: -50px;
+  left: 543px;
+  top: -49px;
 }
 .djm-iua-right .line-one {
   left: -19px;
-  top: 125px;
+  top: 160px;
 }
 .djm-iua-right .line-two {
-  left: -114px;
-  top: 91px;
+  left: -113px;
+  top: 125px;
 }
 /* 分界线上的圆 */
 .round-big {
@@ -95,7 +95,7 @@ li.djm-iua-right {
 }
 .djm-iua-right .round-big {
   left: -204px;
-  top: 162px;
+  top: 197px;
 }
 /* 作者/日期 */
 .djm-iua-line span {
@@ -131,8 +131,8 @@ li.djm-iua-right {
   top: 30px;
 }
 .djm-iua-right .article-author {
-  top: 149px;
+  top: 183px;
 }
 .djm-iua-right .article-data {
-  top: 171px;
+  top: 203px;
 }
