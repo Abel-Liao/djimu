@@ -173,7 +173,6 @@ class Login extends React.Component {
             )}
             <label className="djm-login-button" htmlFor="loginInput">
               <input
-                // className={this.state.error ? null : "dont-click"}
                 id="loginInput"
                 type="button"
                 value={language.button}
