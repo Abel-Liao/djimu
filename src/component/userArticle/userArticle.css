@@ -2,9 +2,8 @@
   position: relative;
 }
 .djm-index-uesr-article li {
-  width: 400px;
+  width: 430px;
   height: 220px;
-  margin-right: 10px;
   margin-bottom: 20px;
   cursor: pointer;
   transition: transform ease-in-out 0.1s;
@@ -15,7 +14,6 @@ li.djm-iua-left {
 }
 li.djm-iua-right {
   float: right;
-  margin-right: 0;
 }
 .djm-index-uesr-article li img {
   height: 180px;
@@ -36,7 +34,7 @@ li.djm-iua-right {
   height: 100%;
   width: 2px;
   background: #ddd;
-  left: 600px;
+  left: 630px;
   /* transform: translateX(-1px); */
 }
 /* 指向线 */
@@ -67,11 +65,11 @@ li.djm-iua-right {
   height: 155px;
 }
 .djm-iua-left .line-one {
-  left: 420px;
+  left: 450px;
   top: 20px;
 }
 .djm-iua-left .line-two {
-  left: 516px;
+  left: 546px;
   top: -50px;
 }
 .djm-iua-right .line-one {
@@ -92,7 +90,7 @@ li.djm-iua-right {
   height: 11px;
 }
 .djm-iua-left .round-big {
-  left: 595px;
+  left: 625px;
   top: 22px;
 }
 .djm-iua-right .round-big {
@@ -110,7 +108,7 @@ li.djm-iua-right {
   transition: all ease-in 0.15s;
 }
 .djm-iua-left .djm-iua-line span {
-  left: 441px;
+  left: 471px;
 }
 .djm-iua-right .djm-iua-line span {
   left: -187px;
