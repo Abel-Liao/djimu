@@ -35,6 +35,7 @@ class Login extends React.Component {
     this.handleClickDynamicCode = this.handleClickDynamicCode.bind(this);
     this.handleOnBlur = this.handleOnBlur.bind(this);
     this.setUserInfoFun = this.setUserInfoFun.bind(this);
+    this.forUserInfo = this.forUserInfo.bind(this);
   }
   setUserInfoFun(stateName, element, content) {
     this.setState(
@@ -43,13 +44,27 @@ class Login extends React.Component {
       })
     );
   }
+  forUserInfo() {
+    for (const key in this.state.userInfo) {
+      if (this.state.userInfo[key] === "") {
+        if (!this.state.loginWay && key === "password") {
+          continue;
+        }
+        this.setState({ errorText: [key] + "Null" });
+        return false;
+      }
+    }
+  }
   handleClickLogin() {
-    sessionStorage.setItem("isLogin", true);
-    this.props.history.push("/");
+    this.forUserInfo();
+    if (!this.forUserInfo) {
+      sessionStorage.setItem("isLogin", true);
+      this.props.history.push("/");
+    }
   }
   handleOnBlur(element, event) {
     if (this.state.userInfo[element] === "") {
-      this.setState({ errorText: [element] + "Null" });
+      this.forUserInfo();
       return;
     }
     if (!regexFun(element, event.target.value)) {
@@ -152,11 +167,11 @@ class Login extends React.Component {
             )}
             <label className="djm-login-button" htmlFor="loginInput">
               <input
-                className={this.state.error ? null : "dont-click"}
+                // className={this.state.error ? null : "dont-click"}
                 id="loginInput"
                 type="button"
                 value={language.button}
-                onClick={this.loginButton}
+                onClick={this.handleClickLogin}
               />
             </label>
           </form>

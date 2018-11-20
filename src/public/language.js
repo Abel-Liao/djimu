@@ -22,7 +22,7 @@ const language = {
         emailNull: "请输入邮箱!",
         passwordNull: "请输入密码!",
         dynamicCodeNull: "请输入动态码!",
-        emailText: "请输入正确的邮箱!",
+        emailText: "请输入正确的邮箱地址!",
         passwordText: "请输入正确的密码!",
         dynamicCodeText: "请输入正确的动态码!"
       }
@@ -55,7 +55,7 @@ const language = {
         emailNull: "Please enter email address!",
         passwordNull: "Please enter password!",
         dynamicCodeNull: "Please enter dynamic code!",
-        emailText: "Please enter the correct mailbox!",
+        emailText: "Please enter the correct email address!",
         passwordText: "Please enter the correct password!",
         dynamicCodeText: "Please enter the correct dynamic code!"
       }
