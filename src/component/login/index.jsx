@@ -49,15 +49,20 @@ class Login extends React.Component {
       if (this.state.userInfo[key] === "") {
         if (!this.state.loginWay && key === "password") {
           continue;
+        } else if (this.state.loginWay && key === "dynamicCode") {
+          continue;
         }
         this.setState({ errorText: [key] + "Null" });
         return false;
+      } else {
+        continue;
       }
     }
+    return true;
   }
   handleClickLogin() {
-    this.forUserInfo();
-    if (!this.forUserInfo) {
+    const isNull = this.forUserInfo();
+    if (isNull) {
       sessionStorage.setItem("isLogin", true);
       this.props.history.push("/");
     }
@@ -74,7 +79,7 @@ class Login extends React.Component {
   }
   handleChangeInput(element, event) {
     this.setUserInfoFun("userInfo", element, event.target.value);
-    if (regexFun(element, event.target.value)) {
+    if (regexFun(element, event.target.value) && event.target.value === "") {
       this.setUserInfoFun("errorInfo", element, true);
       this.setState({ errorText: null });
     } else {
@@ -93,6 +98,7 @@ class Login extends React.Component {
   handleClickLoginWay() {
     this.setUserInfoFun("userInfo", "password", "");
     this.setUserInfoFun("userInfo", "dynamicCode", "");
+    this.setState({ errorText: null });
     this.setState({ error: false });
     this.setState({ loginWay: !this.state.loginWay });
   }

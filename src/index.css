@@ -77,11 +77,11 @@ body *.display {
 
 /* 搜索框占位符颜色 */
 ::-moz-placeholder {
-  color: #bbb;
+  color: #ccc;
 }
 ::-webkit-input-placeholder {
-  color: #bbb;
+  color: #ccc;
 }
 :-ms-input-placeholder {
-  color: #bbb;
+  color: #ccc;
 }

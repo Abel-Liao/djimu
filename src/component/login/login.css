@@ -5,11 +5,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background: url("./images/timg.jfif") no-repeat;
+  background-size: 100% 100%;
 }
 .dji-login-nav {
   width: 400px;
   height: 400px;
   background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
 }
 .djm-login-logo {
   margin: 30px 0;
@@ -36,6 +39,9 @@
   border: 1px solid #ccc;
   padding-left: 5px;
   padding-right: 23px;
+  background: none;
+  color: #fff;
+  font-size: 16px;
 }
 .djm-login-from span {
   position: absolute;
@@ -45,28 +51,32 @@
   height: 15px;
   line-height: 12px;
   border-radius: 50%;
-  color: #999;
+  color: #ddd;
   cursor: pointer;
   display: none;
 }
 .djm-login-from span:hover {
-  color: #666;
+  color: #fff;
 }
 .djm-login-button input {
   border: none;
-  background: rgba(229, 26, 72, 1);
+  background: rgba(229, 26, 72, 0.8);
   color: #fff;
   cursor: pointer;
   padding: 0;
 }
 .djm-login-button input:hover {
+  background: rgba(229, 26, 72, 1);
+}
+.djm-login-button .dont-click:hover {
   background: rgba(229, 26, 72, 0.8);
 }
 .djm-login-footer span {
   cursor: pointer;
+  color: #fff;
 }
 .djm-login-footer span:hover {
-  color: rgba(229, 26, 72, 0.8);
+  color: rgba(252, 5, 18, 1);
 }
 .djm-login-forget {
   margin-right: 30px;
@@ -97,6 +107,6 @@
   margin: 0 auto;
   height: 25px;
   line-height: 25px;
-  color: rgba(229, 26, 72, 1);
+  color: rgba(252, 5, 18, 1);
   text-align: left;
 }
