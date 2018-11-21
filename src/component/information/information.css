@@ -15,13 +15,17 @@
   left: 10px;
   border: 2px solid #fff;
   border-radius: 5px;
-  position: relative;
   width: 150px;
   height: 150px;
 }
 .djm-information-userImg img {
   width: 100%;
   height: 100%;
+  border-radius: 3px;
+}
+.djm-information-userImg:hover .djm-information-head-portrait {
+  opacity: 1;
+  z-index: 1;
 }
 .djm-information-head-portrait {
   position: absolute;
@@ -30,6 +34,17 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  opacity: 0;
+  z-index: -1;
+  transition: all ease-in 0.12s;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.djm-information-hp-text {
+  position: absolute;
+  top: 85px;
+  left: 45px;
 }
 .djm-information-head-portrait input {
   display: inline-block;
@@ -37,6 +52,14 @@
   height: 100%;
   opacity: 0;
   cursor: pointer;
+}
+.djm-information-head-portrait::before {
+  position: absolute;
+  top: 73px;
+  left: 73px;
+  font-size: 38px;
+  color: #fff;
+  transform: translate(-19px, -30px);
 }
 .djm-information-userName {
   text-align: left;

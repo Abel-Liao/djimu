@@ -42,7 +42,8 @@ class Information extends React.Component {
           <div className="djm-information-content">
             <div className="djm-information-userImg">
               <img src={this.state.headPortraitUrl} alt="" />
-              <span className="djm-information-head-portrait">
+              <span className="djm-information-head-portrait iconfont icon-camera">
+                <span className="djm-information-hp-text">修改头像</span>
                 <input
                   onChange={this.handleChangeImg}
                   type="file"
@@ -64,6 +65,7 @@ class Information extends React.Component {
                         }
                         className="djm-information-change"
                       >
+                        <i className="iconfont icon-pen" />
                         修改
                       </span>
                     </React.Fragment>
