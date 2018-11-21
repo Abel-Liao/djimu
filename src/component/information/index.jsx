@@ -1,6 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import HeadPortrait from "./headPortrait";
+import AddText from "./addText";
+import UserText from "./userText";
+import ChangeText from "./changeText";
+
 import "./information.css";
 
 import firstImg from "./images/logo.png";
@@ -11,14 +16,39 @@ class Information extends React.Component {
     this.state = {
       changeInfo: {
         email: true,
-        impressionAddr: true
+        describeYourself: true,
+        wantPlace: true,
+        impressionPlace: true
       },
-      headPortraitUrl: firstImg
+      headPortraitUrl: firstImg,
+      userInfoArr: [
+        { title: "email", content: "sdas@adas.com" },
+        { title: "describeYourself", content: "abcdefg" },
+        { title: "wantPlace", content: "西藏" },
+        { title: "impressionPlace", content: "" }
+      ]
     };
-    this.handleClcikChange = this.handleClcikChange.bind(this);
+    this.handleClickChange = this.handleClickChange.bind(this);
     this.handleChangeImg = this.handleChangeImg.bind(this);
+    this.handleClickSure = this.handleClickSure.bind(this);
   }
-  handleClcikChange(changeName) {
+  handleClickChange(changeName) {
+    this.setState(
+      Object.assign(this.state.changeInfo, this.state.changeInfo, {
+        [changeName]: !this.state.changeInfo[changeName]
+      })
+    );
+  }
+  handleClickSure(changeIndex, changeName, element) {
+    this.setState(
+      Object.assign(
+        this.state.userInfoArr[changeIndex],
+        this.state.userInfoArr[changeIndex],
+        {
+          content: element.value
+        }
+      )
+    );
     this.setState(
       Object.assign(this.state.changeInfo, this.state.changeInfo, {
         [changeName]: !this.state.changeInfo[changeName]
@@ -33,6 +63,7 @@ class Information extends React.Component {
     };
   }
   render() {
+    const language = this.props.languageStore.language.information;
     return (
       <div className="djm-information">
         <div className="djm-information-main">
@@ -40,92 +71,46 @@ class Information extends React.Component {
             <img src={require("./images/top_img.jfif")} alt="img" />
           </div>
           <div className="djm-information-content">
-            <div className="djm-information-userImg">
-              <img src={this.state.headPortraitUrl} alt="" />
-              <span className="djm-information-head-portrait iconfont icon-camera">
-                <span className="djm-information-hp-text">修改头像</span>
-                <input
-                  onChange={this.handleChangeImg}
-                  type="file"
-                  accept="image/png, image/jpeg"
-                />
-              </span>
-            </div>
+            <HeadPortrait
+              handleChangeImg={this.handleChangeImg}
+              headPortraitUrl={this.state.headPortraitUrl}
+              language={language}
+              {...this.props}
+            />
             <div className="djm-information-userName">
               <h2>Abel</h2>
               <ul className="djm-information-userInfoList">
-                <li>
-                  <b>Email:</b>
-                  {this.state.changeInfo.email ? (
-                    <React.Fragment>
-                      <span>sdas@adas.com</span>
-                      <span
-                        onClick={event =>
-                          this.handleClcikChange("email", event)
-                        }
-                        className="djm-information-change"
-                      >
-                        <i className="iconfont icon-pen" />
-                        修改
-                      </span>
-                    </React.Fragment>
-                  ) : (
-                    <React.Fragment>
-                      <input
-                        className="djm-information-change-input"
-                        type="text"
-                        placeholder="输入邮箱"
+                {this.state.userInfoArr.map((item, index) => (
+                  <li key={index}>
+                    <b>{language[item.title]}</b>
+                    {item.content === "" &&
+                    this.state.changeInfo[item.title] ? (
+                      <AddText
+                        {...this.props}
+                        handleClickChange={this.handleClickChange}
+                        title={item.title}
+                        language={language}
                       />
-                      <span className="djm-information-sure">确定</span>
-                      <span
-                        className="djm-information-cancel"
-                        onClick={event =>
-                          this.handleClcikChange("email", event)
-                        }
-                      >
-                        取消
-                      </span>
-                    </React.Fragment>
-                  )}
-                </li>
-                <li>
-                  <b>描述自己:</b>abcdefg
-                </li>
-                <li>
-                  <b>最想去的地方:</b>西藏
-                </li>
-                <li>
-                  <b>印象最深的地方:</b>
-                  {this.state.changeInfo.impressionAddr ? (
-                    <p
-                      onClick={this.handleClcikChange.bind(
-                        this,
-                        "impressionAddr"
-                      )}
-                      className="djm-information-add"
-                    >
-                      <span className="djm-information-addButton">+</span>
-                      添加
-                    </p>
-                  ) : (
-                    <React.Fragment>
-                      <input
-                        className="djm-information-change-input"
-                        type="text"
-                        placeholder="输入地名"
+                    ) : this.state.changeInfo[item.title] ? (
+                      <UserText
+                        {...this.props}
+                        content={item.content}
+                        title={item.title}
+                        handleClickChange={this.handleClickChange}
+                        language={language}
                       />
-                      <span className="djm-information-sure">确定</span>
-                      <span
-                        className="djm-information-cancel"
-                        onClick={event =>
-                          this.handleClcikChange("impressionAddr", event)
-                        }
-                      >
-                        取消
-                      </span>
-                    </React.Fragment>
-                  )}
-                </li>
+                    ) : (
+                      <ChangeText
+                        {...this.props}
+                        handleClickSure={this.handleClickSure}
+                        handleClickChange={this.handleClickChange}
+                        language={language}
+                        title={item.title}
+                        index={index}
+                      />
+                    )}
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

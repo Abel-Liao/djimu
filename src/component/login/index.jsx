@@ -141,7 +141,7 @@ class Login extends React.Component {
                 autoComplete="off"
                 type="text"
                 placeholder={language.uesrName}
-                ref="userEmail"
+                // ref="userEmail"
                 onChange={this.handleChangeInput.bind(this, "email")}
                 onBlur={this.handleOnBlur.bind(this, "email")}
               />
@@ -159,6 +159,7 @@ class Login extends React.Component {
                 clearAll={this.handleClickClear}
                 userInfo={this.state.userInfo}
                 handleOnBlur={this.handleOnBlur}
+                language={language}
               />
             ) : (
               <EmailQuick
@@ -169,6 +170,7 @@ class Login extends React.Component {
                 dynamicCode={this.handleClickDynamicCode}
                 codeNumber={this.state.codeNumber}
                 handleOnBlur={this.handleOnBlur}
+                language={language}
               />
             )}
             <label className="djm-login-button" htmlFor="loginInput">

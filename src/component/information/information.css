@@ -44,7 +44,8 @@
 .djm-information-hp-text {
   position: absolute;
   top: 85px;
-  left: 45px;
+  left: 0;
+  width: 100%;
 }
 .djm-information-head-portrait input {
   display: inline-block;
@@ -93,6 +94,9 @@
 }
 .djm-information-userInfoList li:hover .djm-information-change {
   display: inline-block;
+}
+.djm-information-userInfoList textarea {
+  vertical-align: top;
 }
 .djm-information-add {
   display: inline-block;

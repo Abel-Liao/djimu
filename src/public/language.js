@@ -30,6 +30,22 @@ const language = {
     userArticle: {
       author: "作者：",
       date: "日期："
+    },
+    information: {
+      changePortrait: "修改头像",
+      email: "邮箱",
+      describeYourself: "介绍自己",
+      wantPlace: "最想去的地方",
+      impressionPlace: "印象最深的地方",
+      addText: "添加",
+      changeText: "修改",
+      changeSure: "确定",
+      changeCancel: "取消",
+      input: {
+        email: "请输入邮箱",
+        wantPlace: "请输入地址",
+        impressionPlace: "请输入地址"
+      }
     }
   },
   "en-US": {
@@ -63,6 +79,22 @@ const language = {
     userArticle: {
       author: "Author：",
       date: "Date："
+    },
+    information: {
+      changePortrait: "Change Portrait",
+      email: "Email",
+      describeYourself: "Describe Yourself",
+      wantPlace: "Want To Place",
+      impressionPlace: "Impression Place",
+      addText: "Add",
+      changeText: "Change",
+      changeSure: "Sure",
+      changeCancel: "Cancel",
+      input: {
+        email: "Email",
+        wantPlace: "Input Place",
+        impressionPlace: "Input Place"
+      }
     }
   }
 };
