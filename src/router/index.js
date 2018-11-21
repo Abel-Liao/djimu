@@ -30,7 +30,7 @@ const routeArrLogin = [
   {
     path: "/information",
     exact: false,
-    component: [Header, Information, Footer]
+    component: [Header, Information]
   }
 ];
 
