@@ -1,11 +1,12 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 
 import Index from "../component/index";
 import Login from "../component/login";
 import Register from "../component/register";
 import Header from "../component/header";
 import Footer from "../component/footer";
+import Information from "../component/information";
 
 const routeArr = [
   {
@@ -25,7 +26,16 @@ const routeArr = [
   }
 ];
 
-function routeFun(arr) {
+const routeArrLogin = [
+  {
+    path: "/information",
+    exact: false,
+    component: [Header, Information, Footer]
+  }
+];
+
+function routeFun(arr, needLoginBool = false) {
+  const isLogin = sessionStorage.getItem("isLogin");
   return arr.map((route, index) => (
     <Route
       key={index}
@@ -33,14 +43,31 @@ function routeFun(arr) {
       path={route.path}
       // component={route.component}
       render={props =>
-        route.component.map((Routeree, index) => (
-          <Routeree key={index} {...props} />
-        ))
+        route.component.map((RouteLink, index) =>
+          !needLoginBool ? (
+            <RouteLink key={index} {...props} />
+          ) : isLogin === "true" ? (
+            <RouteLink key={index} {...props} />
+          ) : (
+            <Redirect
+              key={index}
+              to={{
+                pathname: "/login",
+                state: { from: props.location }
+              }}
+            />
+          )
+        )
       }
     />
   ));
 }
 
-const Router = () => <React.Fragment>{routeFun(routeArr)}</React.Fragment>;
+const Router = () => (
+  <React.Fragment>
+    {routeFun(routeArr)}
+    {routeFun(routeArrLogin, true)}
+  </React.Fragment>
+);
 
 export default Router;

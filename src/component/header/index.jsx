@@ -61,7 +61,7 @@ class Header extends React.Component {
     this.props.history.push(`/${url}`);
   }
   handleClickLogout() {
-    sessionStorage.removeItem("isLogin");
+    sessionStorage.clear();
     this.setState({ isLogin: null });
   }
   handleChangeLan(language) {
@@ -112,9 +112,22 @@ class Header extends React.Component {
                   <span>Abel</span>
                   <i className="iconfont icon-triangle" />
                   <ul className="djm-hu-setting">
-                    <li>{language.YourProfile}</li>
+                    <li
+                      onClick={event =>
+                        this.handleChangePage("information", event)
+                      }
+                    >
+                      {language.YourProfile}
+                    </li>
                     <li>{language.EditArticles}</li>
-                    <li onClick={this.handleClickLogout}>{language.logout}</li>
+                    <li
+                      onClick={event => {
+                        this.handleClickLogout(event);
+                        this.handleChangePage("", event);
+                      }}
+                    >
+                      {language.logout}
+                    </li>
                   </ul>
                 </li>
               </React.Fragment>
