@@ -3,7 +3,7 @@
 }
 .djm-index-uesr-article li {
   width: 430px;
-  height: 250px;
+  height: 285px;
   margin-bottom: 150px;
   cursor: pointer;
   transition: transform ease-in-out 0.1s;
@@ -22,6 +22,7 @@ li.djm-iua-right {
 }
 .djm-iua-content {
   transition: transform ease-in-out 0.1s;
+  padding-bottom: 15px;
 }
 .djm-index-uesr-article li:hover .djm-iua-content {
   box-shadow: 0 3px 20px 1px #ddd;
@@ -137,4 +138,14 @@ li.djm-iua-right {
 }
 .djm-iua-right .article-data {
   top: 203px;
+}
+/* 分享等 */
+.djm-iua-function span {
+  margin-right: 20px;
+}
+.djm-iua-function span:last-child {
+  margin-right: 0;
+}
+.djm-iua-function span::before {
+  margin-right: 5px;
 }

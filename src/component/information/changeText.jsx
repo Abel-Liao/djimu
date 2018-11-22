@@ -6,6 +6,7 @@ class ChangeText extends React.Component {
       <React.Fragment>
         {this.props.title === "describeYourself" ? (
           <textarea
+            className="djm-information-change-textarea"
             name="describeYourself-textarea"
             id=""
             cols="30"

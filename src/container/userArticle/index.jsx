@@ -58,6 +58,12 @@ class UserArticle extends React.Component {
             <div className="djm-iua-content">
               <img src={item.imgUrl} alt="图片" />
               <p>{item.title}</p>
+              <div className="djm-iua-function">
+                <span className="iconfont icon-comments">评论</span>
+                <span className="iconfont icon-givelike">点赞</span>
+                <span className="iconfont icon-collection">收藏</span>
+                <span className="iconfont icon-plane">分享</span>
+              </div>
             </div>
           </li>
         ))}
