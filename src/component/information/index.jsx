@@ -26,41 +26,77 @@ class Information extends React.Component {
         { title: "describeYourself", content: "abcdefg" },
         { title: "wantPlace", content: "西藏" },
         { title: "impressionPlace", content: "" }
+      ],
+      oldInfoArr: [
+        { title: "email", content: "sdas@adas.com" },
+        { title: "describeYourself", content: "abcdefg" },
+        { title: "wantPlace", content: "西藏" },
+        { title: "impressionPlace", content: "" }
       ]
     };
     this.handleClickChange = this.handleClickChange.bind(this);
     this.handleChangeImg = this.handleChangeImg.bind(this);
     this.handleClickSure = this.handleClickSure.bind(this);
+    this.handleChangeValue = this.handleChangeValue.bind(this);
+    this.changeObjectFun = this.changeObjectFun.bind(this);
   }
-  handleClickChange(changeName) {
-    this.setState(
-      Object.assign(this.state.changeInfo, this.state.changeInfo, {
-        [changeName]: !this.state.changeInfo[changeName]
-      })
-    );
-  }
-  handleClickSure(changeIndex, changeName, element) {
+  changeObjectFun(stateName, key, value, stateIndex) {
     this.setState(
       Object.assign(
-        this.state.userInfoArr[changeIndex],
-        this.state.userInfoArr[changeIndex],
+        this.state[stateName][stateIndex],
+        this.state[stateName][stateIndex],
         {
-          content: element.value
+          [key]: value
         }
       )
     );
+  }
+  handleClickChange(changeName, changeIndex, isCancel) {
     this.setState(
       Object.assign(this.state.changeInfo, this.state.changeInfo, {
         [changeName]: !this.state.changeInfo[changeName]
-      })
+      }),
+      () => {
+        if (this.state.changeInfo[changeName] && isCancel) {
+          this.changeObjectFun(
+            "userInfoArr",
+            "content",
+            this.state.oldInfoArr[changeIndex].content,
+            changeIndex
+          );
+        }
+      }
+    );
+  }
+  handleClickSure(changeName, changeIndex, element) {
+    this.setState(oldInfoArr => ({ oldInfoArr: oldInfoArr.userInfoArr }));
+    this.changeObjectFun("userInfoArr", "content", element.value, changeIndex);
+  }
+  handleChangeValue(changeIndex, event) {
+    this.changeObjectFun(
+      "userInfoArr",
+      "content",
+      event.target.value,
+      changeIndex
     );
   }
   handleChangeImg(event) {
     const fileReader = new FileReader();
-    fileReader.readAsDataURL(event.target.files[0], "UTF-8");
+    fileReader.readAsDataURL(event.target.files[0]);
     fileReader.onload = event => {
       this.setState({ headPortraitUrl: event.target.result });
     };
+  }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    // if (this.state.changeInfo[changeName]) {
+    //   this.changeObjectFun(
+    //     "userInfoArr",
+    //     "content",
+    //     this.state.oldInfoArr[changeIndex].content,
+    //     changeIndex
+    //   );
+    // }
+    return null;
   }
   render() {
     const language = this.props.languageStore.language.information;
@@ -90,6 +126,7 @@ class Information extends React.Component {
                         handleClickChange={this.handleClickChange}
                         title={item.title}
                         language={language}
+                        index={index}
                       />
                     ) : this.state.changeInfo[item.title] ? (
                       <UserText
@@ -98,14 +135,17 @@ class Information extends React.Component {
                         title={item.title}
                         handleClickChange={this.handleClickChange}
                         language={language}
+                        index={index}
                       />
                     ) : (
                       <ChangeText
                         {...this.props}
                         handleClickSure={this.handleClickSure}
                         handleClickChange={this.handleClickChange}
+                        handleChangeValue={this.handleChangeValue}
                         language={language}
                         title={item.title}
+                        content={item.content}
                         index={index}
                       />
                     )}

@@ -11,7 +11,10 @@ class ChangeText extends React.Component {
             cols="30"
             rows="3"
             ref={this.props.title}
-            // value={item.content}
+            value={this.props.content}
+            onChange={event =>
+              this.props.handleChangeValue(this.props.index, event)
+            }
           />
         ) : (
           <input
@@ -19,17 +22,27 @@ class ChangeText extends React.Component {
             type="text"
             placeholder={this.props.language.input[this.props.title]}
             ref={this.props.title}
+            value={this.props.content}
+            onChange={event =>
+              this.props.handleChangeValue(this.props.index, event)
+            }
           />
         )}
         <span
-          onClick={even =>
+          onClick={even => {
             this.props.handleClickSure(
-              this.props.index,
               this.props.title,
+              this.props.index,
               this.refs[this.props.title],
               even
-            )
-          }
+            );
+            this.props.handleClickChange(
+              this.props.title,
+              this.props.index,
+              false,
+              even
+            );
+          }}
           className="djm-information-sure"
         >
           {this.props.language.changeSure}
@@ -37,7 +50,12 @@ class ChangeText extends React.Component {
         <span
           className="djm-information-cancel"
           onClick={event =>
-            this.props.handleClickChange(this.props.title, event)
+            this.props.handleClickChange(
+              this.props.title,
+              this.props.index,
+              true,
+              event
+            )
           }
         >
           {this.props.language.changeCancel}
