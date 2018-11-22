@@ -69,8 +69,8 @@ class Information extends React.Component {
     );
   }
   handleClickSure(changeName, changeIndex, element) {
-    this.setState(oldInfoArr => ({ oldInfoArr: oldInfoArr.userInfoArr }));
     this.changeObjectFun("userInfoArr", "content", element.value, changeIndex);
+    this.changeObjectFun("oldInfoArr", "content", element.value, changeIndex);
   }
   handleChangeValue(changeIndex, event) {
     this.changeObjectFun(
@@ -88,14 +88,6 @@ class Information extends React.Component {
     };
   }
   static getDerivedStateFromProps(nextProps, prevState) {
-    // if (this.state.changeInfo[changeName]) {
-    //   this.changeObjectFun(
-    //     "userInfoArr",
-    //     "content",
-    //     this.state.oldInfoArr[changeIndex].content,
-    //     changeIndex
-    //   );
-    // }
     return null;
   }
   render() {
