@@ -25,7 +25,8 @@ class UserArticle extends React.Component {
           name: "OOO",
           data: "2018-10-11",
           imgUrl: require("./images/index_banner2.jpg"),
-          title: "ASFSAFAS",
+          title:
+            "ASFSAFASsb adasdsd savnd asndasdba sdnab dnav sanv dnad js bbfbm fdabfds bfsbdnfd nfs dvfs dvfn vsd nfs vdnf sdv nf mvfnm dsvfm sdv fjs dvf ja amdhasb dasn dvad asd san dvasb d ",
           comments: 2136,
           givelike: {
             number: 1289,
@@ -40,7 +41,8 @@ class UserArticle extends React.Component {
           name: "AAA",
           data: "2014-10-11",
           imgUrl: require("./images/index_banner3.jpg"),
-          title: "阿贾克斯发发",
+          title:
+            "阿贾克斯发发阿贾克斯发发阿贾克斯发发阿贾克斯发发阿贾克斯发发阿贾克斯发发阿贾克斯发发阿贾克斯发发阿贾克斯发发阿贾克斯发发阿贾克斯发发阿贾克斯发发阿贾克斯发发阿贾克斯发发阿贾克斯发发阿贾克斯发发阿贾克斯发发阿贾克斯发发阿贾克斯发发",
           comments: 6587,
           givelike: {
             number: 554,
