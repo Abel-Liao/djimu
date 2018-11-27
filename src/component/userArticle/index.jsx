@@ -1,4 +1,5 @@
 import React from "react";
+import connect from "react-redux";
 
 import UserArticleList from "../../container/userArticle";
 
@@ -69,7 +70,8 @@ class UserArticle extends React.Component {
             isChoose: false
           }
         }
-      ]
+      ],
+      myCollection: []
     };
     this.handleClickAction = this.handleClickAction.bind(this);
     this.changeItemFun = this.changeItemFun.bind(this);
@@ -121,4 +123,9 @@ class UserArticle extends React.Component {
     );
   }
 }
-export default UserArticle;
+
+function mapStateToProps(state, ownProps) {
+  return;
+}
+
+export default connect(mapStateToProps)(UserArticle);

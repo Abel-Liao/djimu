@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 
 import dateFun from "../../public/date";
 
@@ -65,7 +64,4 @@ function UserArticle(props) {
     </React.Fragment>
   );
 }
-function mapStateToProps(state, ownProps) {
-  return state;
-}
-export default connect(mapStateToProps)(UserArticle);
+export default UserArticle;
