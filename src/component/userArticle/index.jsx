@@ -1,5 +1,5 @@
 import React from "react";
-import connect from "react-redux";
+import { connect } from "react-redux";
 
 import UserArticleList from "../../container/userArticle";
 
@@ -67,14 +67,16 @@ class UserArticle extends React.Component {
           },
           collection: {
             number: 1475,
-            isChoose: false
+            isChoose: true
           }
         }
       ],
-      myCollection: []
+      myCollection: [],
+      displayList: "new"
     };
     this.handleClickAction = this.handleClickAction.bind(this);
     this.changeItemFun = this.changeItemFun.bind(this);
+    this.handleClickNav = this.handleClickNav.bind(this);
   }
   changeItemFun(changeItem, key, value) {
     this.setState(
@@ -101,19 +103,54 @@ class UserArticle extends React.Component {
       this.changeItemFun(changeItem[dataName], "isChoose", true);
     }
   }
+  handleClickNav(displayName) {
+    if (displayName === "my") {
+      let temporaryArr = [];
+      this.state.userInfo.map((idx, index) => {
+        if (idx.collection.isChoose) {
+          temporaryArr.push(idx);
+        }
+        return temporaryArr;
+      });
+      this.setState(Object.assign(this.state.myCollection, temporaryArr));
+    }
+    this.setState({ displayList: displayName });
+  }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return null;
+  }
   render() {
     const language = this.props.languageStore.language.userArticle;
     return (
       <div className="djm-index-content">
         <div className="djm-index-content-title">
-          <span className="choose-class">最新发布</span>
-          <span>最热攻略</span>
-          <span>我的收藏</span>
+          <span
+            onClick={event => this.handleClickNav("new", event)}
+            className={this.state.displayList === "new" ? "choose-class" : null}
+          >
+            最新发布
+          </span>
+          <span
+            className={this.state.displayList === "hot" ? "choose-class" : null}
+            onClick={event => this.handleClickNav("hot", event)}
+          >
+            最热攻略
+          </span>
+          <span
+            className={this.state.displayList === "my" ? "choose-class" : null}
+            onClick={event => this.handleClickNav("my", event)}
+          >
+            我的收藏
+          </span>
         </div>
         <ul className="djm-index-uesr-article clearfloat">
           <UserArticleList
             {...this.props}
-            userInfo={this.state.userInfo}
+            userInfo={
+              this.state.displayList === "my"
+                ? this.state.myCollection
+                : this.state.userInfo
+            }
             handleClickAction={this.handleClickAction}
             language={language}
           />
@@ -125,7 +162,7 @@ class UserArticle extends React.Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  return;
+  return state;
 }
 
 export default connect(mapStateToProps)(UserArticle);
