@@ -29,7 +29,10 @@ const language = {
     },
     userArticle: {
       author: "作者：",
-      date: "日期："
+      date: "日期：",
+      new: "最新发布",
+      hot: "热门攻略",
+      myCollection: "我的收藏"
     },
     information: {
       changePortrait: "修改头像",
@@ -86,7 +89,10 @@ const language = {
     },
     userArticle: {
       author: "Author：",
-      date: "Date："
+      date: "Date：",
+      new: "Latest Release",
+      hot: "Popular Strategy",
+      myCollection: "My Collection"
     },
     information: {
       changePortrait: "Change Portrait",

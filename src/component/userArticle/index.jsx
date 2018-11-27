@@ -140,19 +140,19 @@ class UserArticle extends React.Component {
             onClick={event => this.handleClickNav("new", event)}
             className={this.state.displayList === "new" ? "choose-class" : null}
           >
-            最新发布
+            {language.new}
           </span>
           <span
             className={this.state.displayList === "hot" ? "choose-class" : null}
             onClick={event => this.handleClickNav("hot", event)}
           >
-            热门攻略
+            {language.hot}
           </span>
           <span
             className={this.state.displayList === "my" ? "choose-class" : null}
             onClick={event => this.handleClickNav("my", event)}
           >
-            我的收藏
+            {language.myCollection}
           </span>
         </div>
         <ul className="djm-index-uesr-article clearfloat">
