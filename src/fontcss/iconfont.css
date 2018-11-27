@@ -29,6 +29,7 @@
 .icon-search:before {
   content: "\e613";
   font-size: 18px;
+  cursor: pointer;
 }
 
 .icon-triangle:before {

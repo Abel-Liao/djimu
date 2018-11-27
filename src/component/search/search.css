@@ -1,0 +1,71 @@
+.djm-index-search {
+  position: fixed;
+  top: 300px;
+  z-index: 30;
+  left: 50%;
+  color: #e51a48;
+  transform: translateX(-200px);
+}
+.djm-index-search-choose li {
+  float: left;
+  margin-right: 50px;
+  cursor: pointer;
+}
+.djm-index-search-choose li:last-child {
+  margin-right: 0;
+}
+li.choose-search i::before {
+  color: #ff0;
+}
+.djm-index-search-input {
+  position: relative;
+}
+.djm-index-search-input input {
+  display: inline-block;
+  width: 400px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  padding-left: 10px;
+  border-radius: 5px;
+  border-color: #e51a48;
+  color: #666;
+  background: none;
+  margin-top: 10px;
+  padding-right: 40px;
+}
+.djm-index-search-input input:focus {
+  background: #fff;
+}
+.djm-index-search-input i {
+  position: absolute;
+  right: 5px;
+  top: 14px;
+}
+.djm-index-search-input i::before {
+  font-size: 28px;
+  font-weight: 600;
+}
+.choose-search-round {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #e51a48;
+  border-radius: 50%;
+  margin-right: 3px;
+  position: relative;
+  top: 3px;
+}
+.choose-search-round i {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  top: 2px;
+  left: 2px;
+  background: #e51a48;
+  border-radius: 50%;
+  display: none;
+}
+.choose-search .choose-search-round i {
+  display: block;
+}

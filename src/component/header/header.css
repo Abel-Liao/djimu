@@ -153,7 +153,7 @@
   border: 1px solid #ddd;
   border-radius: 30px;
   padding-left: 15px;
-  padding-right: 28px;
+  padding-right: 30px;
   width: 150px;
   color: #666;
   transition: all ease-in 0.2s;
@@ -163,6 +163,6 @@
 }
 .djm-header-search i {
   position: absolute;
-  right: 5px;
-  top: 4px;
+  right: 10px;
+  top: 5px;
 }

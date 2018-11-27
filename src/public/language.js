@@ -46,6 +46,14 @@ const language = {
         wantPlace: "请输入地址",
         impressionPlace: "请输入地址"
       }
+    },
+    indexSearch: {
+      destination: "目的地",
+      strategy: "攻略",
+      group: "跟团",
+      destinationDis: "请输入目的地",
+      strategyDis: "请输入作者、景点",
+      groupDis: "请输入团名、景点"
     }
   },
   "en-US": {
@@ -95,6 +103,14 @@ const language = {
         wantPlace: "Input Place",
         impressionPlace: "Input Place"
       }
+    },
+    indexSearch: {
+      destination: "Destination",
+      strategy: "Strategy",
+      group: "Group",
+      destinationDis: "Destination",
+      strategyDis: "Author Or Scenic Spot",
+      groupDis: "Group Name Or Scenic Spot"
     }
   }
 };
