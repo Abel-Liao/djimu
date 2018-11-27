@@ -1,6 +1,6 @@
 .djm-index-search {
-  position: fixed;
-  top: 300px;
+  position: absolute;
+  top: 250px;
   z-index: 30;
   left: 50%;
   color: #e51a48;
