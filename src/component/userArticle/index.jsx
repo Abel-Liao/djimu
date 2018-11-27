@@ -71,7 +71,6 @@ class UserArticle extends React.Component {
           }
         }
       ],
-      myCollection: [],
       displayList: "new"
     };
     this.handleClickAction = this.handleClickAction.bind(this);
@@ -104,16 +103,6 @@ class UserArticle extends React.Component {
     }
   }
   handleClickNav(displayName) {
-    // if (displayName === "my") {
-    //   let temporaryArr = [];
-    //   this.state.userInfo.map((idx, index) => {
-    //     if (idx.collection.isChoose) {
-    //       temporaryArr.push(idx);
-    //     }
-    //     return temporaryArr;
-    //   });
-    //   this.setState(Object.assign(this.state.myCollection, temporaryArr));
-    // }
     this.setState({ displayList: displayName });
   }
   static getDerivedStateFromProps(nextProps, prevState) {
