@@ -1,0 +1,156 @@
+.djm-information-main {
+  width: 1260px;
+  margin: 0 auto;
+}
+.djm-information-top img {
+  width: 100%;
+  height: 300px;
+}
+.djm-information-content {
+  position: relative;
+}
+.djm-information-userImg {
+  position: absolute;
+  top: -20px;
+  left: 10px;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  width: 150px;
+  height: 150px;
+}
+.djm-information-userImg img {
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+}
+.djm-information-userImg:hover .djm-information-head-portrait {
+  opacity: 1;
+  z-index: 10;
+}
+.djm-information-head-portrait {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  opacity: 0;
+  z-index: -1;
+  transition: all ease-in 0.12s;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.djm-information-hp-text {
+  position: absolute;
+  top: 85px;
+  left: 0;
+  width: 100%;
+}
+.djm-information-head-portrait input {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.djm-information-head-portrait::before {
+  position: absolute;
+  top: 73px;
+  left: 73px;
+  font-size: 38px;
+  color: #fff;
+  transform: translate(-19px, -30px);
+}
+.djm-information-userName {
+  text-align: left;
+  padding-left: 200px;
+  font-size: 20px;
+}
+.djm-information-userName h2 {
+  color: #555;
+}
+.djm-information-userInfoList li {
+  height: 100px;
+  padding-top: 32.5px;
+  border-bottom: 1px solid #ddd;
+}
+.djm-information-userInfoList b {
+  display: inline-block;
+  width: 180px;
+  color: #666;
+  height: 35px;
+  line-height: 35px;
+}
+.djm-information-change {
+  margin-left: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  color: rgba(36, 142, 247, 1);
+  display: none;
+}
+.djm-information-change:hover {
+  color: rgba(36, 142, 247, 0.8);
+}
+.djm-information-userInfoList li:hover .djm-information-change {
+  display: inline-block;
+}
+.djm-information-userInfoList textarea {
+  vertical-align: top;
+}
+.djm-information-add {
+  display: inline-block;
+  font-size: 16px;
+  color: rgba(36, 142, 247, 1);
+  cursor: pointer;
+}
+.djm-information-add:hover {
+  color: rgba(36, 142, 247, 0.8);
+}
+.djm-information-addButton {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  line-height: 15px;
+  font-size: 30px;
+  border: 2px dashed rgba(36, 142, 247, 1);
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+  position: relative;
+  top: -3px;
+}
+.djm-information-add:hover .djm-information-addButton {
+  border-color: rgba(36, 142, 247, 0.8);
+}
+.djm-information-change-input {
+  position: relative;
+  top: -1px;
+  width: 200px;
+  height: 35px;
+  line-height: 35px;
+  padding-left: 8px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-right: 5px;
+  font-size: 16px;
+}
+.djm-information-change-textarea,
+.djm-information-change-input {
+  color: #666;
+}
+.djm-information-sure,
+.djm-information-cancel {
+  font-size: 16px;
+  cursor: pointer;
+}
+.djm-information-sure {
+  color: rgba(36, 142, 247, 1);
+  margin: 0 15px;
+}
+.djm-information-sure:hover {
+  color: rgba(36, 142, 247, 0.8);
+}
+.djm-information-cancel:hover {
+  color: rgba(252, 5, 18, 1);
+}
