@@ -16,7 +16,7 @@ function LiList(props) {
         </span>
         <span className="article-data">
           {props.language.date}
-          {dateFun(props.item.data, "MM-DD-YYYY")}
+          {dateFun(props.item.date, "MM-DD-YYYY")}
         </span>
       </p>
       <div className="djm-iua-img">

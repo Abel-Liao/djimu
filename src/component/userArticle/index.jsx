@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import sortingFun from "../../public/sorting";
+
 import UserArticleList from "../../container/userArticle";
 
 import "./userArticle.css";
@@ -12,9 +14,9 @@ class UserArticle extends React.Component {
       userInfo: [
         {
           name: "XXX",
-          data: "2018-11-11",
+          date: "2018-11-11",
           imgUrl: require("./images/index_banner1.jpg"),
-          title: "hsahfhashfasfa",
+          title: "2018-11-11",
           comments: 2356,
           givelike: {
             number: 6589,
@@ -27,9 +29,9 @@ class UserArticle extends React.Component {
         },
         {
           name: "OOO",
-          data: "2018-10-11",
+          date: "2018-10-11",
           imgUrl: require("./images/index_banner2.jpg"),
-          title: "ASFSAFASsb",
+          title: "2018-10-11",
           comments: 2136,
           givelike: {
             number: 1289,
@@ -42,9 +44,9 @@ class UserArticle extends React.Component {
         },
         {
           name: "AAA",
-          data: "2014-10-11",
+          date: "2014-10-11",
           imgUrl: require("./images/index_banner3.jpg"),
-          title: "阿贾克斯",
+          title: "2014-10-11",
           comments: 6587,
           givelike: {
             number: 554,
@@ -57,9 +59,24 @@ class UserArticle extends React.Component {
         },
         {
           name: "CCCC",
-          data: "2016-02-11",
+          date: "2016-02-11",
           imgUrl: require("./images/index_banner4.jpg"),
-          title: "safsaffasf",
+          title: "2016-02-11",
+          comments: 6987123,
+          givelike: {
+            number: 2365124,
+            isChoose: false
+          },
+          collection: {
+            number: 1475,
+            isChoose: true
+          }
+        },
+        {
+          name: "CCCC",
+          date: "2018-03-11",
+          imgUrl: require("./images/index_banner4.jpg"),
+          title: "2018-03-11",
           comments: 6987123,
           givelike: {
             number: 2365124,
@@ -103,9 +120,15 @@ class UserArticle extends React.Component {
     }
   }
   handleClickNav(displayName) {
+    if (displayName === "hot") {
+      this.setState({ userInfo: sortingFun(this.state.userInfo, "givelike") });
+    }
     this.setState({ displayList: displayName });
   }
   static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.displayList !== "hot") {
+      return { userInfo: sortingFun(prevState.userInfo, "date") };
+    }
     return null;
   }
   render() {
@@ -123,7 +146,7 @@ class UserArticle extends React.Component {
             className={this.state.displayList === "hot" ? "choose-class" : null}
             onClick={event => this.handleClickNav("hot", event)}
           >
-            最热攻略
+            热门攻略
           </span>
           <span
             className={this.state.displayList === "my" ? "choose-class" : null}
