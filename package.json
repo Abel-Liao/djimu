@@ -30,6 +30,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@babel/polyfill": "^7.0.0",
     "redux-devtools-extension": "^2.13.5"
   }
 }
