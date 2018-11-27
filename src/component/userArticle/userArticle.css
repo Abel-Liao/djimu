@@ -19,10 +19,10 @@
   -khtml-user-select: none; /*早期浏览器*/
   user-select: none;
 }
-li.djm-iua-left {
+.djm-iua-list:nth-child(odd) {
   float: left;
 }
-li.djm-iua-right {
+.djm-iua-list:nth-child(even) {
   float: right;
   position: relative;
   top: 20px;
@@ -84,19 +84,19 @@ li.djm-iua-right {
   transform: rotate(90deg);
   height: 148px;
 }
-.djm-iua-left .line-one {
+.djm-iua-list:nth-child(odd) .line-one {
   left: 419px;
   top: 20px;
 }
-.djm-iua-left .line-two {
+.djm-iua-list:nth-child(odd) .line-two {
   left: 510px;
   top: -47px;
 }
-.djm-iua-right .line-one {
+.djm-iua-list:nth-child(even) .line-one {
   left: -20px;
   top: 160px;
 }
-.djm-iua-right .line-two {
+.djm-iua-list:nth-child(even) .line-two {
   left: -111px;
   top: 128px;
 }
@@ -109,11 +109,11 @@ li.djm-iua-right {
   width: 11px;
   height: 11px;
 }
-.djm-iua-left .round-big {
+.djm-iua-list:nth-child(odd) .round-big {
   left: 584px;
   top: 22px;
 }
-.djm-iua-right .round-big {
+.djm-iua-list:nth-child(even) .round-big {
   left: -196px;
   top: 197px;
 }
@@ -127,33 +127,33 @@ li.djm-iua-right {
   white-space: nowrap;
   transition: all ease-in 0.15s;
 }
-.djm-iua-left .djm-iua-line span {
+.djm-iua-list:nth-child(odd) .djm-iua-line span {
   left: 438px;
 }
-.djm-iua-right .djm-iua-line span {
+.djm-iua-list:nth-child(even) .djm-iua-line span {
   left: -182px;
 }
-.djm-index-uesr-article li:hover span {
+.djm-index-uesr-article li.djm-iua-list:hover span {
   transform: translateX(0);
 }
-.djm-iua-left .article-author,
-.djm-iua-right .article-data {
+.djm-iua-list:nth-child(odd) .article-author,
+.djm-iua-list:nth-child(even) .article-data {
   transform: translateX(-30px);
 }
-.djm-iua-left .article-data,
-.djm-iua-right .article-author {
+.djm-iua-list:nth-child(odd) .article-data,
+.djm-iua-list:nth-child(even) .article-author {
   transform: translateX(30px);
 }
-.djm-iua-left .article-author {
+.djm-iua-list:nth-child(odd) .article-author {
   top: 7px;
 }
-.djm-iua-left .article-data {
+.djm-iua-list:nth-child(odd) .article-data {
   top: 30px;
 }
-.djm-iua-right .article-author {
+.djm-iua-list:nth-child(even) .article-author {
   top: 182px;
 }
-.djm-iua-right .article-data {
+.djm-iua-list:nth-child(even) .article-data {
   top: 203px;
 }
 /* 分享等 */

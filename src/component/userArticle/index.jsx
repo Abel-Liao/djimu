@@ -104,16 +104,16 @@ class UserArticle extends React.Component {
     }
   }
   handleClickNav(displayName) {
-    if (displayName === "my") {
-      let temporaryArr = [];
-      this.state.userInfo.map((idx, index) => {
-        if (idx.collection.isChoose) {
-          temporaryArr.push(idx);
-        }
-        return temporaryArr;
-      });
-      this.setState(Object.assign(this.state.myCollection, temporaryArr));
-    }
+    // if (displayName === "my") {
+    //   let temporaryArr = [];
+    //   this.state.userInfo.map((idx, index) => {
+    //     if (idx.collection.isChoose) {
+    //       temporaryArr.push(idx);
+    //     }
+    //     return temporaryArr;
+    //   });
+    //   this.setState(Object.assign(this.state.myCollection, temporaryArr));
+    // }
     this.setState({ displayList: displayName });
   }
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -146,13 +146,10 @@ class UserArticle extends React.Component {
         <ul className="djm-index-uesr-article clearfloat">
           <UserArticleList
             {...this.props}
-            userInfo={
-              this.state.displayList === "my"
-                ? this.state.myCollection
-                : this.state.userInfo
-            }
+            userInfo={this.state.userInfo}
             handleClickAction={this.handleClickAction}
             language={language}
+            displayList={this.state.displayList}
           />
           <span className="separated-line" />
         </ul>
