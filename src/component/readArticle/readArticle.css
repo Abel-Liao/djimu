@@ -2,7 +2,10 @@
   width: 1180px;
   margin: 0 auto;
   position: relative;
-  padding-top: 100px;
+  padding-top: 60px;
+}
+.article-author {
+  font-weight: 700;
 }
 
 /* 头部 */
@@ -13,7 +16,7 @@
   width: 100%;
   z-index: 30;
   height: 100px;
-  padding-left: 120px;
+  padding-left: 140px;
 }
 .djm-readPage-header img {
   width: 100px;

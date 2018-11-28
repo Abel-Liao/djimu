@@ -14,9 +14,9 @@ class ReadArticle extends React.Component {
           <div className="djm-readPage-header">
             <img src={require("./images/user_img.jpg")} alt="Head portrait" />
             <div className="title-author">
-              <h1>sandan</h1>
+              <h1>无与伦比，袋鼠国中袋鼠岛</h1>
               <p>
-                <span>Fsas</span>
+                <span className="article-author">哈哈</span>
                 <span className="focusOn-author">关注</span>
                 <span>2018-08-15</span>
                 <span className="iconfont icon-eyes">阅读：2564785</span>
