@@ -82,6 +82,9 @@
   margin: 20px 0;
   line-height: 22px;
 }
+.djm-readPage-content img {
+  width: 100%;
+}
 
 /* 信息板块 */
 .djm-readPage-travel-info {
