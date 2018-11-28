@@ -178,6 +178,9 @@
 span.choosed::before {
   color: rgba(229, 26, 72, 1);
 }
+.djm-iua-share:hover::before {
+  color: rgba(229, 26, 72, 1);
+}
 
 /* 选择最热或最新 */
 .djm-index-content-nav {

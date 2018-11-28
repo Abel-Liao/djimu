@@ -53,7 +53,9 @@ function LiList(props) {
             ? `${parseInt(props.item.collection.number / 1000)}K+ 收藏`
             : props.item.collection.number}
         </span>
-        <span className="iconfont icon-plane">分享</span>
+        <span className="djm-iua-share iconfont icon-plane">
+          {props.language.share}
+        </span>
       </div>
     </li>
   );

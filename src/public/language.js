@@ -32,7 +32,8 @@ const language = {
       date: "日期：",
       new: "最新发布",
       hot: "热门攻略",
-      myCollection: "我的收藏"
+      myCollection: "我的收藏",
+      share: "分享"
     },
     information: {
       changePortrait: "修改头像",
@@ -92,7 +93,8 @@ const language = {
       date: "Date：",
       new: "Latest Release",
       hot: "Popular Strategy",
-      myCollection: "My Collection"
+      myCollection: "My Collection",
+      share: "Share"
     },
     information: {
       changePortrait: "Change Portrait",
