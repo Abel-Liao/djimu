@@ -6,6 +6,29 @@ import Banner from "../banner";
 import "./readArticle.css";
 
 class ReadArticle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      articleNumber: props.location.search.split("=")[1],
+      articleInfo: null
+    };
+    this.chooseContent = this.chooseContent.bind(this);
+  }
+  chooseContent(arr) {
+    let temporary = null;
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].id === parseInt(this.state.articleNumber)) {
+        return (temporary = arr[i]);
+      }
+    }
+    return temporary;
+  }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    // if (this.chooseContent(nextProps.articleStore) !== prevState.articleInfo) {
+    //   return { articleInfo: nextProps.articleStore[prevState.articleNumber] };
+    // }
+    return null;
+  }
   render() {
     return (
       <div className="djm-readPage">

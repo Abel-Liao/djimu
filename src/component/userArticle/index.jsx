@@ -11,83 +11,7 @@ class UserArticle extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userInfo: [
-        {
-          id: 0,
-          date: "2018-11-11",
-          imgUrl: require("./images/index_banner1.jpg"),
-          title: "2018-11-11",
-          comments: 2356,
-          givelike: {
-            number: 6589,
-            isChoose: false
-          },
-          collection: {
-            number: 564,
-            isChoose: false
-          }
-        },
-        {
-          id: 1,
-          date: "2018-10-11",
-          imgUrl: require("./images/index_banner2.jpg"),
-          title: "2018-10-11",
-          comments: 2136,
-          givelike: {
-            number: 1289,
-            isChoose: false
-          },
-          collection: {
-            number: 230,
-            isChoose: true
-          }
-        },
-        {
-          id: 2,
-          date: "2014-10-11",
-          imgUrl: require("./images/index_banner3.jpg"),
-          title: "2014-10-11",
-          comments: 6587,
-          givelike: {
-            number: 554,
-            isChoose: true
-          },
-          collection: {
-            number: 0,
-            isChoose: false
-          }
-        },
-        {
-          id: 3,
-          date: "2016-02-11",
-          imgUrl: require("./images/index_banner4.jpg"),
-          title: "2016-02-11",
-          comments: 6987123,
-          givelike: {
-            number: 2365124,
-            isChoose: false
-          },
-          collection: {
-            number: 1475,
-            isChoose: true
-          }
-        },
-        {
-          id: 4,
-          date: "2018-03-11",
-          imgUrl: require("./images/index_banner4.jpg"),
-          title: "2018-03-11",
-          comments: 6987123,
-          givelike: {
-            number: 2365124,
-            isChoose: false
-          },
-          collection: {
-            number: 1475,
-            isChoose: true
-          }
-        }
-      ],
+      userInfo: null,
       displayList: "new",
       contentNav: ["new", "hot", "myCollection"]
     };
@@ -104,22 +28,22 @@ class UserArticle extends React.Component {
     );
   }
   handleClickAction(dataName, stateIndex) {
-    const changeItem = this.state.userInfo[stateIndex];
-    if (changeItem[dataName].isChoose) {
-      this.changeItemFun(
-        changeItem[dataName],
-        "number",
-        changeItem[dataName].number - 1
-      );
-      this.changeItemFun(changeItem[dataName], "isChoose", false);
-    } else {
-      this.changeItemFun(
-        changeItem[dataName],
-        "number",
-        changeItem[dataName].number + 1
-      );
-      this.changeItemFun(changeItem[dataName], "isChoose", true);
-    }
+    // const changeItem = this.state.userInfo[stateIndex];
+    this.props.dispatch({
+      type: "CHANGE_ARTICLE",
+      dataNumber: stateIndex,
+      dataName: dataName,
+      dataValue: !this.state.userInfo[stateIndex][dataName].isChoose
+    });
+    // if (changeItem[dataName].isChoose) {
+    // } else {
+    //   this.changeItemFun(
+    //     changeItem[dataName],
+    //     "number",
+    //     changeItem[dataName].number + 1
+    //   );
+    //   this.changeItemFun(changeItem[dataName], "isChoose", true);
+    // }
   }
   handleClickNav(displayName) {
     if (displayName === "hot") {
@@ -134,12 +58,15 @@ class UserArticle extends React.Component {
   }
   static getDerivedStateFromProps(nextProps, prevState) {
     // 这样实现有违 getDerivedStateFromProps 初衷
-    // if (prevState.displayList !== "hot") {
-    //   return { userInfo: sortingFun(prevState.userInfo, "date") };
-    // }
     // if (prevState.displayList === "hot") {
     //   return { userInfo: sortingFun(prevState.userInfo, "givelike") };
     // }
+    // if (prevState.displayList !== "hot") {
+    //   return { userInfo: sortingFun(prevState.userInfo, "date") };
+    // }
+    if (nextProps.articleStore !== prevState.userInfo) {
+      return { userInfo: nextProps.articleStore };
+    }
     return null;
   }
   render() {
