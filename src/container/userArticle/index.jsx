@@ -20,13 +20,17 @@ function LiList(props) {
         </span>
       </p>
       <div className="djm-iua-img">
-        <img src={props.item.imgUrl} alt="图片" />
+        <img
+          onClick={event => props.handleClickLink(props.item.id, event)}
+          src={props.item.imgUrl}
+          alt="图片"
+        />
       </div>
       <p className="djm-iua-text">{props.item.title}</p>
       <div className="djm-iua-function">
         <span className="iconfont icon-comments">
           {props.item.comments > 100000
-            ? `${parseInt(props.item.comments / 1000)}K+ 评论`
+            ? `${parseInt(props.item.comments / 1000)}K+`
             : props.item.comments}
         </span>
         <span
@@ -38,7 +42,7 @@ function LiList(props) {
           } iconfont icon-givelike`}
         >
           {props.item.givelike.number > 100000
-            ? `${parseInt(props.item.givelike.number / 1000)}K+ 点赞`
+            ? `${parseInt(props.item.givelike.number / 1000)}K+`
             : props.item.givelike.number}
         </span>
         <span
@@ -50,7 +54,7 @@ function LiList(props) {
           } iconfont icon-collection`}
         >
           {props.item.collection > 100000
-            ? `${parseInt(props.item.collection.number / 1000)}K+ 收藏`
+            ? `${parseInt(props.item.collection.number / 1000)}K+`
             : props.item.collection.number}
         </span>
         <span className="djm-iua-share iconfont icon-plane">

@@ -7,6 +7,7 @@ import Register from "../component/register";
 import Header from "../component/header";
 import Footer from "../component/footer";
 import Information from "../component/information";
+import ReadArticle from "../component/readArticle";
 
 const routeArr = [
   {
@@ -23,6 +24,11 @@ const routeArr = [
     path: "/register",
     exact: false,
     component: [Register]
+  },
+  {
+    path: "/readArticle",
+    exact: false,
+    component: [Header, ReadArticle, Footer]
   }
 ];
 

@@ -1,0 +1,104 @@
+.djm-readPage-main {
+  width: 1180px;
+  margin: 0 auto;
+  position: relative;
+  padding-top: 100px;
+}
+
+/* 头部 */
+.djm-readPage-header {
+  position: absolute;
+  top: -50px;
+  left: 0;
+  width: 100%;
+  z-index: 30;
+  height: 100px;
+  padding-left: 120px;
+}
+.djm-readPage-header img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+  left: 10px;
+}
+.title-author {
+  float: left;
+}
+.title-author h1 {
+  font-size: 24px;
+  color: #444;
+  height: 50px;
+  line-height: 50px;
+  color: #fff;
+  text-align: left;
+}
+.title-author p {
+  height: 50px;
+  line-height: 50px;
+}
+.title-author p span {
+  margin-right: 20px;
+}
+.title-author p span:last-child {
+  margin-right: 0;
+}
+.focusOn-author {
+  display: inline-block;
+  height: 22px;
+  line-height: 22px;
+  width: 50px;
+  border-radius: 3px;
+  background: rgba(229, 26, 72, 0.8);
+  color: #fff;
+  cursor: pointer;
+}
+.focusOn-author:hover {
+  background: rgba(229, 26, 72, 1);
+}
+.title-author .icon-collection,
+.title-author .icon-plane {
+  cursor: pointer;
+}
+.title-author .icon-collection:hover,
+.title-author .icon-plane:hover {
+  color: rgba(229, 26, 72, 1);
+}
+/* 内容部分 */
+.djm-readPage-content {
+  text-align: left;
+  font-size: 17px;
+}
+.djm-readPage-content h2 {
+  margin-bottom: 10px;
+  font-weight: normal;
+  font-size: 22px;
+  color: #666;
+}
+.djm-readPage-content p {
+  margin: 20px 0;
+  line-height: 22px;
+}
+
+/* 信息板块 */
+.djm-readPage-travel-info {
+  border: 1px dashed #ddd;
+  width: 100%;
+}
+.djm-readPage-travel-info li {
+  float: left;
+  width: 50%;
+  height: 40px;
+  line-height: 40px;
+  text-align: left;
+}
+.djm-readPage-travel-info li:nth-child(odd) span {
+  display: inline-block;
+  width: 60%;
+  text-align: right;
+}
+.djm-readPage-travel-info li:nth-child(even) span {
+  display: inline-block;
+  width: 30%;
+  text-align: right;
+}

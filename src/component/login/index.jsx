@@ -64,7 +64,8 @@ class Login extends React.Component {
     const isNull = this.forUserInfo();
     if (isNull) {
       sessionStorage.setItem("isLogin", true);
-      this.props.history.push("/");
+      // this.props.history.push("/");
+      this.props.history.goBack(-1);
     }
   }
   handleOnBlur(element, event) {

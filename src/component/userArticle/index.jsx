@@ -13,7 +13,7 @@ class UserArticle extends React.Component {
     this.state = {
       userInfo: [
         {
-          name: "XXX",
+          id: 0,
           date: "2018-11-11",
           imgUrl: require("./images/index_banner1.jpg"),
           title: "2018-11-11",
@@ -94,6 +94,7 @@ class UserArticle extends React.Component {
     this.handleClickAction = this.handleClickAction.bind(this);
     this.changeItemFun = this.changeItemFun.bind(this);
     this.handleClickNav = this.handleClickNav.bind(this);
+    this.handleClickLink = this.handleClickLink.bind(this);
   }
   changeItemFun(changeItem, key, value) {
     this.setState(
@@ -127,6 +128,9 @@ class UserArticle extends React.Component {
       this.setState({ userInfo: sortingFun(this.state.userInfo, "date") });
     }
     this.setState({ displayList: displayName });
+  }
+  handleClickLink(idNumber) {
+    this.props.history.push(`/readArticle?id=${idNumber}`);
   }
   static getDerivedStateFromProps(nextProps, prevState) {
     // 这样实现有违 getDerivedStateFromProps 初衷
@@ -163,6 +167,7 @@ class UserArticle extends React.Component {
             handleClickAction={this.handleClickAction}
             language={language}
             displayList={this.state.displayList}
+            handleClickLink={this.handleClickLink}
           />
           <span className="separated-line" />
         </ul>
