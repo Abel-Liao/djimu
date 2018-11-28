@@ -63,7 +63,7 @@ function UserArticle(props) {
   return (
     <React.Fragment>
       {props.userInfo.map((item, index) => {
-        return props.displayList === "my" ? (
+        return props.displayList === "myCollection" ? (
           item.collection.isChoose ? (
             <LiList key={index} {...props} item={item} index={index} />
           ) : null

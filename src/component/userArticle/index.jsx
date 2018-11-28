@@ -88,7 +88,8 @@ class UserArticle extends React.Component {
           }
         }
       ],
-      displayList: "new"
+      displayList: "new",
+      contentNav: ["new", "hot", "myCollection"]
     };
     this.handleClickAction = this.handleClickAction.bind(this);
     this.changeItemFun = this.changeItemFun.bind(this);
@@ -122,39 +123,39 @@ class UserArticle extends React.Component {
   handleClickNav(displayName) {
     if (displayName === "hot") {
       this.setState({ userInfo: sortingFun(this.state.userInfo, "givelike") });
+    } else {
+      this.setState({ userInfo: sortingFun(this.state.userInfo, "date") });
     }
     this.setState({ displayList: displayName });
   }
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (prevState.displayList !== "hot") {
-      return { userInfo: sortingFun(prevState.userInfo, "date") };
-    }
+    // 这样实现有违 getDerivedStateFromProps 初衷
+    // if (prevState.displayList !== "hot") {
+    //   return { userInfo: sortingFun(prevState.userInfo, "date") };
+    // }
+    // if (prevState.displayList === "hot") {
+    //   return { userInfo: sortingFun(prevState.userInfo, "givelike") };
+    // }
     return null;
   }
   render() {
     const language = this.props.languageStore.language.userArticle;
     return (
       <div className="djm-index-content">
-        <div className="djm-index-content-title">
-          <span
-            onClick={event => this.handleClickNav("new", event)}
-            className={this.state.displayList === "new" ? "choose-class" : null}
-          >
-            {language.new}
-          </span>
-          <span
-            className={this.state.displayList === "hot" ? "choose-class" : null}
-            onClick={event => this.handleClickNav("hot", event)}
-          >
-            {language.hot}
-          </span>
-          <span
-            className={this.state.displayList === "my" ? "choose-class" : null}
-            onClick={event => this.handleClickNav("my", event)}
-          >
-            {language.myCollection}
-          </span>
-        </div>
+        <ul className="djm-index-content-nav clearfloat">
+          {this.state.contentNav.map(item => (
+            <li
+              key={item}
+              onClick={event => this.handleClickNav(item, event)}
+              className={
+                this.state.displayList === item ? "choose-class" : null
+              }
+            >
+              {language[item]}
+              <span className="under-line" />
+            </li>
+          ))}
+        </ul>
         <ul className="djm-index-uesr-article clearfloat">
           <UserArticleList
             {...this.props}

@@ -5,8 +5,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url("./images/timg.jfif") no-repeat;
-  background-size: 100% 100%;
+  background: #e9e7ce;
+}
+.djm-login-bg {
+  position: absolute;
+  /* height: 100%; */
+  min-width: 1166px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
 }
 .dji-login-nav {
   width: 400px;

@@ -124,6 +124,11 @@ class Login extends React.Component {
     const language = this.props.languageStore.language.login;
     return (
       <div className="dji-login">
+        <img
+          className="djm-login-bg"
+          src={require("./images/timg.jfif")}
+          alt=""
+        />
         <div className="dji-login-nav">
           <h1 className="djm-login-logo">This is Logo!</h1>
           <p className="djm-login-error-info">
