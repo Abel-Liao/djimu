@@ -28,7 +28,7 @@ class UserArticle extends React.Component {
           }
         },
         {
-          name: "OOO",
+          id: 1,
           date: "2018-10-11",
           imgUrl: require("./images/index_banner2.jpg"),
           title: "2018-10-11",
@@ -43,7 +43,7 @@ class UserArticle extends React.Component {
           }
         },
         {
-          name: "AAA",
+          id: 2,
           date: "2014-10-11",
           imgUrl: require("./images/index_banner3.jpg"),
           title: "2014-10-11",
@@ -58,7 +58,7 @@ class UserArticle extends React.Component {
           }
         },
         {
-          name: "CCCC",
+          id: 3,
           date: "2016-02-11",
           imgUrl: require("./images/index_banner4.jpg"),
           title: "2016-02-11",
@@ -73,7 +73,7 @@ class UserArticle extends React.Component {
           }
         },
         {
-          name: "CCCC",
+          id: 4,
           date: "2018-03-11",
           imgUrl: require("./images/index_banner4.jpg"),
           title: "2018-03-11",

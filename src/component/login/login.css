@@ -11,6 +11,7 @@
   position: absolute;
   /* height: 100%; */
   min-width: 1166px;
+  max-width: 1600px;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
