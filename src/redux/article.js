@@ -32,7 +32,7 @@ let article = [
     <p>
       其实，我一直特别向往的，是 东京那种像太空舱一样的胶囊旅店。不过，这家满满的日式风情也很有味道。虽然门外就是京都 商业街的繁华，但是走进门的一瞬间，仿佛就穿越了。
     </p>
-    <img src="${require("../component/readArticle/images/1.jpeg")} alt="pic" />
+    <img src=${require("../component/readArticle/images/1.jpeg")} alt="pic" />
     <p>
       住在这里的客人， 日本 人>欧美人> 中国 人。因为赶上 日本的周末连休，周末时更是热闹无比，很多拉着小小的行李箱到 京都进行短途旅行的 日本人。可能欧美游客也很多的缘故，这里工作人员的英语程度很好，沟通完全没问题。
     </p>
@@ -143,7 +143,7 @@ let article = [
       <p>
         其实，我一直特别向往的，是 东京那种像太空舱一样的胶囊旅店。不过，这家满满的日式风情也很有味道。虽然门外就是京都 商业街的繁华，但是走进门的一瞬间，仿佛就穿越了。
       </p>
-      <img src="${require("../component/readArticle/images/1.jpeg")} alt="pic" />
+      <img src=${require("../component/readArticle/images/1.jpeg")} alt="pic" />
       <p>
         住在这里的客人， 日本 人>欧美人> 中国 人。因为赶上 日本的周末连休，周末时更是热闹无比，很多着小小的行李箱到 京都进行短途旅行的 日本人。可能欧美游客也很多的缘故，这里工作人员的英语程度很好，沟通完全没问题。
       </p>

@@ -1,12 +1,22 @@
 .djm-information-main {
-  width: 1260px;
-  margin: 0 auto;
+  /* width: 1180px;
+  margin: 0 auto; */
+}
+.djm-information-top {
+  width: 100%;
+  height: 350px;
+  position: relative;
+  overflow: hidden;
 }
 .djm-information-top img {
-  width: 100%;
-  height: 300px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 .djm-information-content {
+  width: 1180px;
+  margin: 0 auto;
   position: relative;
 }
 .djm-information-userImg {
