@@ -4,6 +4,7 @@
 }
 .djm-information-top {
   width: 100%;
+  min-width: 1180px;
   height: 350px;
   position: relative;
   overflow: hidden;

@@ -9,12 +9,14 @@ class Banner extends React.Component {
     this.state = {
       bannerIndex: 0,
       bannerTime: null,
-      bannerUrl: [
-        "index_banner1.jpg",
-        "index_banner2.jpg",
-        "index_banner3.jpg",
-        "index_banner4.jpg"
-      ]
+      bannerUrl: props.bannerUrl
+        ? props.bannerUrl
+        : [
+            require("./images/index_banner1.jpg"),
+            require("./images/index_banner2.jpg"),
+            require("./images/index_banner3.jpg"),
+            require("./images/index_banner4.jpg")
+          ]
     };
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
@@ -59,7 +61,7 @@ class Banner extends React.Component {
                 this.state.bannerIndex === index ? "djm-ibi-display" : null
               }
             >
-              <img src={require(`./images/${url}`)} alt="banner" />
+              <img src={url} alt="banner" />
             </li>
           ))}
         </ul>

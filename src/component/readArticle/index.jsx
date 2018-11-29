@@ -12,7 +12,13 @@ class ReadArticle extends React.Component {
     super(props);
     this.state = {
       articleNumber: props.location.search.split("&")[0].split("=")[1],
-      articleInfo: null
+      articleInfo: null,
+      bannerUrl: [
+        require("./images/banner/read_banner1.jpg"),
+        require("./images/banner/read_banner2.jpg"),
+        require("./images/banner/read_banner3.jpg"),
+        require("./images/banner/read_banner4.jpg")
+      ]
     };
     this.handleClickCollection = this.handleClickCollection.bind(this);
   }
@@ -53,7 +59,7 @@ class ReadArticle extends React.Component {
     const language = this.props.languageStore.language.readArticle;
     return (
       <div className="djm-readPage">
-        <Banner />
+        <Banner bannerUrl={this.state.bannerUrl} />
         <div className="djm-readPage-main">
           <div className="djm-readPage-header">
             <img src={require("./images/user_img.jpg")} alt="Head portrait" />
