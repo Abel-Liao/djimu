@@ -50,7 +50,7 @@
   display: inline-block;
   height: 22px;
   line-height: 22px;
-  width: 50px;
+  padding: 0 10px;
   border-radius: 3px;
   background: rgba(229, 26, 72, 0.8);
   color: #fff;
@@ -64,7 +64,8 @@
   cursor: pointer;
 }
 .title-author .icon-collection:hover,
-.title-author .icon-plane:hover {
+.title-author .icon-plane:hover,
+.collection-article {
   color: rgba(229, 26, 72, 1);
 }
 /* 内容部分 */

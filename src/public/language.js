@@ -58,6 +58,19 @@ const language = {
       destinationDis: "请输入目的地",
       strategyDis: "请输入作者、景点",
       groupDis: "请输入团名、景点"
+    },
+    readArticle: {
+      focusOn: "关注",
+      readNumber: "阅读：",
+      collection: "收藏",
+      share: "分享",
+      time: "出行时间：",
+      days: "出行天数：",
+      peoples: "出行人数：",
+      money: "出行费用：",
+      moneyUnit: " 元",
+      dayUnit: " 天",
+      PeopleUnit: " 人"
     }
   },
   "en-US": {
@@ -119,6 +132,19 @@ const language = {
       destinationDis: "Destination",
       strategyDis: "Author Or Scenic Spot",
       groupDis: "Group Name Or Scenic Spot"
+    },
+    readArticle: {
+      focusOn: "Focus On",
+      readNumber: "Readed：",
+      collection: "Collection",
+      share: "Share",
+      time: "Travel Time：",
+      days: "Travel Days：",
+      peoples: "Travel Peoples：",
+      money: "Cost：",
+      moneyUnit: " $",
+      dayUnit: " days",
+      PeopleUnit: " peoples"
     }
   }
 };

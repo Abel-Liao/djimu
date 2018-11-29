@@ -12,7 +12,7 @@ function LiList(props) {
         <i className="round-big" />
         <span className="article-author">
           {props.language.author}
-          {props.item.name}
+          {props.item.authorName}
         </span>
         <span className="article-data">
           {props.language.date}
@@ -21,7 +21,9 @@ function LiList(props) {
       </p>
       <div className="djm-iua-img">
         <img
-          onClick={event => props.handleClickLink(props.item.id, event)}
+          onClick={event =>
+            props.handleClickLink(props.item.id, props.index, event)
+          }
           src={props.item.imgUrl}
           alt="图片"
         />

@@ -53,8 +53,8 @@ class UserArticle extends React.Component {
     }
     this.setState({ displayList: displayName });
   }
-  handleClickLink(idNumber) {
-    this.props.history.push(`/readArticle?id=${idNumber}`);
+  handleClickLink(idNumber, indexNUmber) {
+    this.props.history.push(`/readArticle?id=${idNumber}&index=${indexNUmber}`);
   }
   static getDerivedStateFromProps(nextProps, prevState) {
     // 这样实现有违 getDerivedStateFromProps 初衷
