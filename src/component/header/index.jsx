@@ -91,14 +91,14 @@ class Header extends React.Component {
             {!this.state.isLogin ? (
               <React.Fragment>
                 <li
-                  onClick={even => this.handleChangePage("login", even)}
+                  onClick={event => this.handleChangePage("login", event)}
                   className="djm-header-login-button"
                 >
                   {language.login}
                   <b />
                 </li>
                 <li
-                  onClick={even => this.handleChangePage("register", even)}
+                  onClick={event => this.handleChangePage("register", event)}
                   className="djm-header-register-button"
                 >
                   {language.register}
@@ -113,17 +113,17 @@ class Header extends React.Component {
                   <i className="iconfont icon-triangle" />
                   <ul className="djm-hu-setting">
                     <li
-                      onClick={event =>
-                        this.handleChangePage("information", event)
+                      onClick={eventt =>
+                        this.handleChangePage("information", eventt)
                       }
                     >
                       {language.YourProfile}
                     </li>
                     <li>{language.EditArticles}</li>
                     <li
-                      onClick={event => {
-                        this.handleClickLogout(event);
-                        this.handleChangePage("", event);
+                      onClick={eventt => {
+                        this.handleClickLogout(eventt);
+                        this.handleChangePage("", eventt);
                       }}
                     >
                       {language.logout}

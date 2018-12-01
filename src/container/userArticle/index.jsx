@@ -37,11 +37,14 @@ function LiList(props) {
         </span>
         <span
           onClick={event =>
-            props.handleClickAction("givelike", props.index, event)
+            {
+              props.handleClickAction("givelike", props.index, event);
+              props.handleClickGivelike(props.index, event)
+            }
           }
           className={`${
-            props.item.givelike.isChoose ? "choosed" : null
-          } iconfont icon-givelike`}
+            props.item.givelike.isChoose ? "choosed" : ''
+          } iconfont icon-givelike ${props.chooseGivelike===props.index?'click-givelike':''}`}
         >
           {props.item.givelike.number > 100000
             ? `${parseInt(props.item.givelike.number / 1000)}K+`
@@ -52,14 +55,17 @@ function LiList(props) {
             props.handleClickAction("collection", props.index, event)
           }
           className={`${
-            props.item.collection.isChoose ? "choosed" : null
+            props.item.collection.isChoose ? "choosed" : ''
           } iconfont icon-collection`}
         >
           {props.item.collection > 100000
             ? `${parseInt(props.item.collection.number / 1000)}K+`
             : props.item.collection.number}
         </span>
-        <span className="djm-iua-share iconfont icon-plane">
+        <span className={`djm-iua-share iconfont icon-plane ${props.chooseShare===props.index?"click-share":''}`}
+        onClick={(event=>props.handleClickShare(props.index,event))}
+        ref={(props.shareRef('span'+props.index))}
+        >
           {props.language.share}
         </span>
       </div>

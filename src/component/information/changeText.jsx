@@ -30,18 +30,18 @@ class ChangeText extends React.Component {
           />
         )}
         <span
-          onClick={even => {
+          onClick={event => {
             this.props.handleClickSure(
               this.props.title,
               this.props.index,
               this.refs[this.props.title],
-              even
+              event
             );
             this.props.handleClickChange(
               this.props.title,
               this.props.index,
               false,
-              even
+              event
             );
           }}
           className="djm-information-sure"

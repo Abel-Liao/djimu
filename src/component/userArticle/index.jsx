@@ -1,4 +1,4 @@
-import React from "react";
+import  React from "react";
 import { connect } from "react-redux";
 
 import sortingFun from "../../public/sorting";
@@ -13,12 +13,22 @@ class UserArticle extends React.Component {
     this.state = {
       userInfo: null,
       displayList: "new",
-      contentNav: ["new", "hot", "myCollection"]
+      contentNav: ["new", "hot", "myCollection"],
+      chooseShare: null,
+      timeShare: null,
+      fixedShare: {
+        bottom: 0,
+        left: -100
+      },
+      timeGivelike: null,
+      chooseGivelike: -1
     };
     this.handleClickAction = this.handleClickAction.bind(this);
     this.changeItemFun = this.changeItemFun.bind(this);
     this.handleClickNav = this.handleClickNav.bind(this);
     this.handleClickLink = this.handleClickLink.bind(this);
+    this.handleClickShare = this.handleClickShare.bind(this);
+    this.handleClickGivelike = this.handleClickGivelike.bind(this);
   }
   changeItemFun(changeItem, key, value) {
     this.setState(
@@ -28,13 +38,15 @@ class UserArticle extends React.Component {
     );
   }
   handleClickAction(dataName, stateIndex) {
-    // const changeItem = this.state.userInfo[stateIndex];
     this.props.dispatch({
       type: "CHANGE_ARTICLE",
       dataNumber: stateIndex,
       dataName: dataName,
       dataValue: !this.state.userInfo[stateIndex][dataName].isChoose
     });
+    
+    // data来源于state
+    // const changeItem = this.state.userInfo[stateIndex];
     // if (changeItem[dataName].isChoose) {
     // } else {
     //   this.changeItemFun(
@@ -56,6 +68,23 @@ class UserArticle extends React.Component {
   handleClickLink(idNumber, indexNUmber) {
     this.props.history.push(`/readArticle?id=${idNumber}&index=${indexNUmber}`);
   }
+  handleClickShare(number){
+    setTimeout(this.state.timeShare);
+    const temporary = this['span'+number].getBoundingClientRect();
+    this.setState({fixedShare:{top:parseInt(temporary.y)-4,left:parseInt(temporary.x)}});
+    this.setState({chooseShare: number});
+    this.setState({timeShare: setTimeout(()=>{
+      this.setState({chooseShare: null});
+      this.setState({fixedShare:{top:0,left:-100}});
+    },600)})
+  }
+  handleClickGivelike(number){
+    clearTimeout(this.state.timeGivelike);
+    this.setState({chooseGivelike: number});
+    this.setState({timeGivelike: setTimeout(()=>{
+      this.setState({chooseGivelike: null});
+    },200)})
+  }
   static getDerivedStateFromProps(nextProps, prevState) {
     // 这样实现有违 getDerivedStateFromProps 初衷
     // if (prevState.displayList === "hot") {
@@ -68,6 +97,10 @@ class UserArticle extends React.Component {
       return { userInfo: nextProps.articleStore };
     }
     return null;
+  }
+  componentWillUnmount(){
+    clearTimeout(this.state.timeShare);
+    clearTimeout(this.state.timeGivelike);
   }
   render() {
     const language = this.props.languageStore.language.userArticle;
@@ -95,9 +128,18 @@ class UserArticle extends React.Component {
             language={language}
             displayList={this.state.displayList}
             handleClickLink={this.handleClickLink}
+            handleClickShare={this.handleClickShare}
+            chooseShare={this.state.chooseShare}
+            shareRef = {(index) =>(ele)=> {this[index]=ele}}
+            handleClickGivelike={this.handleClickGivelike}
+            givelikeRef = {(index) =>(ele)=> {this[index]=ele}}
+            chooseGivelike = {this.state.chooseGivelike}
           />
           <span className="separated-line" />
         </ul>
+        <i className={`share-animation iconfont icon-plane ${this.state.chooseShare!==null?"click-share":''}`} 
+          style={this.state.fixedShare}
+        />
       </div>
     );
   }
