@@ -6,7 +6,9 @@ function LookImg(props){
     return (
         <div className="djm-look-img">
             <span className="djm-look-img-close iconfont icon-close" onClick={props.handleClickLookImg} />
-            <Banner bannerUrl={props.imgCount} loop={false} dots={false} toggleButton={true}/>
+            <Banner bannerUrl={props.imgCount} loop={false} dots={false} toggleButton={true}
+                {...props}
+            />
         </div>
     )
 }

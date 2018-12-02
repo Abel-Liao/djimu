@@ -6,7 +6,6 @@ import "./banner.css";
 class Banner extends React.Component {
   constructor(props) {
     super(props);
-    console.log(111);
     this.state = {
       bannerIndex: 0,
       bannerTime: null,
@@ -83,7 +82,6 @@ class Banner extends React.Component {
     clearInterval(this.state.bannerTime);
   }
   render() {
-    console.log(this.state.ulTransform);
     return (
       <div className="djm-banner">
         <ul className={`djm-banner-img ${this.state.toggleButton?'img-float clearfloat':'img-pos'}`} style={this.state.toggleButton?this.state.ulStyle:null}>

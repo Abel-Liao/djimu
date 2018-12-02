@@ -18,6 +18,8 @@ class ReadArticle extends React.Component {
       lookImg: false,
       wordCount: null,
       imgCount: [],
+      h2Elevator:[],
+      elevatorNum: 0,
       bannerUrl: [
         require("./images/banner/read_banner1.jpg"),
         require("./images/banner/read_banner2.jpg"),
@@ -27,6 +29,8 @@ class ReadArticle extends React.Component {
     };
     this.handleClickCollection = this.handleClickCollection.bind(this);
     this.handleClickLookImg = this.handleClickLookImg.bind(this);
+    this.handleClickElevator = this.handleClickElevator.bind(this);
+    this.onScrollHight = this.onScrollHight.bind(this);
   }
   handleClickCollection() {
     this.props.dispatch({
@@ -38,6 +42,9 @@ class ReadArticle extends React.Component {
   }
   handleClickLookImg() {
     this.setState(state=>({lookImg: !state.lookImg}))
+  }
+  onScrollHight(e,v){
+    console.log(e,v);
   }
   static getDerivedStateFromProps(nextProps, prevState) {
     // if (this.chooseContent(nextProps.articleStore) !== prevState.articleInfo) {
@@ -60,20 +67,28 @@ class ReadArticle extends React.Component {
     }
     return null;
   }
+  handleClickElevator(number){
+    this.setState({elevatorNum:number});
+  }
   componentDidMount() {
     window.scrollTo(0, 0);
     const temporary = this.childEle.children;
     let wordCount = 0;
     let imgCount = [];
+    let h2Elevator = [];
     for(let i=0;i<temporary.length;i++){
       if(temporary[i].nodeName!=="IMG"){
-        wordCount+=temporary[i].textContent.length;
+        if(temporary[i].nodeName==="H2"){
+          h2Elevator.push(temporary[i].outerText)
+        }
+        wordCount+=temporary[i].outerText.length;
       }else{
         imgCount.push(temporary[i].src);
       }
     }
     this.setState({wordCount:wordCount});
     this.setState({imgCount:imgCount});
+    this.setState({h2Elevator:h2Elevator});
   }
   render() {
     const temporary = this.state.articleInfo;
@@ -81,7 +96,7 @@ class ReadArticle extends React.Component {
     return (
       <div className="djm-readPage">
         <div className="djm-readPage-banner">
-          <Banner bannerUrl={this.state.bannerUrl} />
+          <Banner bannerUrl={this.state.bannerUrl} {...this.props}/>
         </div>
         <div className="djm-readPage-main">
           <div className="djm-readPage-header">
@@ -140,6 +155,10 @@ class ReadArticle extends React.Component {
               wordCount={this.state.wordCount}
               imgCount={this.state.imgCount}
               handleClickLookImg={this.handleClickLookImg}
+              h2Elevator = {this.state.h2Elevator}
+              elevatorNum={this.state.elevatorNum}
+              handleClickElevator={this.handleClickElevator}
+              onScrollHight={this.onScrollHight}
             />
           </div>
         </div>
