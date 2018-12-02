@@ -18,12 +18,12 @@ function ReadPageRight (props){
                         <li
                             className={props.elevatorNum===index?'choose-elevator':''}
                             key={index}
-                            onClick={event=>props.handleClickElevator(index,event)}
+                            onClick={event=>props.handleClickElevator(index,item.scrollTop,event)}
                         >
                             <span>
                                 <i></i>
                             </span>
-                            {item}
+                            {item.content}
                         </li>
                     ))}
                 </ul>

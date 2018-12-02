@@ -21,6 +21,7 @@ class ReadArticle extends React.Component {
       h2Elevator:[],
       elevatorNum: 0,
       scrollTop: 0,
+      listenScroll: null,
       bannerUrl: [
         require("./images/banner/read_banner1.jpg"),
         require("./images/banner/read_banner2.jpg"),
@@ -69,16 +70,17 @@ class ReadArticle extends React.Component {
     }
     return null;
   }
-  handleClickElevator(number){
+  handleClickElevator(number,scrollTop){
     this.setState({elevatorNum:number});
+    window.scrollTo(0, scrollTop+592);
   }
   handleScroll(){
-    const abc = document.body.scrollTop || document.documentElement.scrollTop;
-    this.setState({scrollTop: abc})
+    const temporary = document.body.scrollTop || document.documentElement.scrollTop;
+    this.setState({scrollTop: temporary})
   }
   componentDidMount() {
     window.scrollTo(0, 0);
-    window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener("scroll", this.handleScroll);
     const temporary = this.childEle.children;
     let wordCount = 0;
     let imgCount = [];
@@ -86,7 +88,7 @@ class ReadArticle extends React.Component {
     for(let i=0;i<temporary.length;i++){
       if(temporary[i].nodeName!=="IMG"){
         if(temporary[i].nodeName==="H2"){
-          h2Elevator.push(temporary[i].outerText)
+          h2Elevator.push({content:temporary[i].outerText,scrollTop:temporary[i].offsetTop})
         }
         wordCount+=temporary[i].outerText.length;
       }else{
@@ -96,6 +98,9 @@ class ReadArticle extends React.Component {
     this.setState({wordCount:wordCount});
     this.setState({imgCount:imgCount});
     this.setState({h2Elevator:h2Elevator});
+  }
+  componentWillUnmount(){
+    window.removeEventListener("scroll",this.handleScroll);
   }
   render() {
     const temporary = this.state.articleInfo;
