@@ -4,7 +4,7 @@ import Banner from "../../banner";
 
 function ReadPageRight (props){
     return (
-        <div className="djm-readpage-content-right">
+        <div className={`djm-readpage-content-right ${props.scrollTop>556?'right-fixed':''}`}>
             <div className="djm-rcr-top">
                 本文共有<span>{props.wordCount}</span>字，共有<span>{props.imgCount.length}</span>张图片
             </div>

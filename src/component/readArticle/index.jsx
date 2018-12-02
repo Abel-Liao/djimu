@@ -20,6 +20,7 @@ class ReadArticle extends React.Component {
       imgCount: [],
       h2Elevator:[],
       elevatorNum: 0,
+      scrollTop: 0,
       bannerUrl: [
         require("./images/banner/read_banner1.jpg"),
         require("./images/banner/read_banner2.jpg"),
@@ -31,6 +32,7 @@ class ReadArticle extends React.Component {
     this.handleClickLookImg = this.handleClickLookImg.bind(this);
     this.handleClickElevator = this.handleClickElevator.bind(this);
     this.onScrollHight = this.onScrollHight.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
   }
   handleClickCollection() {
     this.props.dispatch({
@@ -70,8 +72,13 @@ class ReadArticle extends React.Component {
   handleClickElevator(number){
     this.setState({elevatorNum:number});
   }
+  handleScroll(){
+    const abc = document.body.scrollTop || document.documentElement.scrollTop;
+    this.setState({scrollTop: abc})
+  }
   componentDidMount() {
     window.scrollTo(0, 0);
+    window.addEventListener('scroll', this.handleScroll);
     const temporary = this.childEle.children;
     let wordCount = 0;
     let imgCount = [];
@@ -159,6 +166,7 @@ class ReadArticle extends React.Component {
               elevatorNum={this.state.elevatorNum}
               handleClickElevator={this.handleClickElevator}
               onScrollHight={this.onScrollHight}
+              scrollTop={this.state.scrollTop}
             />
           </div>
         </div>
