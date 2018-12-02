@@ -2,8 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 
 import dateFun from "../../public/date";
-
 import Banner from "../banner";
+
+import ReadPageRight from './readPageRight';
+import LookImg from './lookImg';
 
 import "./readArticle.css";
 
@@ -13,6 +15,9 @@ class ReadArticle extends React.Component {
     this.state = {
       articleNumber: props.location.search.split("&")[0].split("=")[1],
       articleInfo: null,
+      lookImg: false,
+      wordCount: null,
+      imgCount: [],
       bannerUrl: [
         require("./images/banner/read_banner1.jpg"),
         require("./images/banner/read_banner2.jpg"),
@@ -21,6 +26,7 @@ class ReadArticle extends React.Component {
       ]
     };
     this.handleClickCollection = this.handleClickCollection.bind(this);
+    this.handleClickLookImg = this.handleClickLookImg.bind(this);
   }
   handleClickCollection() {
     this.props.dispatch({
@@ -29,6 +35,9 @@ class ReadArticle extends React.Component {
       dataName: "collection",
       dataValue: !this.state.articleInfo.collection.isChoose
     });
+  }
+  handleClickLookImg() {
+    this.setState(state=>({lookImg: !state.lookImg}))
   }
   static getDerivedStateFromProps(nextProps, prevState) {
     // if (this.chooseContent(nextProps.articleStore) !== prevState.articleInfo) {
@@ -53,13 +62,27 @@ class ReadArticle extends React.Component {
   }
   componentDidMount() {
     window.scrollTo(0, 0);
+    const temporary = this.childEle.children;
+    let wordCount = 0;
+    let imgCount = [];
+    for(let i=0;i<temporary.length;i++){
+      if(temporary[i].nodeName!=="IMG"){
+        wordCount+=temporary[i].textContent.length;
+      }else{
+        imgCount.push(temporary[i].src);
+      }
+    }
+    this.setState({wordCount:wordCount});
+    this.setState({imgCount:imgCount});
   }
   render() {
     const temporary = this.state.articleInfo;
     const language = this.props.languageStore.language.readArticle;
     return (
       <div className="djm-readPage">
-        <Banner bannerUrl={this.state.bannerUrl} />
+        <div className="djm-readPage-banner">
+          <Banner bannerUrl={this.state.bannerUrl} />
+        </div>
         <div className="djm-readPage-main">
           <div className="djm-readPage-header">
             <img src={require("./images/user_img.jpg")} alt="Head portrait" />
@@ -106,11 +129,25 @@ class ReadArticle extends React.Component {
               {language.moneyUnit}
             </li>
           </ul>
-          <div
-            className="djm-readPage-content"
-            dangerouslySetInnerHTML={{ __html: temporary.content }}
-          />
+          <div className="djm-readPage-content clearfloat">
+            <div 
+              className="djm-readPage-content-left"
+              dangerouslySetInnerHTML={{ __html: temporary.content }}
+              ref={(ele)=>this.childEle=ele}
+            />
+            <ReadPageRight
+              {...this.props} 
+              wordCount={this.state.wordCount}
+              imgCount={this.state.imgCount}
+              handleClickLookImg={this.handleClickLookImg}
+            />
+          </div>
         </div>
+        {this.state.lookImg?(<LookImg 
+          {...this.props} 
+          imgCount={this.state.imgCount}
+          handleClickLookImg={this.handleClickLookImg}
+        />) : null}
       </div>
     );
   }

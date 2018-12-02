@@ -3,3 +3,9 @@
   position: relative;
   background: #fff;
 }
+.djm-index-banner{
+  height: 350px;
+}
+.djm-index-banner img{
+  min-width: 1180px;
+}
