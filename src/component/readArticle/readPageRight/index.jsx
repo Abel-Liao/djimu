@@ -10,7 +10,7 @@ function ReadPageRight(props) {
       }`}
     >
       <div className="djm-rcr-top">
-        本文共有<span>{props.wordCount}</span>字，共有
+        本文共有<span>{props.wordCount}</span>个字和
         <span>{props.imgCount.length}</span>张图片
       </div>
       <div className="djm-rcr-banner" onClick={props.handleClickLookImg}>
