@@ -70,7 +70,10 @@ const language = {
       money: "出行费用：",
       moneyUnit: " 元",
       dayUnit: " 天",
-      PeopleUnit: " 人"
+      PeopleUnit: " 人",
+      words: "这篇文章有",
+      and: "个文字和",
+      pictures: "张图片"
     }
   },
   "en-US": {
@@ -144,7 +147,10 @@ const language = {
       money: "Cost：",
       moneyUnit: " $",
       dayUnit: " days",
-      PeopleUnit: " peoples"
+      PeopleUnit: " peoples",
+      words: "This article has",
+      and: "Words And",
+      pictures: "Pictures"
     }
   }
 };

@@ -176,6 +176,7 @@ class ReadArticle extends React.Component {
               handleClickElevator={this.handleClickElevator}
               onScrollHight={this.onScrollHight}
               scrollTop={this.state.scrollTop}
+              language={language}
             />
           </div>
         </div>
