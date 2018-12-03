@@ -20,7 +20,7 @@ function ReadPageRight(props) {
         <Banner bannerUrl={props.imgCount} dots={false} {...props} />
       </div>
       <div className="djm-rcr-elevator" onScroll={props.onScrollHight}>
-        <h3>游记目录</h3>
+        <h3>{props.language.directory}</h3>
         <ul>
           {props.h2Elevator.map((item, index) => (
             <li

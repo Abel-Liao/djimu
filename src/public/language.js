@@ -73,7 +73,8 @@ const language = {
       PeopleUnit: " 人",
       words: "这篇文章有",
       and: "个文字和",
-      pictures: "张图片"
+      pictures: "张图片",
+      directory: "游记目录"
     }
   },
   "en-US": {
@@ -150,7 +151,8 @@ const language = {
       PeopleUnit: " peoples",
       words: "This article has",
       and: "Words And",
-      pictures: "Pictures"
+      pictures: "Pictures",
+      directory: "Travel Directory"
     }
   }
 };
