@@ -21,7 +21,9 @@ class ReadArticle extends React.Component {
       h2Elevator: [],
       elevatorNum: 0,
       scrollTop: 0,
+      timeScroll: null,
       listenScroll: null,
+      elementNode: null,
       bannerUrl: [
         require("./images/banner/read_banner1.jpg"),
         require("./images/banner/read_banner2.jpg"),
@@ -34,6 +36,7 @@ class ReadArticle extends React.Component {
     this.handleClickElevator = this.handleClickElevator.bind(this);
     this.onScrollHight = this.onScrollHight.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
+    this.scrollFun = this.scrollFun.bind(this);
   }
   handleClickCollection() {
     this.props.dispatch({
@@ -48,6 +51,88 @@ class ReadArticle extends React.Component {
   }
   onScrollHight(e, v) {
     console.log(e, v);
+  }
+  handleClickElevator(number, index) {
+    clearInterval(this.state.timeScroll);
+    this.setState({ elevatorNum: number });
+    let temporaryScroll =
+      document.body.scrollTop || document.documentElement.scrollTop;
+    const temporary = this.state.elementNode[index].offsetTop + 330;
+    this.setState({
+      timeScroll: setInterval(() => {
+        if (temporaryScroll < temporary) {
+          temporaryScroll += 200;
+          window.scrollTo(0, temporaryScroll);
+          if (temporaryScroll >= temporary) {
+            clearInterval(this.state.timeScroll);
+          }
+        } else {
+          temporaryScroll -= 200;
+          window.scrollTo(0, temporaryScroll);
+          if (temporaryScroll <= temporary) {
+            clearInterval(this.state.timeScroll);
+          }
+        }
+      }, 10)
+    });
+  }
+  handleScroll() {
+    const temporary =
+      document.body.scrollTop || document.documentElement.scrollTop;
+    const temporaryH2 = this.state.h2Elevator;
+    const temporaryEle = this.state.elementNode;
+    // for (let i = 0; i < temporaryH2.length; i++) {
+    //   const abc = temporaryH2[i].index;
+    //   let abd = null;
+    //   if (i !== temporaryH2.length - 1) {
+    //     abd = temporaryH2[i + 1].index;
+    //   }
+    //   if (
+    //     temporary > temporaryEle[abc].offsetTop &&
+    //     temporary < temporaryEle[abd].offsetTop &&
+    //     i !== temporaryH2.length - 1
+    //   ) {
+    //     this.setState({ elevatorNum: i });
+    //   } else {
+    //     this.setState({ elevatorNum: temporaryH2.length - 1 });
+    //   }
+    // }
+    this.setState({ scrollTop: temporary });
+  }
+  scrollFun() {
+    const temporary = this.state.elementNode;
+    let wordCount = 0;
+    let imgCount = [];
+    let h2Elevator = [];
+    for (let i = 0; i < temporary.length; i++) {
+      if (temporary[i].nodeName !== "IMG") {
+        if (temporary[i].nodeName === "H2") {
+          h2Elevator.push({
+            content: temporary[i].outerText,
+            index: i
+          });
+        }
+        wordCount += temporary[i].outerText.length;
+      } else {
+        imgCount.push(temporary[i].src);
+      }
+    }
+    this.setState({ wordCount: wordCount });
+    this.setState({ imgCount: imgCount });
+    this.setState({ h2Elevator: h2Elevator });
+  }
+  componentDidMount() {
+    window.scrollTo(0, 0);
+    window.addEventListener("scroll", this.handleScroll);
+    this.setState({ elementNode: this.childEle.children }, () => {
+      return this.scrollFun();
+    });
+  }
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    return null;
+  }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    return null;
   }
   static getDerivedStateFromProps(nextProps, prevState) {
     // if (this.chooseContent(nextProps.articleStore) !== prevState.articleInfo) {
@@ -70,41 +155,9 @@ class ReadArticle extends React.Component {
     }
     return null;
   }
-  handleClickElevator(number, scrollTop) {
-    this.setState({ elevatorNum: number });
-    window.scrollTo(0, scrollTop + 592);
-  }
-  handleScroll() {
-    const temporary =
-      document.body.scrollTop || document.documentElement.scrollTop;
-    this.setState({ scrollTop: temporary });
-  }
-  componentDidMount() {
-    window.scrollTo(0, 0);
-    window.addEventListener("scroll", this.handleScroll);
-    const temporary = this.childEle.children;
-    let wordCount = 0;
-    let imgCount = [];
-    let h2Elevator = [];
-    for (let i = 0; i < temporary.length; i++) {
-      if (temporary[i].nodeName !== "IMG") {
-        if (temporary[i].nodeName === "H2") {
-          h2Elevator.push({
-            content: temporary[i].outerText,
-            scrollTop: temporary[i].offsetTop
-          });
-        }
-        wordCount += temporary[i].outerText.length;
-      } else {
-        imgCount.push(temporary[i].src);
-      }
-    }
-    this.setState({ wordCount: wordCount });
-    this.setState({ imgCount: imgCount });
-    this.setState({ h2Elevator: h2Elevator });
-  }
   componentWillUnmount() {
     window.removeEventListener("scroll", this.handleScroll);
+    clearInterval(this.state.timeScroll);
   }
   render() {
     const temporary = this.state.articleInfo;
