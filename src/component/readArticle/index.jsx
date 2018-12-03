@@ -52,9 +52,8 @@ class ReadArticle extends React.Component {
   onScrollHight(e, v) {
     console.log(e, v);
   }
-  handleClickElevator(number, index) {
+  handleClickElevator(index) {
     clearInterval(this.state.timeScroll);
-    this.setState({ elevatorNum: number });
     let temporaryScroll =
       document.body.scrollTop || document.documentElement.scrollTop;
     const temporary = this.state.elementNode[index].offsetTop + 330;
@@ -81,22 +80,20 @@ class ReadArticle extends React.Component {
       document.body.scrollTop || document.documentElement.scrollTop;
     const temporaryH2 = this.state.h2Elevator;
     const temporaryEle = this.state.elementNode;
-    // for (let i = 0; i < temporaryH2.length; i++) {
-    //   const abc = temporaryH2[i].index;
-    //   let abd = null;
-    //   if (i !== temporaryH2.length - 1) {
-    //     abd = temporaryH2[i + 1].index;
-    //   }
-    //   if (
-    //     temporary > temporaryEle[abc].offsetTop &&
-    //     temporary < temporaryEle[abd].offsetTop &&
-    //     i !== temporaryH2.length - 1
-    //   ) {
-    //     this.setState({ elevatorNum: i });
-    //   } else {
-    //     this.setState({ elevatorNum: temporaryH2.length - 1 });
-    //   }
-    // }
+    for (let i = 0; i < temporaryH2.length - 1; i++) {
+      if (
+        temporary > temporaryEle[temporaryH2[i].index].offsetTop &&
+        temporary < temporaryEle[temporaryH2[i + 1].index].offsetTop
+      ) {
+        this.setState({ elevatorNum: i });
+      }
+    }
+    if (
+      temporary >=
+      temporaryEle[temporaryH2[temporaryH2.length - 1].index].offsetTop
+    ) {
+      this.setState({ elevatorNum: temporaryH2.length - 1 });
+    }
     this.setState({ scrollTop: temporary });
   }
   scrollFun() {
@@ -123,10 +120,10 @@ class ReadArticle extends React.Component {
   }
   componentDidMount() {
     window.scrollTo(0, 0);
-    window.addEventListener("scroll", this.handleScroll);
     this.setState({ elementNode: this.childEle.children }, () => {
       return this.scrollFun();
     });
+    window.addEventListener("scroll", this.handleScroll);
   }
   getSnapshotBeforeUpdate(prevProps, prevState) {
     return null;
