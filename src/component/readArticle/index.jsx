@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import dateFun from "../../public/date";
 import Banner from "../banner";
 
-import ReadPageRight from './readPageRight';
-import LookImg from './lookImg';
+import ReadPageRight from "./readPageRight";
+import LookImg from "./lookImg";
 
 import "./readArticle.css";
 
@@ -18,7 +18,7 @@ class ReadArticle extends React.Component {
       lookImg: false,
       wordCount: null,
       imgCount: [],
-      h2Elevator:[],
+      h2Elevator: [],
       elevatorNum: 0,
       scrollTop: 0,
       listenScroll: null,
@@ -44,10 +44,10 @@ class ReadArticle extends React.Component {
     });
   }
   handleClickLookImg() {
-    this.setState(state=>({lookImg: !state.lookImg}))
+    this.setState(state => ({ lookImg: !state.lookImg }));
   }
-  onScrollHight(e,v){
-    console.log(e,v);
+  onScrollHight(e, v) {
+    console.log(e, v);
   }
   static getDerivedStateFromProps(nextProps, prevState) {
     // if (this.chooseContent(nextProps.articleStore) !== prevState.articleInfo) {
@@ -70,13 +70,14 @@ class ReadArticle extends React.Component {
     }
     return null;
   }
-  handleClickElevator(number,scrollTop){
-    this.setState({elevatorNum:number});
-    window.scrollTo(0, scrollTop+592);
+  handleClickElevator(number, scrollTop) {
+    this.setState({ elevatorNum: number });
+    window.scrollTo(0, scrollTop + 592);
   }
-  handleScroll(){
-    const temporary = document.body.scrollTop || document.documentElement.scrollTop;
-    this.setState({scrollTop: temporary})
+  handleScroll() {
+    const temporary =
+      document.body.scrollTop || document.documentElement.scrollTop;
+    this.setState({ scrollTop: temporary });
   }
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -85,22 +86,25 @@ class ReadArticle extends React.Component {
     let wordCount = 0;
     let imgCount = [];
     let h2Elevator = [];
-    for(let i=0;i<temporary.length;i++){
-      if(temporary[i].nodeName!=="IMG"){
-        if(temporary[i].nodeName==="H2"){
-          h2Elevator.push({content:temporary[i].outerText,scrollTop:temporary[i].offsetTop})
+    for (let i = 0; i < temporary.length; i++) {
+      if (temporary[i].nodeName !== "IMG") {
+        if (temporary[i].nodeName === "H2") {
+          h2Elevator.push({
+            content: temporary[i].outerText,
+            scrollTop: temporary[i].offsetTop
+          });
         }
-        wordCount+=temporary[i].outerText.length;
-      }else{
+        wordCount += temporary[i].outerText.length;
+      } else {
         imgCount.push(temporary[i].src);
       }
     }
-    this.setState({wordCount:wordCount});
-    this.setState({imgCount:imgCount});
-    this.setState({h2Elevator:h2Elevator});
+    this.setState({ wordCount: wordCount });
+    this.setState({ imgCount: imgCount });
+    this.setState({ h2Elevator: h2Elevator });
   }
-  componentWillUnmount(){
-    window.removeEventListener("scroll",this.handleScroll);
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
   }
   render() {
     const temporary = this.state.articleInfo;
@@ -108,7 +112,7 @@ class ReadArticle extends React.Component {
     return (
       <div className="djm-readPage">
         <div className="djm-readPage-banner">
-          <Banner bannerUrl={this.state.bannerUrl} {...this.props}/>
+          <Banner bannerUrl={this.state.bannerUrl} {...this.props} />
         </div>
         <div className="djm-readPage-main">
           <div className="djm-readPage-header">
@@ -157,17 +161,17 @@ class ReadArticle extends React.Component {
             </li>
           </ul>
           <div className="djm-readPage-content clearfloat">
-            <div 
+            <div
               className="djm-readPage-content-left"
               dangerouslySetInnerHTML={{ __html: temporary.content }}
-              ref={(ele)=>this.childEle=ele}
+              ref={ele => (this.childEle = ele)}
             />
             <ReadPageRight
-              {...this.props} 
+              {...this.props}
               wordCount={this.state.wordCount}
               imgCount={this.state.imgCount}
               handleClickLookImg={this.handleClickLookImg}
-              h2Elevator = {this.state.h2Elevator}
+              h2Elevator={this.state.h2Elevator}
               elevatorNum={this.state.elevatorNum}
               handleClickElevator={this.handleClickElevator}
               onScrollHight={this.onScrollHight}
@@ -175,11 +179,13 @@ class ReadArticle extends React.Component {
             />
           </div>
         </div>
-        {this.state.lookImg?(<LookImg 
-          {...this.props} 
-          imgCount={this.state.imgCount}
-          handleClickLookImg={this.handleClickLookImg}
-        />) : null}
+        {this.state.lookImg ? (
+          <LookImg
+            {...this.props}
+            imgCount={this.state.imgCount}
+            handleClickLookImg={this.handleClickLookImg}
+          />
+        ) : null}
       </div>
     );
   }

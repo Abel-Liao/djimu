@@ -178,37 +178,37 @@
 span.choosed::before {
   color: rgba(229, 26, 72, 1);
 }
-.djm-iua-share::before{
+.djm-iua-share::before {
   opacity: 1;
 }
-.djm-iua-share.click-share::before{
+.djm-iua-share.click-share::before {
   opacity: 0;
 }
 .djm-iua-share:hover::before {
   color: rgba(229, 26, 72, 1);
 }
-.share-animation{
+.share-animation {
   position: fixed;
   display: block;
   z-index: -1;
 }
-.share-animation.click-share{
+.share-animation.click-share {
   z-index: 20;
 }
-.share-animation::before{
+.share-animation::before {
   display: block;
   color: rgba(229, 26, 72, 1);
   transition: all ease-in 0.5s;
 }
-.share-animation.click-share::before{
+.share-animation.click-share::before {
   transform: rotateX(90deg) rotateY(-10deg) translateX(50px) scaleX(0.5);
 }
-.djm-iua-function .icon-givelike::before{
+.djm-iua-function .icon-givelike::before {
   display: inline-block;
   transform-origin: 0% 60%;
   transition: all ease-in 0.15s;
 }
-.click-givelike::before{
+.click-givelike::before {
   transform: scale(1.2) rotateZ(-10deg);
 }
 

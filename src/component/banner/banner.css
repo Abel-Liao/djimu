@@ -8,7 +8,7 @@
   position: relative;
   height: 100%;
 }
-.djm-banner-img.img-pos{
+.djm-banner-img.img-pos {
   width: 100%;
 }
 .djm-banner-img li {
@@ -22,7 +22,7 @@
   opacity: 0;
   transition: opacity ease-in 0.5s;
 }
-.djm-banner-img.img-float{
+.djm-banner-img.img-float {
   transition: all ease-in 0.4s;
 }
 .djm-banner-img.img-float li {
@@ -64,25 +64,27 @@ li.djm-ibi-choose {
 .djm-banner-indicator li:last-child {
   margin-right: 0;
 }
-.djm-banner-prev,.djm-banner-next{
+.djm-banner-prev,
+.djm-banner-next {
   font-size: 30px;
   position: absolute;
   z-index: 100;
   top: 50%;
   cursor: pointer;
-  color: rgba(255,255,255,.5);
+  color: rgba(255, 255, 255, 0.5);
   transform: translateY(-50%);
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
-.djm-banner-prev:hover::before,.djm-banner-next:hover::before{
-  color: rgba(229, 26, 72, .8);
+.djm-banner-prev:hover::before,
+.djm-banner-next:hover::before {
+  color: rgba(229, 26, 72, 0.8);
 }
-.djm-banner-prev{
+.djm-banner-prev {
   left: 10px;
 }
-.djm-banner-next{
+.djm-banner-next {
   right: 10px;
 }

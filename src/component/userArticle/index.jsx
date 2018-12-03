@@ -1,9 +1,9 @@
-import  React from "react";
+import React from "react";
 import { connect } from "react-redux";
 
 import sortingFun from "../../public/sorting";
 
-import UserArticleList from "../../container/userArticle";
+import UserArticleList from "./ui";
 
 import "./userArticle.css";
 
@@ -44,7 +44,7 @@ class UserArticle extends React.Component {
       dataName: dataName,
       dataValue: !this.state.userInfo[stateIndex][dataName].isChoose
     });
-    
+
     // data来源于state
     // const changeItem = this.state.userInfo[stateIndex];
     // if (changeItem[dataName].isChoose) {
@@ -68,22 +68,31 @@ class UserArticle extends React.Component {
   handleClickLink(idNumber, indexNUmber) {
     this.props.history.push(`/readArticle?id=${idNumber}&index=${indexNUmber}`);
   }
-  handleClickShare(number){
+  handleClickShare(number) {
     setTimeout(this.state.timeShare);
-    const temporary = this['span'+number].getBoundingClientRect();
-    this.setState({fixedShare:{top:parseInt(temporary.y)-4,left:parseInt(temporary.x)}});
-    this.setState({chooseShare: number});
-    this.setState({timeShare: setTimeout(()=>{
-      this.setState({chooseShare: null});
-      this.setState({fixedShare:{top:0,left:-100}});
-    },600)})
+    const temporary = this["span" + number].getBoundingClientRect();
+    this.setState({
+      fixedShare: {
+        top: parseInt(temporary.y) - 4,
+        left: parseInt(temporary.x)
+      }
+    });
+    this.setState({ chooseShare: number });
+    this.setState({
+      timeShare: setTimeout(() => {
+        this.setState({ chooseShare: null });
+        this.setState({ fixedShare: { top: 0, left: -100 } });
+      }, 600)
+    });
   }
-  handleClickGivelike(number){
+  handleClickGivelike(number) {
     clearTimeout(this.state.timeGivelike);
-    this.setState({chooseGivelike: number});
-    this.setState({timeGivelike: setTimeout(()=>{
-      this.setState({chooseGivelike: null});
-    },200)})
+    this.setState({ chooseGivelike: number });
+    this.setState({
+      timeGivelike: setTimeout(() => {
+        this.setState({ chooseGivelike: null });
+      }, 200)
+    });
   }
   static getDerivedStateFromProps(nextProps, prevState) {
     // 这样实现有违 getDerivedStateFromProps 初衷
@@ -98,7 +107,7 @@ class UserArticle extends React.Component {
     }
     return null;
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
     clearTimeout(this.state.timeShare);
     clearTimeout(this.state.timeGivelike);
   }
@@ -130,14 +139,21 @@ class UserArticle extends React.Component {
             handleClickLink={this.handleClickLink}
             handleClickShare={this.handleClickShare}
             chooseShare={this.state.chooseShare}
-            shareRef = {(index) =>(ele)=> {this[index]=ele}}
+            shareRef={index => ele => {
+              this[index] = ele;
+            }}
             handleClickGivelike={this.handleClickGivelike}
-            givelikeRef = {(index) =>(ele)=> {this[index]=ele}}
-            chooseGivelike = {this.state.chooseGivelike}
+            givelikeRef={index => ele => {
+              this[index] = ele;
+            }}
+            chooseGivelike={this.state.chooseGivelike}
           />
           <span className="separated-line" />
         </ul>
-        <i className={`share-animation iconfont icon-plane ${this.state.chooseShare!==null?"click-share":''}`} 
+        <i
+          className={`share-animation iconfont icon-plane ${
+            this.state.chooseShare !== null ? "click-share" : ""
+          }`}
           style={this.state.fixedShare}
         />
       </div>
