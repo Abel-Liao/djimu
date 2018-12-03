@@ -146,7 +146,7 @@ class Login extends React.Component {
                 value={this.state.userInfo.email}
                 autoComplete="off"
                 type="text"
-                placeholder={language.uesrName}
+                placeholder={language.email}
                 // ref="userEmail"
                 onChange={this.handleChangeInput.bind(this, "email")}
                 onBlur={this.handleOnBlur.bind(this, "email")}

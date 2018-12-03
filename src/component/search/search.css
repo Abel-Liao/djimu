@@ -35,7 +35,7 @@ li.choose-search i::before {
   padding-right: 40px;
 }
 .djm-index-search-input input:focus {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.9);
 }
 .djm-index-search-input i {
   position: absolute;

@@ -10,7 +10,7 @@ const language = {
       placeholder: "请输入搜索信息"
     },
     login: {
-      uesrName: "请输入邮箱地址",
+      email: "请输入邮箱地址",
       password: "请输入密码",
       button: "登录",
       forgetPaw: "忘记密码?",
@@ -88,7 +88,7 @@ const language = {
       placeholder: "search"
     },
     login: {
-      uesrName: "Email",
+      email: "Email",
       password: "Password",
       button: "LOGIN",
       forgetPaw: "Forget Password?",

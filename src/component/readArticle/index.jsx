@@ -82,8 +82,8 @@ class ReadArticle extends React.Component {
     const temporaryEle = this.state.elementNode;
     for (let i = 0; i < temporaryH2.length - 1; i++) {
       if (
-        temporary > temporaryEle[temporaryH2[i].index].offsetTop &&
-        temporary < temporaryEle[temporaryH2[i + 1].index].offsetTop
+        temporary >= temporaryEle[temporaryH2[i].index].offsetTop &&
+        temporary <= temporaryEle[temporaryH2[i + 1].index].offsetTop
       ) {
         this.setState({ elevatorNum: i });
       }
