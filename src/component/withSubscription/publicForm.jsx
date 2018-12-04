@@ -56,7 +56,7 @@ class PublicForm extends React.Component {
   }
   forUserInfo() {
     for (const key in this.state.userInfo) {
-      for (const i = 0; i < this.state.inputArr.length; i++) {
+      for (let i = 0; i < this.state.inputArr.length; i++) {
         if (
           this.state.userInfo[key] === "" &&
           this.state.inputArr.length[i] === key
