@@ -82,7 +82,7 @@ class UserArticle extends React.Component {
       timeShare: setTimeout(() => {
         this.setState({ chooseShare: null });
         this.setState({ fixedShare: { top: 0, left: -100 } });
-      }, 600)
+      }, 1000)
     });
   }
   handleClickGivelike(number) {
