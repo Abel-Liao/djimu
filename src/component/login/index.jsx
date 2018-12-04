@@ -11,7 +11,6 @@ import "./login.css";
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props.history);
     this.state = {
       userInfo: {
         email: "",
