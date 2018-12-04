@@ -29,13 +29,15 @@ class Register extends React.Component {
     this.handleClickregister = this.handleClickregister.bind(this);
     this.handleChangeInput = this.handleChangeInput.bind(this);
     this.handleClickClear = this.handleClickClear.bind(this);
-    this.handleClickregisterWay = this.handleClickregisterWay.bind(this);
     this.handleClickDynamicCode = this.handleClickDynamicCode.bind(this);
     this.handleOnBlur = this.handleOnBlur.bind(this);
     this.setUserInfoFun = this.setUserInfoFun.bind(this);
     this.forUserInfo = this.forUserInfo.bind(this);
   }
   setUserInfoFun(stateName, element, content) {
+    if (element === "dynamicCode" && isNaN(content)) {
+      return;
+    }
     this.setState(
       Object.assign(this.state[stateName], this.state[stateName], {
         [element]: content
@@ -70,28 +72,22 @@ class Register extends React.Component {
   }
   handleChangeInput(element, event) {
     this.setUserInfoFun("userInfo", element, event.target.value);
-    if (regexFun(element, event.target.value) && event.target.value === "") {
+    if (regexFun(element, event.target.value)) {
       this.setUserInfoFun("errorInfo", element, true);
       this.setState({ errorText: null });
+      this.setState({
+        error:
+          this.state.errorInfo.email &&
+          this.state.errorInfo.password &&
+          this.state.errorInfo.dynamicCode
+      });
     } else {
       this.setUserInfoFun("errorInfo", element, false);
     }
-    this.setState({
-      error:
-        this.state.errorInfo.email &&
-        (this.state.errorInfo.password || this.state.errorInfo.dynamicCode)
-    });
   }
   handleClickClear(element) {
     this.setState({ error: false });
     this.setUserInfoFun("userInfo", element, "");
-  }
-  handleClickregisterWay() {
-    this.setUserInfoFun("userInfo", "password", "");
-    this.setUserInfoFun("userInfo", "dynamicCode", "");
-    this.setState({ errorText: null });
-    this.setState({ error: false });
-    this.setState({ registerWay: !this.state.registerWay });
   }
   handleClickDynamicCode() {
     this.setState({ codeNumber: 59 });
@@ -156,7 +152,7 @@ class Register extends React.Component {
                     className={
                       this.state.codeNumber === 60 ? null : "dont-click"
                     }
-                    onClick={this.dynamicCode}
+                    onClick={this.handleClickDynamicCode}
                   >
                     {this.state.codeNumber === 60
                       ? language.sendDynamicCode
@@ -169,7 +165,8 @@ class Register extends React.Component {
               <input
                 id="registerInput"
                 type="button"
-                value={language.button}
+                disabled={!this.state.error}
+                value={language.registerButton}
                 onClick={this.handleClickregister}
               />
             </label>

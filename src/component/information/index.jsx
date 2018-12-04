@@ -14,6 +14,7 @@ class Information extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      userName: props.loginStore.userName || sessionStorage.getItem("userName"),
       changeInfo: {
         email: true,
         describeYourself: true,
@@ -28,7 +29,6 @@ class Information extends React.Component {
         { title: "impressionPlace", content: "" }
       ],
       oldInfoArr: [
-        { title: "email", content: "sdas@adas.com" },
         { title: "describeYourself", content: "abcdefg" },
         { title: "wantPlace", content: "西藏" },
         { title: "impressionPlace", content: "" }
@@ -106,7 +106,19 @@ class Information extends React.Component {
               {...this.props}
             />
             <div className="djm-information-userName">
-              <h2>Abel</h2>
+              <h2>
+                {this.state.userName}
+                {/* <ChangeText
+                  {...this.props}
+                  handleClickSure={this.handleClickSure}
+                  handleClickChange={this.handleClickChange}
+                  handleChangeValue={this.handleChangeValue}
+                  language={language}
+                  title={this.state.userInfoArr[0].title}
+                  content={this.state.userInfoArr[0].content}
+                  index={0}
+                /> */}
+              </h2>
               <ul className="djm-information-userInfoList">
                 {this.state.userInfoArr.map((item, index) => (
                   <li key={index}>

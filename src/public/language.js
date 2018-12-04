@@ -12,7 +12,8 @@ const language = {
     login: {
       email: "请输入邮箱地址",
       password: "请输入密码",
-      button: "登录",
+      loginButton: "登录",
+      registerButton: "注册",
       forgetPaw: "忘记密码?",
       emailQuick: "邮箱快捷登录",
       dynamicCode: "输入动态码",
@@ -90,7 +91,8 @@ const language = {
     login: {
       email: "Email",
       password: "Password",
-      button: "LOGIN",
+      loginButton: "LOGIN",
+      registerButton: "REGISTER",
       forgetPaw: "Forget Password?",
       emailQuick: "Email Quick",
       dynamicCode: "Code",

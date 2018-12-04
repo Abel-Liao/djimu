@@ -38,6 +38,9 @@ class Login extends React.Component {
     this.forUserInfo = this.forUserInfo.bind(this);
   }
   setUserInfoFun(stateName, element, content) {
+    if (element === "dynamicCode" && isNaN(content)) {
+      return;
+    }
     this.setState(
       Object.assign(this.state[stateName], this.state[stateName], {
         [element]: content
@@ -64,6 +67,11 @@ class Login extends React.Component {
     const isNull = this.forUserInfo();
     if (isNull) {
       sessionStorage.setItem("isLogin", true);
+      this.props.dispatch({ type: "USER_LOGIN" });
+      this.props.dispatch({
+        type: "USER_NAME",
+        data: this.state.userInfo.email
+      });
       // this.props.history.push("/");
       this.props.history.goBack(-1);
     }
@@ -80,17 +88,17 @@ class Login extends React.Component {
   }
   handleChangeInput(element, event) {
     this.setUserInfoFun("userInfo", element, event.target.value);
-    if (regexFun(element, event.target.value) && event.target.value === "") {
-      this.setUserInfoFun("errorInfo", element, true);
-      this.setState({ errorText: null });
-    } else {
-      this.setUserInfoFun("errorInfo", element, false);
-    }
-    this.setState({
-      error:
-        this.state.errorInfo.email &&
-        (this.state.errorInfo.password || this.state.errorInfo.dynamicCode)
-    });
+    // if (regexFun(element, event.target.value) && event.target.value === "") {
+    //   this.setUserInfoFun("errorInfo", element, true);
+    //   this.setState({ errorText: null });
+    // } else {
+    //   this.setUserInfoFun("errorInfo", element, false);
+    // }
+    // this.setState({
+    //   error:
+    //     this.state.errorInfo.email &&
+    //     (this.state.errorInfo.password || this.state.errorInfo.dynamicCode)
+    // });
   }
   handleClickClear(element) {
     this.setState({ error: false });
@@ -183,7 +191,7 @@ class Login extends React.Component {
               <input
                 id="loginInput"
                 type="button"
-                value={language.button}
+                value={language.loginButton}
                 onClick={this.handleClickLogin}
               />
             </label>

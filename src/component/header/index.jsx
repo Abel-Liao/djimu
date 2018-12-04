@@ -7,6 +7,7 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      userName: props.loginStore.userName || sessionStorage.getItem("userName"),
       num: 1,
       language: props.languageStore.language.header,
       islogin: null,
@@ -109,7 +110,7 @@ class Header extends React.Component {
               <React.Fragment>
                 <li className="djm-header-uesename">
                   <img src={require("./images/logo.png")} alt="headPortrait" />
-                  <span>Abel</span>
+                  <span>{this.state.userName}</span>
                   <i className="iconfont icon-triangle" />
                   <ul className="djm-hu-setting">
                     <li
