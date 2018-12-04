@@ -7,9 +7,10 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      userName: props.loginStore.userName || sessionStorage.getItem("userName"),
       num: 1,
       language: props.languageStore.language.header,
-      islogin: null,
+      isLogin: sessionStorage.getItem("isLogin"),
       changeLan: false,
       lanTran: 5,
       lanOpcation: 0,
@@ -62,17 +63,22 @@ class Header extends React.Component {
   }
   handleClickLogout() {
     sessionStorage.clear();
-    this.setState({ isLogin: null });
+    this.props.dispatch({ type: "USER_LOGIN" });
+    this.setState({ isLogin: false });
   }
   handleChangeLan(language) {
     this.props.dispatch({ type: "CHANGE_LAN", language: language });
   }
   static getDerivedStateFromProps(nextProps, prevState) {
     const isLogin = sessionStorage.getItem("isLogin");
-    if (prevState.islogin !== isLogin) {
-      return {
-        isLogin: isLogin
-      };
+    if (prevState.isLogin !== isLogin) {
+      return { isLogin: false };
+    }
+    if (
+      nextProps.loginStore.userName !== prevState.userName &&
+      nextProps.loginStore.userName !== null
+    ) {
+      return { userName: nextProps.loginStore.userName };
     }
     return null;
   }
@@ -91,14 +97,14 @@ class Header extends React.Component {
             {!this.state.isLogin ? (
               <React.Fragment>
                 <li
-                  onClick={even => this.handleChangePage("login", even)}
+                  onClick={event => this.handleChangePage("login", event)}
                   className="djm-header-login-button"
                 >
                   {language.login}
                   <b />
                 </li>
                 <li
-                  onClick={even => this.handleChangePage("register", even)}
+                  onClick={event => this.handleChangePage("register", event)}
                   className="djm-header-register-button"
                 >
                   {language.register}
@@ -109,21 +115,21 @@ class Header extends React.Component {
               <React.Fragment>
                 <li className="djm-header-uesename">
                   <img src={require("./images/logo.png")} alt="headPortrait" />
-                  <span>Abel</span>
+                  <span>{this.state.userName}</span>
                   <i className="iconfont icon-triangle" />
                   <ul className="djm-hu-setting">
                     <li
-                      onClick={event =>
-                        this.handleChangePage("information", event)
+                      onClick={eventt =>
+                        this.handleChangePage("information", eventt)
                       }
                     >
                       {language.YourProfile}
                     </li>
                     <li>{language.EditArticles}</li>
                     <li
-                      onClick={event => {
-                        this.handleClickLogout(event);
-                        this.handleChangePage("", event);
+                      onClick={eventt => {
+                        this.handleClickLogout(eventt);
+                        this.handleChangePage("", eventt);
                       }}
                     >
                       {language.logout}

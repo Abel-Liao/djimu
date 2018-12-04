@@ -1,10 +1,15 @@
 import React from "react";
 
-function Register() {
+import PublicForm from "../withSubscription/publicForm";
+
+function Register(props) {
   return (
-    <div>
-      <h2>This is register page!</h2>
-    </div>
+    <PublicForm
+      data={["email", "password", "againPassword", "dynamicCode"]}
+      pageName="register"
+      {...props}
+    />
   );
 }
+
 export default Register;

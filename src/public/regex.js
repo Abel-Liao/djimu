@@ -1,10 +1,14 @@
 const regex = {
   email: /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/,
   password: /^.*(?=.{6,16})(?=.*\d)(?=.*[A-Za-z]{1,})(?=.*[!@#$%^&*?()]).*$/,
-  dynamicCode: /^\d{0,4}$/
+  dynamicCode: /^\d{4}$/
 };
 function regexFun(element, content) {
-  const isNull = content.match(regex[element]);
+  const temporary =
+    element === "againPassword" || element === "newPassword"
+      ? "password"
+      : element;
+  const isNull = content.match(regex[temporary]);
   return isNull === null ? false : true;
 }
 export default regexFun;

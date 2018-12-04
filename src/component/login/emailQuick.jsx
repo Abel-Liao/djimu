@@ -15,7 +15,9 @@ function EmailQuick(props) {
       />
       <span
         onClick={e => props.clearAll("dynamicCode", e)}
-        className={props.userInfo.dynamicCode ? "display" : null}
+        className={`clear-all-value ${
+          props.userInfo.dynamicCode ? "display" : null
+        }`}
       >
         x
       </span>

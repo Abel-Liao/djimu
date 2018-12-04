@@ -11,7 +11,9 @@ function Index(props) {
   return (
     <div className="djm-index">
       <div className="djm-index-main">
-        <Banner {...props} />
+        <div className="djm-index-banner">
+          <Banner {...props} />
+        </div>
         <Search {...props} />
         <UserArticle {...props} />
       </div>

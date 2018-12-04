@@ -15,9 +15,17 @@ function EmailPaw(props) {
       />
       <span
         onClick={e => props.clearAll("password", e)}
-        className={props.userInfo.password ? "display" : null}
+        className={`clear-all-value ${
+          props.userInfo.password ? "display" : null
+        }`}
       >
         x
+      </span>
+      <span
+        className="djm-login-forget"
+        onClick={event => props.handleClickJump("forget", event)}
+      >
+        {props.language.forgetPaw}
       </span>
     </label>
   );

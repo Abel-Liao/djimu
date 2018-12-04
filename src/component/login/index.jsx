@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import regexFun from "../../public/regex";
+// import regexFun from "../../public/regex";
 
 import EmailPaw from "./emailPaw";
 import EmailQuick from "./emailQuick";
@@ -36,8 +36,12 @@ class Login extends React.Component {
     this.handleOnBlur = this.handleOnBlur.bind(this);
     this.setUserInfoFun = this.setUserInfoFun.bind(this);
     this.forUserInfo = this.forUserInfo.bind(this);
+    this.handleClickJump = this.handleClickJump.bind(this);
   }
   setUserInfoFun(stateName, element, content) {
+    if (element === "dynamicCode" && isNaN(content)) {
+      return;
+    }
     this.setState(
       Object.assign(this.state[stateName], this.state[stateName], {
         [element]: content
@@ -64,7 +68,13 @@ class Login extends React.Component {
     const isNull = this.forUserInfo();
     if (isNull) {
       sessionStorage.setItem("isLogin", true);
-      this.props.history.push("/");
+      this.props.dispatch({ type: "USER_LOGIN" });
+      this.props.dispatch({
+        type: "USER_NAME",
+        data: this.state.userInfo.email
+      });
+      // this.props.history.push("/");
+      this.props.history.goBack(-1);
     }
   }
   handleOnBlur(element, event) {
@@ -72,24 +82,24 @@ class Login extends React.Component {
       this.forUserInfo();
       return;
     }
-    if (!regexFun(element, event.target.value)) {
-      this.setState({ errorText: [element] + "Text" });
-      return;
-    }
+    // if (!regexFun(element, event.target.value)) {
+    //   this.setState({ errorText: [element] + "Text" });
+    //   return;
+    // }
   }
   handleChangeInput(element, event) {
     this.setUserInfoFun("userInfo", element, event.target.value);
-    if (regexFun(element, event.target.value) && event.target.value === "") {
-      this.setUserInfoFun("errorInfo", element, true);
-      this.setState({ errorText: null });
-    } else {
-      this.setUserInfoFun("errorInfo", element, false);
-    }
-    this.setState({
-      error:
-        this.state.errorInfo.email &&
-        (this.state.errorInfo.password || this.state.errorInfo.dynamicCode)
-    });
+    // if (regexFun(element, event.target.value) && event.target.value === "") {
+    //   this.setUserInfoFun("errorInfo", element, true);
+    //   this.setState({ errorText: null });
+    // } else {
+    //   this.setUserInfoFun("errorInfo", element, false);
+    // }
+    // this.setState({
+    //   error:
+    //     this.state.errorInfo.email &&
+    //     (this.state.errorInfo.password || this.state.errorInfo.dynamicCode)
+    // });
   }
   handleClickClear(element) {
     this.setState({ error: false });
@@ -114,6 +124,9 @@ class Login extends React.Component {
       }, 1000)
     });
   }
+  handleClickJump(pageName) {
+    this.props.history.push(`/${pageName}`);
+  }
   componentWillUnmount() {
     clearInterval(this.state.codeTime);
   }
@@ -124,6 +137,11 @@ class Login extends React.Component {
     const language = this.props.languageStore.language.login;
     return (
       <div className="dji-login">
+        <img
+          className="djm-login-bg"
+          src={require("./images/timg.jfif")}
+          alt=""
+        />
         <div className="dji-login-nav">
           <h1 className="djm-login-logo">This is Logo!</h1>
           <p className="djm-login-error-info">
@@ -140,14 +158,16 @@ class Login extends React.Component {
                 value={this.state.userInfo.email}
                 autoComplete="off"
                 type="text"
-                placeholder={language.uesrName}
+                placeholder={language.email}
                 // ref="userEmail"
                 onChange={this.handleChangeInput.bind(this, "email")}
                 onBlur={this.handleOnBlur.bind(this, "email")}
               />
               <span
                 onClick={e => this.handleClickClear("email", e)}
-                className={this.state.userInfo.email ? "display" : null}
+                className={`clear-all-value ${
+                  this.state.userInfo.email ? "display" : null
+                }`}
               >
                 x
               </span>
@@ -160,6 +180,7 @@ class Login extends React.Component {
                 userInfo={this.state.userInfo}
                 handleOnBlur={this.handleOnBlur}
                 language={language}
+                handleClickJump={this.handleClickJump}
               />
             ) : (
               <EmailQuick
@@ -177,16 +198,18 @@ class Login extends React.Component {
               <input
                 id="loginInput"
                 type="button"
-                value={language.button}
+                value={language.loginButton}
                 onClick={this.handleClickLogin}
               />
             </label>
           </form>
           <div className="djm-login-footer">
-            <span className="djm-login-forget">{language.forgetPaw}</span>
+            <span onClick={event => this.handleClickJump("register", event)}>
+              {language.goRegister}
+            </span>
             <span
               onClick={this.handleClickLoginWay}
-              className="djm-login-email-l"
+              className="djm-login-email-loginWay"
             >
               {this.state.loginWay ? language.emailQuick : language.emailPaw}
             </span>

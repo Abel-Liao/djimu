@@ -178,26 +178,72 @@
 span.choosed::before {
   color: rgba(229, 26, 72, 1);
 }
+.djm-iua-share::before {
+  opacity: 1;
+}
+.djm-iua-share.click-share::before {
+  opacity: 0;
+}
+.djm-iua-share:hover::before {
+  color: rgba(229, 26, 72, 1);
+}
+.share-animation {
+  position: fixed;
+  display: block;
+  z-index: -1;
+}
+.share-animation.click-share {
+  z-index: 20;
+}
+.share-animation::before {
+  display: block;
+  color: rgba(229, 26, 72, 1);
+  transition: all ease-in 0.5s;
+}
+.share-animation.click-share::before {
+  transform: rotateX(90deg) rotateY(-10deg) translateX(50px) scaleX(0.5);
+}
+.djm-iua-function .icon-givelike::before {
+  display: inline-block;
+  transform-origin: 0% 60%;
+  transition: all ease-in 0.15s;
+}
+.click-givelike::before {
+  transform: scale(1.2) rotateZ(-10deg);
+}
 
 /* 选择最热或最新 */
-.djm-index-content-title {
+.djm-index-content-nav {
   text-align: left;
   height: 60px;
-  line-height: 60px;
+  padding-top: 15px;
 }
-.djm-index-content-title span {
-  display: inline-block;
+.djm-index-content-nav li {
+  float: left;
   height: 30px;
   line-height: 30px;
   margin-right: 30px;
   cursor: pointer;
-  border-bottom: 1px solid transparent;
+  position: relative;
 }
-.djm-index-content-title span:last-child {
+.djm-index-content-nav li:last-child {
   margin-right: 0;
 }
-span.choose-class,
-.djm-index-content-title span:hover {
+li.choose-class,
+.djm-index-content-nav li:hover {
   color: rgba(229, 26, 72, 1);
-  border-bottom-color: rgba(229, 26, 72, 1);
+}
+.under-line {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  height: 1px;
+  background: rgba(229, 26, 72, 1);
+  width: 0;
+  transition: all ease-in 0.15s;
+}
+.djm-index-content-nav li:hover .under-line,
+li.choose-class .under-line {
+  transform: translateX(-50%);
+  width: 100%;
 }

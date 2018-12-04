@@ -1,6 +1,6 @@
 import React from "react";
 
-import dateFun from "../../public/date";
+import dateFun from "../../../public/date";
 
 function LiList(props) {
   return (
@@ -12,7 +12,7 @@ function LiList(props) {
         <i className="round-big" />
         <span className="article-author">
           {props.language.author}
-          {props.item.name}
+          {props.item.authorName}
         </span>
         <span className="article-data">
           {props.language.date}
@@ -20,25 +20,34 @@ function LiList(props) {
         </span>
       </p>
       <div className="djm-iua-img">
-        <img src={props.item.imgUrl} alt="图片" />
+        <img
+          onClick={event =>
+            props.handleClickLink(props.item.id, props.index, event)
+          }
+          src={props.item.imgUrl}
+          alt="图片"
+        />
       </div>
       <p className="djm-iua-text">{props.item.title}</p>
       <div className="djm-iua-function">
         <span className="iconfont icon-comments">
           {props.item.comments > 100000
-            ? `${parseInt(props.item.comments / 1000)}K+ 评论`
+            ? `${parseInt(props.item.comments / 1000)}K+`
             : props.item.comments}
         </span>
         <span
-          onClick={event =>
-            props.handleClickAction("givelike", props.index, event)
-          }
+          onClick={event => {
+            props.handleClickAction("givelike", props.index, event);
+            props.handleClickGivelike(props.index, event);
+          }}
           className={`${
-            props.item.givelike.isChoose ? "choosed" : null
-          } iconfont icon-givelike`}
+            props.item.givelike.isChoose ? "choosed" : ""
+          } iconfont icon-givelike ${
+            props.chooseGivelike === props.index ? "click-givelike" : ""
+          }`}
         >
           {props.item.givelike.number > 100000
-            ? `${parseInt(props.item.givelike.number / 1000)}K+ 点赞`
+            ? `${parseInt(props.item.givelike.number / 1000)}K+`
             : props.item.givelike.number}
         </span>
         <span
@@ -46,14 +55,22 @@ function LiList(props) {
             props.handleClickAction("collection", props.index, event)
           }
           className={`${
-            props.item.collection.isChoose ? "choosed" : null
+            props.item.collection.isChoose ? "choosed" : ""
           } iconfont icon-collection`}
         >
           {props.item.collection > 100000
-            ? `${parseInt(props.item.collection.number / 1000)}K+ 收藏`
+            ? `${parseInt(props.item.collection.number / 1000)}K+`
             : props.item.collection.number}
         </span>
-        <span className="iconfont icon-plane">分享</span>
+        <span
+          className={`djm-iua-share iconfont icon-plane ${
+            props.chooseShare === props.index ? "click-share" : ""
+          }`}
+          onClick={event => props.handleClickShare(props.index, event)}
+          ref={props.shareRef("span" + props.index)}
+        >
+          {props.language.share}
+        </span>
       </div>
     </li>
   );
@@ -63,7 +80,7 @@ function UserArticle(props) {
   return (
     <React.Fragment>
       {props.userInfo.map((item, index) => {
-        return props.displayList === "my" ? (
+        return props.displayList === "myCollection" ? (
           item.collection.isChoose ? (
             <LiList key={index} {...props} item={item} index={index} />
           ) : null

@@ -2,7 +2,7 @@ const dataFun = function(timeNum, format = "YYYY-MM-DD") {
   let returnTime = null;
   const time = new Date(timeNum);
   const Year = time.getFullYear();
-  const Month = time.getMonth();
+  const Month = time.getMonth() + 1;
   const Data = time.getDate();
   switch (format) {
     case "YYYY-MM-DD":
