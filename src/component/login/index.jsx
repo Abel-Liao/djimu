@@ -81,10 +81,10 @@ class Login extends React.Component {
       this.forUserInfo();
       return;
     }
-    if (!regexFun(element, event.target.value)) {
-      this.setState({ errorText: [element] + "Text" });
-      return;
-    }
+    // if (!regexFun(element, event.target.value)) {
+    //   this.setState({ errorText: [element] + "Text" });
+    //   return;
+    // }
   }
   handleChangeInput(element, event) {
     this.setUserInfoFun("userInfo", element, event.target.value);
