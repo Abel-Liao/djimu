@@ -10,7 +10,7 @@ class Header extends React.Component {
       userName: props.loginStore.userName || sessionStorage.getItem("userName"),
       num: 1,
       language: props.languageStore.language.header,
-      islogin: null,
+      isLogin: sessionStorage.getItem("isLogin"),
       changeLan: false,
       lanTran: 5,
       lanOpcation: 0,
@@ -63,17 +63,22 @@ class Header extends React.Component {
   }
   handleClickLogout() {
     sessionStorage.clear();
-    this.setState({ isLogin: null });
+    this.props.dispatch({ type: "USER_LOGIN" });
+    this.setState({ isLogin: false });
   }
   handleChangeLan(language) {
     this.props.dispatch({ type: "CHANGE_LAN", language: language });
   }
   static getDerivedStateFromProps(nextProps, prevState) {
     const isLogin = sessionStorage.getItem("isLogin");
-    if (prevState.islogin !== isLogin) {
-      return {
-        isLogin: isLogin
-      };
+    if (prevState.isLogin !== isLogin) {
+      return { isLogin: false };
+    }
+    if (
+      nextProps.loginStore.userName !== prevState.userName &&
+      nextProps.loginStore.userName !== null
+    ) {
+      return { userName: nextProps.loginStore.userName };
     }
     return null;
   }

@@ -99,6 +99,7 @@
   cursor: pointer;
   color: rgba(36, 142, 247, 1);
   display: none;
+  font-weight: normal;
 }
 .djm-information-change:hover {
   color: rgba(36, 142, 247, 0.8);
@@ -164,4 +165,10 @@
 }
 .djm-information-cancel:hover {
   color: rgba(252, 5, 18, 1);
+}
+.djm-information-userName-change span {
+  font-weight: normal;
+}
+.djm-information-userName-h2:hover .djm-information-change {
+  display: inline-block;
 }
