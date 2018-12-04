@@ -4,7 +4,11 @@ const regex = {
   dynamicCode: /^\d{4}$/
 };
 function regexFun(element, content) {
-  const isNull = content.match(regex[element]);
+  const temporary =
+    element === "againPassword" || element === "newPassword"
+      ? "password"
+      : element;
+  const isNull = content.match(regex[temporary]);
   return isNull === null ? false : true;
 }
 export default regexFun;

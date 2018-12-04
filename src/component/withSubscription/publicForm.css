@@ -1,4 +1,4 @@
-.dji-register {
+.dji-public {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -7,7 +7,7 @@
   align-items: center;
   background: #e9e7ce;
 }
-.djm-register-bg {
+.djm-public-bg {
   position: absolute;
   /* height: 100%; */
   min-width: 1166px;
@@ -17,29 +17,32 @@
   transform: translate(-50%, -50%);
   z-index: -1;
 }
-.dji-register-nav {
+.dji-public-nav {
   width: 400px;
   height: 400px;
   background: rgba(0, 0, 0, 0.3);
   border-radius: 8px;
 }
-.djm-register-logo {
+.djm-public-logo {
   margin: 30px 0;
 }
-.djm-register-from {
+.djm-public-logo-register {
+  margin: 15px 0;
+}
+.djm-public-from {
   width: 100%;
   border-radius: 5px;
 }
-.djm-register-from label {
+.djm-public-from label {
   display: block;
   margin: 0 auto 20px;
   position: relative;
   width: 250px;
 }
-.djm-register-from label:last-child {
+.djm-public-from label:last-child {
   margin-bottom: 0;
 }
-.djm-register-from input {
+.djm-public-from input {
   height: 35px;
   line-height: 38px;
   width: 100%;
@@ -51,7 +54,7 @@
   color: #fff;
   font-size: 16px;
 }
-.djm-register-from span {
+.djm-public-from span {
   position: absolute;
   right: 5px;
   top: 10px;
@@ -63,40 +66,40 @@
   cursor: pointer;
   display: none;
 }
-.djm-register-from span:hover {
+.djm-public-from span:hover {
   color: #fff;
 }
-.djm-register-button input {
+.djm-public-button input {
   border: none;
   background: rgba(229, 26, 72, 0.8);
   color: #fff;
   cursor: pointer;
   padding: 0;
 }
-.djm-register-button input:hover {
+.djm-public-button input:hover {
   background: rgba(229, 26, 72, 1);
 }
-.djm-register-button .dont-click:hover {
+.djm-public-button .dont-click:hover {
   background: rgba(229, 26, 72, 0.8);
 }
-.djm-register-footer {
+.djm-public-footer {
   user-select: none;
   margin-top: 10px;
 }
-.djm-register-footer span {
+.djm-public-footer span {
   cursor: pointer;
   color: #fff;
 }
-.djm-register-footer span:hover {
+.djm-public-footer span:hover {
   color: rgba(252, 5, 18, 1);
 }
-.djm-register-forget {
+.djm-public-forget {
   margin-right: 30px;
 }
-.djm-register-dynamicCode input {
+.djm-public-dynamicCode input {
   width: 125px;
 }
-.djm-register-dynamicCode p {
+.djm-public-dynamicCode p {
   float: right;
   height: 35;
   width: 120px;
@@ -107,17 +110,18 @@
   cursor: pointer;
   color: #fff;
 }
-.djm-register-dynamicCode p.dont-click {
+.djm-public-dynamicCode p.dont-click {
   background: #444;
 }
-.djm-register-from .djm-register-dynamicCode span {
+.djm-public-from .djm-public-dynamicCode span {
   right: 130px;
 }
-.djm-register-error-info {
+.djm-public-error-info {
   width: 250px;
   margin: 0 auto;
   height: 25px;
   line-height: 25px;
   color: rgba(252, 5, 18, 1);
   text-align: left;
+  overflow: hidden;
 }

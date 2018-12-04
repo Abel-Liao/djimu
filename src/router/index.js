@@ -7,6 +7,7 @@ import Index from "../component/index";
 import Login from "../component/login";
 import Register from "../component/register";
 import ForgetPaw from "../component/forgetPaw";
+import ChangePaw from "../component/changePaw";
 import Information from "../component/information";
 import ReadArticle from "../component/readArticle";
 
@@ -30,6 +31,11 @@ const routeArr = [
     path: "/forget",
     exact: false,
     component: [ForgetPaw]
+  },
+  {
+    path: "/change",
+    exact: false,
+    component: [ChangePaw]
   },
   {
     path: "/readArticle",
