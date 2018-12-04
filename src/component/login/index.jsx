@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import regexFun from "../../public/regex";
+// import regexFun from "../../public/regex";
 
 import EmailPaw from "./emailPaw";
 import EmailQuick from "./emailQuick";
@@ -11,6 +11,7 @@ import "./login.css";
 class Login extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props.history);
     this.state = {
       userInfo: {
         email: "",
@@ -36,6 +37,7 @@ class Login extends React.Component {
     this.handleOnBlur = this.handleOnBlur.bind(this);
     this.setUserInfoFun = this.setUserInfoFun.bind(this);
     this.forUserInfo = this.forUserInfo.bind(this);
+    this.handleClickJump = this.handleClickJump.bind(this);
   }
   setUserInfoFun(stateName, element, content) {
     if (element === "dynamicCode" && isNaN(content)) {
@@ -123,6 +125,9 @@ class Login extends React.Component {
       }, 1000)
     });
   }
+  handleClickJump(pageName) {
+    this.props.history.push(`/${pageName}`);
+  }
   componentWillUnmount() {
     clearInterval(this.state.codeTime);
   }
@@ -161,7 +166,9 @@ class Login extends React.Component {
               />
               <span
                 onClick={e => this.handleClickClear("email", e)}
-                className={this.state.userInfo.email ? "display" : null}
+                className={`clear-all-value ${
+                  this.state.userInfo.email ? "display" : null
+                }`}
               >
                 x
               </span>
@@ -174,6 +181,7 @@ class Login extends React.Component {
                 userInfo={this.state.userInfo}
                 handleOnBlur={this.handleOnBlur}
                 language={language}
+                handleClickJump={this.handleClickJump}
               />
             ) : (
               <EmailQuick
@@ -197,10 +205,12 @@ class Login extends React.Component {
             </label>
           </form>
           <div className="djm-login-footer">
-            <span className="djm-login-forget">{language.forgetPaw}</span>
+            <span onClick={event => this.handleClickJump("register", event)}>
+              {language.goRegister}
+            </span>
             <span
               onClick={this.handleClickLoginWay}
-              className="djm-login-email-l"
+              className="djm-login-email-loginWay"
             >
               {this.state.loginWay ? language.emailQuick : language.emailPaw}
             </span>

@@ -3,16 +3,15 @@ import { connect } from "react-redux";
 
 import regexFun from "../../public/regex";
 
-import "./register.css";
+import "./forgetPaw.css";
 
-class Register extends React.Component {
+class ForgetPaw extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputArr: ["email", "password", "dynamicCode"],
+      inputArr: ["email", "dynamicCode"],
       userInfo: {
         email: "",
-        password: "",
         dynamicCode: ""
       },
       registerWay: true,
@@ -22,7 +21,6 @@ class Register extends React.Component {
       errorText: null,
       errorInfo: {
         email: false,
-        password: false,
         dynamicCode: false
       }
     };
@@ -140,7 +138,7 @@ class Register extends React.Component {
                   id={item}
                   value={this.state.userInfo[item]}
                   autoComplete="off"
-                  type={item === "password" ? "password" : "text"}
+                  type={item !== "password" ? "text" : "password"}
                   placeholder={language[item]}
                   onChange={this.handleChangeInput.bind(this, item)}
                   onBlur={this.handleOnBlur.bind(this, item)}
@@ -188,4 +186,4 @@ class Register extends React.Component {
 function mapStateToProps(state, ownProps) {
   return state;
 }
-export default connect(mapStateToProps)(Register);
+export default connect(mapStateToProps)(ForgetPaw);

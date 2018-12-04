@@ -52,7 +52,7 @@
   color: #fff;
   font-size: 16px;
 }
-.djm-login-from span {
+.clear-all-value {
   position: absolute;
   right: 5px;
   top: 10px;
@@ -64,7 +64,7 @@
   cursor: pointer;
   display: none;
 }
-.djm-login-from span:hover {
+.clear-all-value:hover {
   color: #fff;
 }
 .djm-login-button input {
@@ -82,6 +82,9 @@
 }
 .djm-login-footer {
   user-select: none;
+  width: 250px;
+  margin: 0 auto;
+  text-align: left;
 }
 .djm-login-footer span {
   cursor: pointer;
@@ -90,8 +93,8 @@
 .djm-login-footer span:hover {
   color: rgba(252, 5, 18, 1);
 }
-.djm-login-forget {
-  margin-right: 30px;
+.djm-login-email-loginWay {
+  float: right;
 }
 
 .djm-login-dynamicCode input {
@@ -121,4 +124,18 @@
   line-height: 25px;
   color: rgba(252, 5, 18, 1);
   text-align: left;
+}
+.djm-login-userpaw input {
+  padding-right: 70px;
+}
+.djm-login-forget {
+  position: absolute;
+  right: 5px;
+  top: 8px;
+  color: #ddd;
+  cursor: pointer;
+  font-size: 12px;
+}
+.djm-login-forget:hover {
+  color: rgba(252, 5, 18, 1);
 }
