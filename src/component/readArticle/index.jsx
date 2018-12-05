@@ -24,19 +24,35 @@ class ReadArticle extends React.Component {
       timeScroll: null,
       listenScroll: null,
       elementNode: null,
+      ulClientHeight: null,
+      ulScrollHeight: null,
+      partentHeight: null,
+      childHeight: null,
+      ulNode: null,
       bannerUrl: [
         require("./images/banner/read_banner1.jpg"),
         require("./images/banner/read_banner2.jpg"),
         require("./images/banner/read_banner3.jpg"),
         require("./images/banner/read_banner4.jpg")
-      ]
+      ],
+      scrollNumber: 0,
+      stepNum: 0,
+      pStyle: {
+        // height: "70%",
+        transform: "translateY(0)"
+      },
+      ulStyle: {
+        transform: "translateY(0)"
+      }
     };
     this.handleClickCollection = this.handleClickCollection.bind(this);
     this.handleClickLookImg = this.handleClickLookImg.bind(this);
     this.handleClickElevator = this.handleClickElevator.bind(this);
-    this.onScrollHight = this.onScrollHight.bind(this);
+    this.onScrollHeight = this.onScrollHeight.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
     this.scrollFun = this.scrollFun.bind(this);
+    this.onMouseEnter = this.onMouseEnter.bind(this);
+    this.onMouseLeave = this.onMouseLeave.bind(this);
   }
   handleClickCollection() {
     this.props.dispatch({
@@ -49,9 +65,73 @@ class ReadArticle extends React.Component {
   handleClickLookImg() {
     this.setState(state => ({ lookImg: !state.lookImg }));
   }
-  onScrollHight(e, v) {
-    console.log(e, v);
+  onScrollHeight(parentHeight, childHight, e) {
+    const step = Math.ceil((childHight - parentHeight) / 50);
+    let temporary = null;
+    if (e.wheelDelta) {
+      temporary = e.wheelDelta > 0 ? true : false;
+    } else {
+      temporary = e.detail < 0 ? true : false;
+    }
+    if (temporary && this.state.scrollNumber < 0) {
+      this.setState(
+        state => ({ stepNum: state.stepNum - 100 / step }),
+        () => {
+          return this.ulScrollFun(temporary, this.state.stepNum);
+        }
+      );
+    } else if (
+      !temporary &&
+      this.state.scrollNumber > Math.ceil(parentHeight - childHight)
+    ) {
+      this.setState(
+        state => ({ stepNum: state.stepNum + 100 / step }),
+        () => {
+          return this.ulScrollFun(temporary, this.state.stepNum);
+        }
+      );
+    }
   }
+  ulScrollFun(isUp, step) {
+    this.setState(
+      num => ({ scrollNumber: num.scrollNumber + (isUp ? 1 : -1) * 50 }),
+      () => {
+        const temporaryNum = this.state.scrollNumber;
+        return (
+          this.setState({
+            pStyle: {
+              transform: `translateY(${step}%`
+            }
+          }),
+          this.setState({
+            ulStyle: {
+              transform: `translateY(${temporaryNum}px`
+            }
+          })
+        );
+      }
+    );
+  }
+  onMouseEnter() {
+    const temporary = this.refScroll;
+    const temporaryPar = temporary.offsetParent.clientHeight;
+    const temporaryChi = temporary.scrollHeight;
+    if (temporaryChi > 500) {
+      this.setState({
+        pStyle: {
+          transform: `translateY(${this.state.scrollNumber})`
+        }
+      });
+      if (temporary.addEventListener) {
+        temporary.addEventListener("DOMMouseScroll", event =>
+          this.onScrollHeight(temporaryPar, temporaryChi, event)
+        );
+      }
+      temporary.onmousewheel = event =>
+        this.onScrollHeight(temporaryPar, temporaryChi, event);
+    }
+  }
+  onMouseLeave() {}
   handleClickElevator(index) {
     clearInterval(this.state.timeScroll);
     let temporaryScroll =
@@ -105,11 +185,11 @@ class ReadArticle extends React.Component {
       if (temporary[i].nodeName !== "IMG") {
         if (temporary[i].nodeName === "H2") {
           h2Elevator.push({
-            content: temporary[i].outerText,
+            content: temporary[i].innerText,
             index: i
           });
         }
-        wordCount += temporary[i].outerText.length;
+        wordCount += temporary[i].innerText.length;
       } else {
         imgCount.push(temporary[i].src);
       }
@@ -154,11 +234,13 @@ class ReadArticle extends React.Component {
   }
   componentWillUnmount() {
     window.removeEventListener("scroll", this.handleScroll);
+    this.refScroll.removeEventListener("scroll", this.onScrollHeight);
     clearInterval(this.state.timeScroll);
   }
   render() {
     const temporary = this.state.articleInfo;
     const language = this.props.languageStore.language.readArticle;
+    // console.log(this.state.ulClientHeight);
     return (
       <div className="djm-readPage">
         <div className="djm-readPage-banner">
@@ -224,9 +306,17 @@ class ReadArticle extends React.Component {
               h2Elevator={this.state.h2Elevator}
               elevatorNum={this.state.elevatorNum}
               handleClickElevator={this.handleClickElevator}
-              onScrollHight={this.onScrollHight}
+              onScrollHeight={this.onScrollHeight}
               scrollTop={this.state.scrollTop}
               language={language}
+              refScroll={ele => {
+                this.refScroll = ele;
+              }}
+              onMouseEnter={this.onMouseEnter}
+              onMouseLeave={this.onMouseLeave}
+              pStyle={this.state.pStyle}
+              ulStyle={this.state.ulStyle}
+              childHeight={this.childHeight}
             />
           </div>
         </div>
