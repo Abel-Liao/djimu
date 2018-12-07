@@ -50,7 +50,7 @@ const routeArrLogin = [
   }
 ];
 
-// ????
+// ???? 可以用redux实现
 let temporary = [];
 function lastRouter(props) {
   temporary.push(props.location.pathname.split("/")[1]);
