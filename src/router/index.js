@@ -5,9 +5,7 @@ import Header from "../component/header";
 import Footer from "../component/footer";
 import Index from "../component/index";
 import Login from "../component/login";
-import Register from "../component/register";
-import ForgetPaw from "../component/forgetPaw";
-import ChangePaw from "../component/changePaw";
+import { Register, ChangePaw, ForgetPaw } from "../component/regChaForget";
 import Information from "../component/information";
 import ReadArticle from "../component/readArticle";
 
@@ -52,6 +50,16 @@ const routeArrLogin = [
   }
 ];
 
+// ????
+let temporary = [];
+function lastRouter(props) {
+  temporary.push(props.location.pathname.split("/")[1]);
+  if (temporary.length > 2) {
+    temporary.splice(0, 1);
+  }
+  sessionStorage.setItem("router", JSON.stringify(temporary));
+}
+
 function routeFun(arr, needLoginBool = false) {
   const isLogin = sessionStorage.getItem("isLogin");
   return arr.map((route, index) => (
@@ -60,7 +68,8 @@ function routeFun(arr, needLoginBool = false) {
       exact={route.exact}
       path={route.path}
       // component={route.component}
-      render={props =>
+      render={props => (
+        lastRouter(props),
         route.component.map((RouteLink, index) =>
           !needLoginBool ? (
             <RouteLink key={index} {...props} />
@@ -76,7 +85,7 @@ function routeFun(arr, needLoginBool = false) {
             />
           )
         )
-      }
+      )}
     />
   ));
 }
