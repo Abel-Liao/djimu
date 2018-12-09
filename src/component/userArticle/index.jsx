@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import sortingFun from "../../public/sorting";
 
 import UserArticleList from "./ui";
+import Paging from "./paging";
 
 import "./userArticle.css";
 
@@ -156,6 +157,7 @@ class UserArticle extends React.Component {
           }`}
           style={this.state.fixedShare}
         />
+        <Paging {...this.props} pageLength={10} />
       </div>
     );
   }

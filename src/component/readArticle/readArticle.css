@@ -105,7 +105,7 @@
 }
 .djm-readpage-content-right.right-fixed {
   position: fixed;
-  top: 20px;
+  top: 80px;
   margin-left: 850px;
   margin-top: 0;
 }
@@ -185,6 +185,8 @@
   width: 90%;
   max-height: 90%;
 }
+
+/* 导航 */
 .djm-rcr-elevator {
   width: 90%;
   margin: 20px auto 0;
@@ -194,12 +196,20 @@
   height: 35px;
   line-height: 35px;
 }
+.djm-rcr-elevator-div {
+  max-height: 500px;
+  overflow: hidden;
+  position: relative;
+}
+.djm-rcr-elevator-ul {
+  transition: all ease-in 0.2s;
+}
 .djm-rcr-elevator li {
   height: 30px;
   line-height: 30px;
   cursor: pointer;
 }
-.djm-rcr-elevator span {
+.djm-rcr-elevator li span {
   display: inline-block;
   width: 16px;
   height: 16px;
@@ -227,4 +237,27 @@
 }
 .choose-elevator i {
   background: rgba(229, 26, 72, 1);
+}
+.djm-rcr-elevator-scroll {
+  position: absolute;
+  top: 0;
+  right: 5px;
+  width: 3px;
+  border-radius: 5px;
+  height: 100%;
+  z-index: 99;
+  display: none;
+}
+.djm-rcr-elevator-scroll.display-scroll {
+  display: block;
+}
+.djm-rcr-elevator-scroll span {
+  display: inline-block;
+  width: 3px;
+  background: rgba(229, 26, 72, 1);
+  border-radius: 5px;
+  transform: translateY(-100px);
+  transition: all ease-in 0.2s;
+  cursor: pointer;
+  height: 50%;
 }

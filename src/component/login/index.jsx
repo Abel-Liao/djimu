@@ -67,14 +67,18 @@ class Login extends React.Component {
   handleClickLogin() {
     const isNull = this.forUserInfo();
     if (isNull) {
+      const temporary = JSON.parse(sessionStorage.getItem("router"));
       sessionStorage.setItem("isLogin", true);
       this.props.dispatch({ type: "USER_LOGIN" });
       this.props.dispatch({
         type: "USER_NAME",
         data: this.state.userInfo.email
       });
-      // this.props.history.push("/");
-      this.props.history.goBack(-1);
+      if (temporary[0] === "register" || temporary[0] === "forget") {
+        this.props.history.push("/");
+      } else {
+        this.props.history.goBack(-1);
+      }
     }
   }
   handleOnBlur(element, event) {
