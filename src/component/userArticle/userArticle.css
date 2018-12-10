@@ -247,26 +247,3 @@ li.choose-class .under-line {
   transform: translateX(-50%);
   width: 100%;
 }
-
-/* 分页器 */
-.djm-index-paging {
-  margin: 20px 0;
-}
-.djm-index-paging span {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  margin-right: 5px;
-  cursor: pointer;
-}
-.djm-index-paging span:hover,
-.djm-index-paging span.choose-page {
-  background: rgba(229, 26, 72, 1);
-  color: #fff;
-}
-.djm-index-paging span:last-child {
-  margin-right: 0;
-}

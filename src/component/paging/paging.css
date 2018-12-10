@@ -1,0 +1,22 @@
+/* 分页器 */
+.djm-paging {
+  margin: 20px 0;
+}
+.djm-paging span {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+.djm-paging span:hover,
+.djm-paging span.dji-paging-choose {
+  background: rgba(229, 26, 72, 1);
+  color: #fff;
+}
+.djm-paging span:last-child {
+  margin-right: 0;
+}
