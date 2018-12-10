@@ -45,6 +45,7 @@
 .title-author p {
   height: 50px;
   line-height: 50px;
+  user-select: none;
 }
 .title-author p span {
   margin-right: 20px;
@@ -69,8 +70,6 @@
 .title-author .icon-plane {
   cursor: pointer;
 }
-.title-author .icon-collection:hover,
-.title-author .icon-plane:hover,
 .collection-article {
   color: rgba(229, 26, 72, 1);
 }
@@ -198,16 +197,22 @@
 }
 .djm-rcr-elevator-div {
   max-height: 500px;
-  overflow: hidden;
   position: relative;
+  overflow: hidden;
 }
 .djm-rcr-elevator-ul {
   transition: all ease-in 0.2s;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 500px;
+  width: 320px;
 }
 .djm-rcr-elevator li {
   height: 30px;
   line-height: 30px;
   cursor: pointer;
+  padding-right: 50px;
+  overflow: hidden;
 }
 .djm-rcr-elevator li span {
   display: inline-block;
@@ -260,4 +265,22 @@
   transition: all ease-in 0.2s;
   cursor: pointer;
   height: 50%;
+}
+
+.djm-rcr-elevator-mouse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 100px;
+  z-index: -1;
+  opacity: 0;
+  transform: translateX(-50%) translateY(-50%) rotate(90deg);
+  transition: all ease-in 0.2s;
+}
+.djm-rcr-elevator-mouse::before {
+  color: #fcd1c0;
+}
+.djm-rcr-elevator-mouse.mouse-display {
+  z-index: 1;
+  opacity: 0.7;
 }

@@ -123,7 +123,14 @@ class Header extends React.Component {
                         this.handleChangePage("information", eventt)
                       }
                     >
-                      {language.YourProfile}
+                      {language.MyProfile}
+                    </li>
+                    <li
+                      onClick={eventt =>
+                        this.handleChangePage("myarticle", eventt)
+                      }
+                    >
+                      {language.MyArticle}
                     </li>
                     <li>{language.EditArticles}</li>
                     <li

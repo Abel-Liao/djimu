@@ -11,6 +11,7 @@ class Banner extends React.Component {
       bannerTime: null,
       dots: props.dots === false ? props.dots : true,
       loop: props.loop === false ? props.loop : true,
+      switchTime: props.switchTime ? props.switchTime : 3000,
       toggleButton: props.toggleButton ? props.toggleButton : false,
       ulTransform: 0,
       ulStyle: {
@@ -43,7 +44,7 @@ class Banner extends React.Component {
               ? 0
               : this.state.bannerIndex + 1
         });
-      }, 3000)
+      }, this.state.switchTime)
     });
   }
   handleMouseEnter(index) {

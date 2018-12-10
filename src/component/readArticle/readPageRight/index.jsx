@@ -17,18 +17,29 @@ function ReadPageRight(props) {
         {props.language.pictures}
       </div>
       <div className="djm-rcr-banner" onClick={props.handleClickLookImg}>
-        <Banner bannerUrl={props.imgCount} dots={false} {...props} />
+        <Banner
+          bannerUrl={props.imgCount}
+          dots={false}
+          switchTime={2000}
+          {...props}
+        />
       </div>
-      <div className="djm-rcr-elevator" onScroll={props.onScrollHeight}>
+      {/* <div className="djm-rcr-elevator" onScroll={props.onScrollHeight}> */}
+      <div className="djm-rcr-elevator">
         <h3>{props.language.directory}</h3>
         <div className="djm-rcr-elevator-div">
-          <p
+          {/* <p
             className={`djm-rcr-elevator-scroll ${
               props.childHeight > 500 ? "display-scroll" : ""
             }`}
           >
             <span style={props.pStyle} />
-          </p>
+          </p> */}
+          <p
+            className={`iconfont icon-mouse djm-rcr-elevator-mouse ${
+              props.childHeight > 500 && props.mouseDis ? "mouse-display" : ""
+            }`}
+          />
           <ul
             className="djm-rcr-elevator-ul"
             ref={props.refScroll}
