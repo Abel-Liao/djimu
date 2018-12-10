@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, Switch } from "react-router-dom";
 
 import Header from "../component/header";
 import Footer from "../component/footer";
@@ -12,32 +12,26 @@ import ReadArticle from "../component/readArticle";
 const routeArr = [
   {
     path: "/",
-    exact: true,
     component: [Header, Index, Footer]
   },
   {
     path: "/login",
-    exact: false,
     component: [Login]
   },
   {
     path: "/register",
-    exact: false,
     component: [Register]
   },
   {
     path: "/forget",
-    exact: false,
     component: [ForgetPaw]
   },
   {
     path: "/change",
-    exact: false,
     component: [ChangePaw]
   },
   {
     path: "/readArticle",
-    exact: false,
     component: [Header, ReadArticle, Footer]
   }
 ];
@@ -45,7 +39,6 @@ const routeArr = [
 const routeArrLogin = [
   {
     path: "/information",
-    exact: false,
     component: [Header, Information]
   }
 ];
@@ -65,7 +58,7 @@ function routeFun(arr, needLoginBool = false) {
   return arr.map((route, index) => (
     <Route
       key={index}
-      exact={route.exact}
+      exact={route.path === "/" ? true : false}
       path={route.path}
       // component={route.component}
       render={props => (
@@ -92,8 +85,17 @@ function routeFun(arr, needLoginBool = false) {
 
 const Router = () => (
   <React.Fragment>
-    {routeFun(routeArr)}
-    {routeFun(routeArrLogin, true)}
+    <Switch>
+      {routeFun(routeArr)}
+      {routeFun(routeArrLogin, true)}
+      <Route
+        render={props =>
+          [Header, Index, Footer].map((RouteLink, index) => (
+            <RouteLink key={index} {...props} />
+          ))
+        }
+      />
+    </Switch>
   </React.Fragment>
 );
 

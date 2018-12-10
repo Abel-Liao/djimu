@@ -3,7 +3,6 @@ import React from "react";
 import Banner from "../../banner";
 
 function ReadPageRight(props) {
-  console.log(props.childHeight);
   return (
     <div
       className={`djm-readpage-content-right ${
