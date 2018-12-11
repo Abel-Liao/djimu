@@ -67,7 +67,7 @@ class Paging extends React.Component {
     const temporary = this.state.pageArr;
     const temporaryChoos = parseInt(this.state.choosePage);
     return (
-      <div className="djm-paging clearfloat">
+      <div className="djm-paging">
         {temporary.length === 1 ? null : (
           <span
             className={temporaryChoos === 0 ? "donot-choose" : ""}
