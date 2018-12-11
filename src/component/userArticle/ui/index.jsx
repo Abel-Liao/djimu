@@ -1,6 +1,7 @@
 import React from "react";
 
 import dateFun from "../../../public/date";
+import Paging from "../../paging";
 
 function LiList(props) {
   return (
@@ -37,7 +38,7 @@ function LiList(props) {
         </span>
         <span
           onClick={event => {
-            props.handleClickAction("givelike", props.index, event);
+            props.handleClickAction("givelike", props.item.id, event);
             props.handleClickGivelike(props.index, event);
           }}
           className={`${
@@ -52,7 +53,7 @@ function LiList(props) {
         </span>
         <span
           onClick={event =>
-            props.handleClickAction("collection", props.index, event)
+            props.handleClickAction("collection", props.item.id, event)
           }
           className={`${
             props.item.collection.isChoose ? "choosed" : ""
@@ -79,15 +80,25 @@ function LiList(props) {
 function UserArticle(props) {
   return (
     <React.Fragment>
-      {props.userInfo.map((item, index) => {
-        return props.displayList === "myCollection" ? (
-          item.collection.isChoose ? (
+      <ul className="djm-index-uesr-article clearfloat">
+        {props.userInfo.map((item, index) => {
+          return props.displayList === "myCollection" ? (
+            item.collection.isChoose ? (
+              <LiList key={index} {...props} item={item} index={index} />
+            ) : null
+          ) : (
             <LiList key={index} {...props} item={item} index={index} />
-          ) : null
-        ) : (
-          <LiList key={index} {...props} item={item} index={index} />
-        );
-      })}
+          );
+        })}
+        <span className="separated-line" />
+      </ul>
+      {props.userInfo.length === 0 ? null : (
+        <Paging
+          {...props}
+          pageLength={Math.ceil(props.uesrArr.length / 8)}
+          changePage={props.changePage}
+        />
+      )}
     </React.Fragment>
   );
 }

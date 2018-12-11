@@ -64,7 +64,11 @@ class Paging extends React.Component {
     );
   }
   render() {
-    const temporary = this.state.pageArr;
+    // const temporary = this.state.pageArr;
+    const temporary = Array.from(
+      { length: this.props.pageLength ? this.props.pageLength : 1 },
+      (v, k) => k
+    );
     const temporaryChoos = parseInt(this.state.choosePage);
     return (
       <div className="djm-paging">
