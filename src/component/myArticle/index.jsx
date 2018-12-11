@@ -25,9 +25,11 @@ class MyArticle extends React.Component {
     this.props.history.push(`/readArticle?id=${idNumber}&index=${indexNumber}`);
   }
   deleteArticle(idNumber) {
+    sessionStorage.removeItem("pageNum");
     this.props.dispatch({ type: "DELETE_ARTICLE", articleId: idNumber });
   }
   deleteChoose() {
+    sessionStorage.removeItem("pageNum");
     const temporary = this.state.chooseArticle;
     for (let i = temporary.length; i >= 0; i--) {
       if (temporary[i]) {
