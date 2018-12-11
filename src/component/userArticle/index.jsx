@@ -22,7 +22,10 @@ class UserArticle extends React.Component {
         left: -100
       },
       timeGivelike: null,
-      chooseGivelike: -1
+      chooseGivelike: -1,
+      pageNum: sessionStorage.getItem("pageNum")
+        ? sessionStorage.getItem("pageNum")
+        : 0
     };
     this.handleClickAction = this.handleClickAction.bind(this);
     this.changeItemFun = this.changeItemFun.bind(this);
@@ -30,6 +33,7 @@ class UserArticle extends React.Component {
     this.handleClickLink = this.handleClickLink.bind(this);
     this.handleClickShare = this.handleClickShare.bind(this);
     this.handleClickGivelike = this.handleClickGivelike.bind(this);
+    this.changePage = this.changePage.bind(this);
   }
   changeItemFun(changeItem, key, value) {
     this.setState(
@@ -95,6 +99,10 @@ class UserArticle extends React.Component {
       }, 200)
     });
   }
+  changePage(pageNum) {
+    sessionStorage.setItem("pageNum", pageNum);
+    this.setState({ pageNum: pageNum });
+  }
   static getDerivedStateFromProps(nextProps, prevState) {
     // 这样实现有违 getDerivedStateFromProps 初衷
     // if (prevState.displayList === "hot") {
@@ -114,6 +122,10 @@ class UserArticle extends React.Component {
   }
   render() {
     const language = this.props.languageStore.language.userArticle;
+    const temporary = this.state.userInfo.slice(
+      this.state.pageNum * 8,
+      this.state.pageNum * 8 + 8
+    );
     return (
       <div className="djm-index-content">
         <ul className="djm-index-content-nav clearfloat">
@@ -133,7 +145,7 @@ class UserArticle extends React.Component {
         <ul className="djm-index-uesr-article clearfloat">
           <UserArticleList
             {...this.props}
-            userInfo={this.state.userInfo}
+            userInfo={temporary}
             handleClickAction={this.handleClickAction}
             language={language}
             displayList={this.state.displayList}
@@ -160,6 +172,7 @@ class UserArticle extends React.Component {
         <Paging
           {...this.props}
           pageLength={Math.ceil(this.state.userInfo.length / 8)}
+          changePage={this.changePage}
         />
       </div>
     );

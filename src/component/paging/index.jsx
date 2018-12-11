@@ -14,7 +14,9 @@ class Paging extends React.Component {
         { length: props.pageLength ? props.pageLength : 1 },
         (v, k) => k
       ),
-      choosePage: 0,
+      choosePage: sessionStorage.getItem("pageNum")
+        ? sessionStorage.getItem("pageNum")
+        : 0,
       midPage: 4
     };
     this.handleClickPage = this.handleClickPage.bind(this);
@@ -22,7 +24,9 @@ class Paging extends React.Component {
     this.nextPreviousFun = this.nextPreviousFun.bind(this);
   }
   handleClickPage(indexNum) {
-    this.setState({ choosePage: indexNum });
+    this.setState({ choosePage: indexNum }, () => {
+      this.props.changePage(this.state.choosePage);
+    });
     if (indexNum < 5) {
       this.setState({ midPage: 4 });
     } else if (indexNum > this.state.pageArr.length - 6) {
@@ -45,24 +49,23 @@ class Paging extends React.Component {
         choosePage: state.choosePage + (1 * isNext ? 1 : -1)
       }),
       () => {
-        if (
-          this.state.choosePage >= 5 &&
-          this.state.choosePage < this.state.pageArr.length - 5
-        ) {
-          this.setState(state => ({ midPage: this.state.choosePage + 1 }));
-        } else if (this.state.choosePage < 5) {
+        const temporary = this.state.choosePage;
+        if (temporary >= 5 && temporary < this.state.pageArr.length - 5) {
+          this.setState(state => ({ midPage: temporary + 1 }));
+        } else if (temporary < 5) {
           this.setState({ midPage: 4 });
-        } else if (this.state.choosePage >= this.state.pageArr.length - 5) {
+        } else if (temporary >= this.state.pageArr.length - 5) {
           this.setState(state => ({
             midPage: state.pageArr.length - 3
           }));
         }
+        this.props.changePage(temporary);
       }
     );
   }
   render() {
     const temporary = this.state.pageArr;
-    const temporaryChoos = this.state.choosePage;
+    const temporaryChoos = parseInt(this.state.choosePage);
     return (
       <div className="djm-paging clearfloat">
         {temporary.length === 1 ? null : (
