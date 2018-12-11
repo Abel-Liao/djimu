@@ -1,6 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import SmallPage from "./smallPage";
+import BigPage from "./bigPage";
+
 import "./paging.css";
 
 class Paging extends React.Component {
@@ -11,27 +14,91 @@ class Paging extends React.Component {
         { length: props.pageLength ? props.pageLength : 1 },
         (v, k) => k
       ),
-      choosePage: 0
+      choosePage: 0,
+      midPage: 4
     };
     this.handleClickPage = this.handleClickPage.bind(this);
+    this.handleClickNextPrevious = this.handleClickNextPrevious.bind(this);
+    this.nextPreviousFun = this.nextPreviousFun.bind(this);
   }
   handleClickPage(indexNum) {
     this.setState({ choosePage: indexNum });
+    if (indexNum < 5) {
+      this.setState({ midPage: 4 });
+    } else if (indexNum > this.state.pageArr.length - 6) {
+      this.setState({ midPage: this.state.pageArr.length - 3 });
+    } else {
+      this.setState({ midPage: indexNum + 1 });
+    }
+  }
+  handleClickNextPrevious(isNext) {
+    const temporary = this.state.choosePage;
+    if (isNext && temporary !== this.state.pageArr.length - 1) {
+      this.nextPreviousFun(isNext);
+    } else if (!isNext && temporary !== 0) {
+      this.nextPreviousFun(isNext);
+    }
+  }
+  nextPreviousFun(isNext) {
+    this.setState(
+      state => ({
+        choosePage: state.choosePage + (1 * isNext ? 1 : -1)
+      }),
+      () => {
+        if (
+          this.state.choosePage >= 5 &&
+          this.state.choosePage < this.state.pageArr.length - 5
+        ) {
+          this.setState(state => ({ midPage: this.state.choosePage + 1 }));
+        } else if (this.state.choosePage < 5) {
+          this.setState({ midPage: 4 });
+        } else if (this.state.choosePage >= this.state.pageArr.length - 5) {
+          this.setState(state => ({
+            midPage: state.pageArr.length - 3
+          }));
+        }
+      }
+    );
   }
   render() {
+    const temporary = this.state.pageArr;
+    const temporaryChoos = this.state.choosePage;
     return (
       <div className="djm-paging clearfloat">
-        {this.state.pageArr.map(index => (
+        {temporary.length === 1 ? null : (
+          <span
+            className={temporaryChoos === 0 ? "donot-choose" : ""}
+            onClick={event => this.handleClickNextPrevious(false, event)}
+          >
+            &lt;
+          </span>
+        )}
+        {temporary.length > 10 ? (
+          <BigPage
+            page={temporary}
+            midPage={this.state.midPage}
+            handleClickPage={this.handleClickPage}
+            choosePage={temporaryChoos}
+            {...this.props}
+          />
+        ) : (
+          <SmallPage
+            page={temporary}
+            {...this.props}
+            choosePage={temporaryChoos}
+            handleClickPage={this.handleClickPage}
+          />
+        )}
+        {temporary.length === 1 ? null : (
           <span
             className={
-              index === this.state.choosePage ? "dji-paging-choose" : null
+              temporaryChoos === temporary.length - 1 ? "donot-choose" : ""
             }
-            key={index}
-            onClick={event => this.handleClickPage(index, event)}
+            onClick={event => this.handleClickNextPrevious(true, event)}
           >
-            {index + 1}
+            &gt;
           </span>
-        ))}
+        )}
       </div>
     );
   }

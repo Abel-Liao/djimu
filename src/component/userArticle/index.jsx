@@ -157,7 +157,10 @@ class UserArticle extends React.Component {
           }`}
           style={this.state.fixedShare}
         />
-        <Paging {...this.props} pageLength={10} />
+        <Paging
+          {...this.props}
+          pageLength={Math.ceil(this.state.userInfo.length / 8)}
+        />
       </div>
     );
   }

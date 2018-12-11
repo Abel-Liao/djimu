@@ -1,6 +1,7 @@
 /* 分页器 */
 .djm-paging {
   margin: 20px 0;
+  user-select: none;
 }
 .djm-paging span {
   display: inline-block;
@@ -19,4 +20,25 @@
 }
 .djm-paging span:last-child {
   margin-right: 0;
+}
+.donot-choose {
+  background: #999;
+  color: #ffff;
+  pointer-events: none;
+}
+.donot-choose:hover {
+  background: #999;
+  color: #ffff;
+}
+span.djm-paging-omit {
+  border: none;
+  cursor: default;
+  font-size: 30px;
+  height: 0;
+  position: relative;
+  top: -5px;
+}
+span.djm-paging-omit:hover {
+  background: none;
+  color: #999;
 }
