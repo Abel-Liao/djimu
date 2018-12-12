@@ -178,8 +178,9 @@ class ReadArticle extends React.Component {
       }
     }
     if (
+      temporaryH2.length > 0 &&
       temporary >=
-      temporaryEle[temporaryH2[temporaryH2.length - 1].index].offsetTop
+        temporaryEle[temporaryH2[temporaryH2.length - 1].index].offsetTop
     ) {
       this.setState({ elevatorNum: temporaryH2.length - 1 });
     }
