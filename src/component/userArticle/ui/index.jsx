@@ -97,6 +97,7 @@ function UserArticle(props) {
           {...props}
           pageLength={Math.ceil(props.uesrArr.length / 8)}
           changePage={props.changePage}
+          displayList={props.displayList}
         />
       )}
     </React.Fragment>

@@ -82,6 +82,7 @@ class UserArticle extends React.Component {
       this.setState({ userInfo: sortingFun(this.state.userInfo, "date") });
     }
     this.setState({ displayList: displayName });
+    this.setState({ pageNum: 0 });
   }
   handleClickLink(idNumber, indexNUmber) {
     this.props.history.push(`/readArticle?id=${idNumber}&index=${indexNUmber}`);
@@ -128,7 +129,11 @@ class UserArticle extends React.Component {
       nextProps.articleStore.length !== prevState.userInfo.length &&
       prevState.displayList !== "myCollection"
     ) {
-      return { userInfo: nextProps.articleStore };
+      if (prevState.displayList === "hot") {
+        return { userInfo: sortingFun(nextProps.articleStore, "givelike") };
+      } else {
+        return { userInfo: sortingFun(nextProps.articleStore, "date") };
+      }
     }
     return null;
   }

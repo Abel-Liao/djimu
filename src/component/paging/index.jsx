@@ -17,6 +17,7 @@ class Paging extends React.Component {
       choosePage: sessionStorage.getItem("pageNum")
         ? sessionStorage.getItem("pageNum")
         : 0,
+      displayList: props.displayList ? props.displayList : null,
       midPage: 4
     };
     this.handleClickPage = this.handleClickPage.bind(this);
@@ -62,6 +63,12 @@ class Paging extends React.Component {
         this.props.changePage(temporary);
       }
     );
+  }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.displayList !== prevState.displayList) {
+      return { displayList: nextProps.displayList, choosePage: 0 };
+    }
+    return null;
   }
   render() {
     // const temporary = this.state.pageArr;

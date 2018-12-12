@@ -31,6 +31,7 @@ class Information extends React.Component {
         { title: "impressionPlace", content: "" }
       ],
       oldInfoArr: [
+        { title: "email", content: "sdas@adas.com" },
         { title: "describeYourself", content: "abcdefg" },
         { title: "wantPlace", content: "西藏" },
         { title: "impressionPlace", content: "" }
