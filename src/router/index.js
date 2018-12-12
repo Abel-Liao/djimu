@@ -9,6 +9,7 @@ import { Register, ChangePaw, ForgetPaw } from "../component/regChaForget";
 import Information from "../component/information";
 import ReadArticle from "../component/readArticle";
 import MyArticle from "../component/myArticle";
+import Edit from "../component/edit";
 
 const routeArr = [
   {
@@ -45,6 +46,10 @@ const routeArrLogin = [
   {
     path: "/myarticle",
     component: [Header, MyArticle, Footer]
+  },
+  {
+    path: "/edit",
+    component: [Header, Edit, Footer]
   }
 ];
 

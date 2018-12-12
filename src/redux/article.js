@@ -27,6 +27,9 @@ const articleStore = (state = sortingFun(article, "date"), action) => {
         }
       }
       return Object.assign([], state);
+    case "ADD_ARTICLE":
+      state.push(action.content);
+      return Object.assign([], state);
     default:
       return state;
   }
