@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import sortingFun from "../../public/sorting";
 
 import UserArticleList from "./ui";
-import Paging from "./paging";
+// import Paging from "../paging";
 
 import "./userArticle.css";
 
@@ -12,7 +12,7 @@ class UserArticle extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userInfo: null,
+      userInfo: [],
       displayList: "new",
       contentNav: ["new", "hot", "myCollection"],
       chooseShare: null,
@@ -22,7 +22,10 @@ class UserArticle extends React.Component {
         left: -100
       },
       timeGivelike: null,
-      chooseGivelike: -1
+      chooseGivelike: -1,
+      pageNum: sessionStorage.getItem("pageNum")
+        ? sessionStorage.getItem("pageNum")
+        : 0
     };
     this.handleClickAction = this.handleClickAction.bind(this);
     this.changeItemFun = this.changeItemFun.bind(this);
@@ -30,6 +33,8 @@ class UserArticle extends React.Component {
     this.handleClickLink = this.handleClickLink.bind(this);
     this.handleClickShare = this.handleClickShare.bind(this);
     this.handleClickGivelike = this.handleClickGivelike.bind(this);
+    this.changePage = this.changePage.bind(this);
+    this.collectionFun = this.collectionFun.bind(this);
   }
   changeItemFun(changeItem, key, value) {
     this.setState(
@@ -38,14 +43,24 @@ class UserArticle extends React.Component {
       })
     );
   }
-  handleClickAction(dataName, stateIndex) {
+  collectionFun() {
+    let temporary = [];
+    for (let i = 0; i < this.state.userInfo.length; i++) {
+      if (this.state.userInfo[i].collection.isChoose) {
+        temporary.push(this.state.userInfo[i]);
+      }
+    }
+    this.setState({ userInfo: sortingFun(temporary, "date") });
+  }
+  handleClickAction(dataName, stateId) {
     this.props.dispatch({
       type: "CHANGE_ARTICLE",
-      dataNumber: stateIndex,
-      dataName: dataName,
-      dataValue: !this.state.userInfo[stateIndex][dataName].isChoose
+      dataNumber: stateId,
+      dataName: dataName
     });
-
+    if (dataName === "collection") {
+      this.collectionFun();
+    }
     // data来源于state
     // const changeItem = this.state.userInfo[stateIndex];
     // if (changeItem[dataName].isChoose) {
@@ -61,10 +76,13 @@ class UserArticle extends React.Component {
   handleClickNav(displayName) {
     if (displayName === "hot") {
       this.setState({ userInfo: sortingFun(this.state.userInfo, "givelike") });
+    } else if (displayName === "myCollection") {
+      this.collectionFun();
     } else {
       this.setState({ userInfo: sortingFun(this.state.userInfo, "date") });
     }
     this.setState({ displayList: displayName });
+    this.setState({ pageNum: 0 });
   }
   handleClickLink(idNumber, indexNUmber) {
     this.props.history.push(`/readArticle?id=${idNumber}&index=${indexNUmber}`);
@@ -95,6 +113,10 @@ class UserArticle extends React.Component {
       }, 200)
     });
   }
+  changePage(pageNum) {
+    sessionStorage.setItem("pageNum", pageNum);
+    this.setState({ pageNum: pageNum });
+  }
   static getDerivedStateFromProps(nextProps, prevState) {
     // 这样实现有违 getDerivedStateFromProps 初衷
     // if (prevState.displayList === "hot") {
@@ -103,8 +125,15 @@ class UserArticle extends React.Component {
     // if (prevState.displayList !== "hot") {
     //   return { userInfo: sortingFun(prevState.userInfo, "date") };
     // }
-    if (nextProps.articleStore !== prevState.userInfo) {
-      return { userInfo: nextProps.articleStore };
+    if (
+      nextProps.articleStore.length !== prevState.userInfo.length &&
+      prevState.displayList !== "myCollection"
+    ) {
+      if (prevState.displayList === "hot") {
+        return { userInfo: sortingFun(nextProps.articleStore, "givelike") };
+      } else {
+        return { userInfo: sortingFun(nextProps.articleStore, "date") };
+      }
     }
     return null;
   }
@@ -114,6 +143,11 @@ class UserArticle extends React.Component {
   }
   render() {
     const language = this.props.languageStore.language.userArticle;
+    const temporaryArr = this.state.userInfo;
+    const temporary = temporaryArr.slice(
+      this.state.pageNum * 8,
+      this.state.pageNum * 8 + 8
+    );
     return (
       <div className="djm-index-content">
         <ul className="djm-index-content-nav clearfloat">
@@ -130,34 +164,42 @@ class UserArticle extends React.Component {
             </li>
           ))}
         </ul>
-        <ul className="djm-index-uesr-article clearfloat">
-          <UserArticleList
-            {...this.props}
-            userInfo={this.state.userInfo}
-            handleClickAction={this.handleClickAction}
-            language={language}
-            displayList={this.state.displayList}
-            handleClickLink={this.handleClickLink}
-            handleClickShare={this.handleClickShare}
-            chooseShare={this.state.chooseShare}
-            shareRef={index => ele => {
-              this[index] = ele;
-            }}
-            handleClickGivelike={this.handleClickGivelike}
-            givelikeRef={index => ele => {
-              this[index] = ele;
-            }}
-            chooseGivelike={this.state.chooseGivelike}
-          />
-          <span className="separated-line" />
-        </ul>
+        {/* <ul className="djm-index-uesr-article clearfloat"> */}
+        <UserArticleList
+          {...this.props}
+          userInfo={temporary}
+          uesrArr={temporaryArr}
+          handleClickAction={this.handleClickAction}
+          changePage={this.changePage}
+          language={language}
+          displayList={this.state.displayList}
+          handleClickLink={this.handleClickLink}
+          handleClickShare={this.handleClickShare}
+          chooseShare={this.state.chooseShare}
+          shareRef={index => ele => {
+            this[index] = ele;
+          }}
+          handleClickGivelike={this.handleClickGivelike}
+          givelikeRef={index => ele => {
+            this[index] = ele;
+          }}
+          chooseGivelike={this.state.chooseGivelike}
+        />
+        {/* <span className="separated-line" />
+        </ul> */}
         <i
           className={`share-animation iconfont icon-plane ${
             this.state.chooseShare !== null ? "click-share" : ""
           }`}
           style={this.state.fixedShare}
         />
-        <Paging {...this.props} pageLength={10} />
+        {/* {temporary.length === 0 ? null : (
+          <Paging
+            {...this.props}
+            pageLength={Math.ceil(temporaryArr.length / 8)}
+            changePage={this.changePage}
+          />
+        )} */}
       </div>
     );
   }

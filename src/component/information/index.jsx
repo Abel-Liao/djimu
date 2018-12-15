@@ -31,6 +31,7 @@ class Information extends React.Component {
         { title: "impressionPlace", content: "" }
       ],
       oldInfoArr: [
+        { title: "email", content: "sdas@adas.com" },
         { title: "describeYourself", content: "abcdefg" },
         { title: "wantPlace", content: "西藏" },
         { title: "impressionPlace", content: "" }
@@ -87,10 +88,21 @@ class Information extends React.Component {
   }
   handleChangeImg(event) {
     const fileReader = new FileReader();
-    fileReader.readAsDataURL(event.target.files[0]);
-    fileReader.onload = event => {
-      this.setState({ headPortraitUrl: event.target.result });
-    };
+    const temporary = event.target.files[0];
+    if (
+      (temporary.type === "image/jpeg" ||
+        temporary.type === "image/png" ||
+        temporary.type === "image/jpg") &&
+      parseInt(temporary.size / 1024) < 1024
+    ) {
+      fileReader.readAsDataURL(temporary);
+      fileReader.onload = event => {
+        this.setState({ headPortraitUrl: event.target.result });
+      };
+    } else {
+      console.log("图片太大，或者格式不正确");
+      return;
+    }
   }
   handleClickUserName() {
     this.setState({ isChangeName: !this.state.isChangeName });

@@ -6,6 +6,7 @@ const language = {
       logout: "用户登出",
       language: ["中文", "English"],
       YourProfile: "个人信息",
+      MyArticle: "我的文章",
       EditArticles: "编辑文章",
       placeholder: "请输入搜索信息"
     },
@@ -92,7 +93,8 @@ const language = {
       register: "REGISTER",
       logout: "LOGOUT",
       language: ["English", "中文"],
-      YourProfile: "Your Profile",
+      MyProfile: "My Profile",
+      MyArticle: "My Article",
       EditArticles: "Edit Articles",
       placeholder: "search"
     },

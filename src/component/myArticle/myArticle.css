@@ -1,0 +1,75 @@
+.djm-myArticle {
+  width: 1180px;
+  margin: 0 auto;
+  text-align: left;
+}
+.djm-myArticle-header {
+  height: 50px;
+  line-height: 50px;
+  user-select: none;
+}
+.djm-myArticle-header span {
+  margin-right: 10px;
+  cursor: pointer;
+}
+.djm-myArticle-header span:last-child {
+  margin-right: 0;
+}
+.djm-myArticle-header-delete {
+  float: right;
+}
+.djm-myArticle-main li {
+  display: block;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 5px;
+  cursor: pointer;
+}
+.djm-myArticle-main span {
+  display: inline-block;
+  margin-right: 10px;
+}
+.djm-myArticle-main span:last-child {
+  margin-right: 0;
+}
+.djm-myArticle-main-title {
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  vertical-align: middle;
+}
+.djm-myArticle-main li:nth-child(odd) {
+  background: #ddd;
+}
+.djm-myArticle-main-delete,
+.djm-myArticle-header-delete {
+  text-align: center;
+  color: #fff;
+  float: right;
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 5px;
+  background: rgba(229, 26, 72, 0.8);
+  margin-top: 10px;
+  user-select: none;
+}
+.djm-myArticle-main-delete:hover,
+.djm-myArticle-header-delete:hover {
+  background: rgba(229, 26, 72, 1);
+}
+.choose-input {
+  width: 15px;
+  height: 15px;
+  border: 1px solid rgba(229, 26, 72, 1);
+  position: relative;
+  top: 3px;
+}
+.choose-input::before {
+  position: absolute;
+  top: -19px;
+  left: 0;
+  font-size: 10px;
+  width: 100%;
+  height: 100%;
+}

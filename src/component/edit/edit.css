@@ -1,0 +1,68 @@
+.djm-edit {
+  width: 1180px;
+  margin: 20px auto;
+}
+.bf-container {
+  border: 1px solid #ddd;
+}
+.djm-edit-header {
+  text-align: left;
+}
+.djm-edit-header span {
+  display: inline-block;
+  width: 80px;
+}
+.djm-edit-header-title {
+  height: 40px;
+  line-height: 40px;
+}
+.djm-edit-header-title input {
+  height: 40px;
+  line-height: 40px;
+  width: 1100px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 0 5px;
+  font-size: 18px;
+}
+.djm-edit-info {
+  margin: 20px 0;
+}
+.djm-edit-info li {
+  float: left;
+  width: 287.5px;
+  text-align: left;
+  margin-right: 10px;
+}
+.djm-edit-info li:last-child {
+  margin-right: 0;
+}
+.djm-edit-info li span {
+  display: inline-block;
+  width: 80px;
+}
+.djm-edit-info li input {
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 0 5px;
+  width: 207px;
+}
+.djm-edit-submit {
+  margin-top: 20px;
+}
+.djm-edit-submit button {
+  width: 150px;
+  height: 40px;
+  line-height: 40px;
+  border: 1px solid #ddd;
+  background: rgba(252, 5, 18, 0.8);
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.djm-edit-submit button:hover {
+  background: rgba(252, 5, 18, 1);
+}

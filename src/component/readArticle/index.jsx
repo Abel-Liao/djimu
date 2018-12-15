@@ -28,6 +28,8 @@ class ReadArticle extends React.Component {
       ulScrollHeight: null,
       partentHeight: null,
       childHeight: null,
+      mouseDis: false,
+      timerClicdH: null,
       ulNode: null,
       bannerUrl: [
         require("./images/banner/read_banner1.jpg"),
@@ -37,10 +39,10 @@ class ReadArticle extends React.Component {
       ],
       scrollNumber: 0,
       stepNum: 0,
-      pStyle: {
-        // height: "70%",
-        transform: "translateY(0)"
-      },
+      // pStyle: {
+      //   // height: "70%",
+      //   transform: "translateY(0)"
+      // },
       ulStyle: {
         transform: "translateY(0)"
       }
@@ -48,7 +50,7 @@ class ReadArticle extends React.Component {
     this.handleClickCollection = this.handleClickCollection.bind(this);
     this.handleClickLookImg = this.handleClickLookImg.bind(this);
     this.handleClickElevator = this.handleClickElevator.bind(this);
-    this.onScrollHeight = this.onScrollHeight.bind(this);
+    // this.onScrollHeight = this.onScrollHeight.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
     this.scrollFun = this.scrollFun.bind(this);
     this.onMouseEnter = this.onMouseEnter.bind(this);
@@ -65,73 +67,80 @@ class ReadArticle extends React.Component {
   handleClickLookImg() {
     this.setState(state => ({ lookImg: !state.lookImg }));
   }
-  onScrollHeight(parentHeight, childHight, e) {
-    const step = Math.ceil((childHight - parentHeight) / 50);
-    let temporary = null;
-    if (e.wheelDelta) {
-      temporary = e.wheelDelta > 0 ? true : false;
-    } else {
-      temporary = e.detail < 0 ? true : false;
-    }
-    if (temporary && this.state.scrollNumber < 0) {
-      this.setState(
-        state => ({ stepNum: state.stepNum - 100 / step }),
-        () => {
-          return this.ulScrollFun(temporary, this.state.stepNum);
-        }
-      );
-    } else if (
-      !temporary &&
-      this.state.scrollNumber > Math.ceil(parentHeight - childHight)
-    ) {
-      this.setState(
-        state => ({ stepNum: state.stepNum + 100 / step }),
-        () => {
-          return this.ulScrollFun(temporary, this.state.stepNum);
-        }
-      );
-    }
-  }
-  ulScrollFun(isUp, step) {
-    this.setState(
-      num => ({ scrollNumber: num.scrollNumber + (isUp ? 1 : -1) * 50 }),
-      () => {
-        const temporaryNum = this.state.scrollNumber;
-        return (
-          this.setState({
-            pStyle: {
-              transform: `translateY(${step}%`
-            }
-          }),
-          this.setState({
-            ulStyle: {
-              transform: `translateY(${temporaryNum}px`
-            }
-          })
-        );
-      }
-    );
-  }
+
+  // 注释部分为自定义滚动条
+
+  // onScrollHeight(parentHeight, childHight, e) {
+  //   const step = Math.ceil((childHight - parentHeight) / 50);
+  //   let temporary = null;
+  //   if (e.wheelDelta) {
+  //     temporary = e.wheelDelta > 0 ? true : false;
+  //   } else {
+  //     temporary = e.detail < 0 ? true : false;
+  //   }
+  //   if (temporary && this.state.scrollNumber < 0) {
+  //     this.setState(
+  //       state => ({ stepNum: state.stepNum - 100 / step }),
+  //       () => {
+  //         return this.ulScrollFun(temporary, this.state.stepNum);
+  //       }
+  //     );
+  //   } else if (
+  //     !temporary &&
+  //     this.state.scrollNumber > Math.ceil(parentHeight - childHight)
+  //   ) {
+  //     this.setState(
+  //       state => ({ stepNum: state.stepNum + 100 / step }),
+  //       () => {
+  //         return this.ulScrollFun(temporary, this.state.stepNum);
+  //       }
+  //     );
+  //   }
+  // }
+  // ulScrollFun(isUp, step) {
+  //   this.setState(
+  //     num => ({ scrollNumber: num.scrollNumber + (isUp ? 1 : -1) * 50 }),
+  //     () => {
+  //       const temporaryNum = this.state.scrollNumber;
+  //       return (
+  //         this.setState({
+  //           pStyle: {
+  //             transform: `translateY(${step}%`
+  //           }
+  //         }),
+  //         this.setState({
+  //           ulStyle: {
+  //             transform: `translateY(${temporaryNum}px`
+  //           }
+  //         })
+  //       );
+  //     }
+  //   );
+  // }
   onMouseEnter() {
-    const temporary = this.refScroll;
-    const temporaryPar = temporary.offsetParent.clientHeight;
-    const temporaryChi = temporary.scrollHeight;
-    if (temporaryChi > 500) {
-      this.setState({
-        pStyle: {
-          transform: `translateY(${this.state.scrollNumber})`
-        }
-      });
-      if (temporary.addEventListener) {
-        temporary.addEventListener("DOMMouseScroll", event =>
-          this.onScrollHeight(temporaryPar, temporaryChi, event)
-        );
-      }
-      temporary.onmousewheel = event =>
-        this.onScrollHeight(temporaryPar, temporaryChi, event);
-    }
+    // const temporary = this.refScroll;
+    // const temporaryPar = temporary.offsetParent.clientHeight;
+    // const temporaryChi = temporary.scrollHeight;
+    // if (temporaryChi > 500) {
+    //   this.setState({
+    //     pStyle: {
+    //       transform: `translateY(${this.state.scrollNumber})`
+    //     }
+    //   });
+    //   if (temporary.addEventListener) {
+    //     temporary.addEventListener("DOMMouseScroll", event =>
+    //       this.onScrollHeight(temporaryPar, temporaryChi, event)
+    //     );
+    //   }
+    //   temporary.onmousewheel = event =>
+    //     this.onScrollHeight(temporaryPar, temporaryChi, event);
+    // }
+    this.setState(state => ({ mouseDis: !state.mouseDis }));
   }
-  onMouseLeave() {}
+  onMouseLeave() {
+    // this.setState({ childHeight: 0 });
+    this.setState(state => ({ mouseDis: !state.mouseDis }));
+  }
   handleClickElevator(index) {
     clearInterval(this.state.timeScroll);
     let temporaryScroll =
@@ -169,8 +178,9 @@ class ReadArticle extends React.Component {
       }
     }
     if (
+      temporaryH2.length > 0 &&
       temporary >=
-      temporaryEle[temporaryH2[temporaryH2.length - 1].index].offsetTop
+        temporaryEle[temporaryH2[temporaryH2.length - 1].index].offsetTop
     ) {
       this.setState({ elevatorNum: temporaryH2.length - 1 });
     }
@@ -204,6 +214,11 @@ class ReadArticle extends React.Component {
       return this.scrollFun();
     });
     window.addEventListener("scroll", this.handleScroll);
+    this.setState({
+      timerClicdH: setTimeout(() => {
+        this.setState({ childHeight: this.refScroll.scrollHeight });
+      }, 10)
+    });
   }
   getSnapshotBeforeUpdate(prevProps, prevState) {
     return null;
@@ -234,7 +249,7 @@ class ReadArticle extends React.Component {
   }
   componentWillUnmount() {
     window.removeEventListener("scroll", this.handleScroll);
-    this.refScroll.removeEventListener("scroll", this.onScrollHeight);
+    // this.refScroll.removeEventListener("scroll", this.onScrollHeight);
     clearInterval(this.state.timeScroll);
   }
   render() {
@@ -306,7 +321,7 @@ class ReadArticle extends React.Component {
               h2Elevator={this.state.h2Elevator}
               elevatorNum={this.state.elevatorNum}
               handleClickElevator={this.handleClickElevator}
-              onScrollHeight={this.onScrollHeight}
+              // onScrollHeight={this.onScrollHeight}
               scrollTop={this.state.scrollTop}
               language={language}
               refScroll={ele => {
@@ -314,9 +329,10 @@ class ReadArticle extends React.Component {
               }}
               onMouseEnter={this.onMouseEnter}
               onMouseLeave={this.onMouseLeave}
-              pStyle={this.state.pStyle}
+              // pStyle={this.state.pStyle}
               ulStyle={this.state.ulStyle}
-              childHeight={this.childHeight}
+              childHeight={this.state.childHeight}
+              mouseDis={this.state.mouseDis}
             />
           </div>
         </div>

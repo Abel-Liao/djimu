@@ -20,6 +20,7 @@
 }
 .dim-header-login {
   float: right;
+  user-select: none;
 }
 .dim-header-login > li {
   float: left;
