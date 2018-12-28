@@ -13,6 +13,8 @@ class Edit extends React.Component {
     this.state = {
       editorState: BraftEditor.createEditorState(null),
       infoArr: ["date", "days", "peoples", "cost"],
+      popDisplay: false,
+      editImgUrl: null,
       content: {
         id: props.articleStore.length,
         date: "",
@@ -37,7 +39,9 @@ class Edit extends React.Component {
       }
     };
     this.handleClickSubmit = this.handleClickSubmit.bind(this);
+    this.handleClickImgButton = this.handleClickImgButton.bind(this);
     this.changeEdit = this.changeEdit.bind(this);
+    this.chooseImg = this.chooseImg.bind(this);
   }
   async componentDidMount() {
     // 假设此处从服务端获取html格式的编辑器内容
@@ -53,6 +57,10 @@ class Edit extends React.Component {
     // const htmlContent = this.state.editorState.toHTML();
     // const result = await saveEditorContent(htmlContent)
   };
+  handleClickImgButton() {
+    this.setState(state => ({ popDisplay: !state.popDisplay }));
+    this.setState({ editImgUrl: null });
+  }
   handleEditorChange = editorState => {
     this.setState({ editorState }, () => {
       this.setState({
@@ -80,7 +88,26 @@ class Edit extends React.Component {
       }
     }
   }
+  chooseImg(event) {
+    const fileReader = new FileReader();
+    const temporary = event.target.files[0];
+    if (
+      (temporary.type === "image/jpeg" ||
+        temporary.type === "image/png" ||
+        temporary.type === "image/jpg") &&
+      parseInt(temporary.size / 1024) < 1024
+    ) {
+      fileReader.readAsDataURL(temporary);
+      fileReader.onload = event => {
+        this.setState({ editImgUrl: event.target.result });
+      };
+    } else {
+      console.log("图片太大，或者格式不正确");
+      return;
+    }
+  }
   handleClickSubmit() {
+    console.log(this.state.content);
     this.setState(
       {
         content: Object.assign({}, this.state.content, {
@@ -88,10 +115,10 @@ class Edit extends React.Component {
         })
       },
       () => {
-        this.props.dispatch({
-          type: "ADD_ARTICLE",
-          content: this.state.content
-        });
+        // this.props.dispatch({
+        //   type: "ADD_ARTICLE",
+        //   content: this.state.content
+        // });
       }
     );
   }
@@ -119,6 +146,39 @@ class Edit extends React.Component {
             </li>
           ))}
         </ul>
+        <div className="djm-edit-img">
+          <span className="djm-edit-chooseImg">选择图片</span>
+          <input
+            type="button"
+            value="选择图片"
+            onClick={this.handleClickImgButton}
+          />
+          {this.state.popDisplay ? (
+            <div className="djm-edit-img-pop">
+              <div className="djm-edit-img-pop-content">
+                <div>
+                  <input
+                    onChange={this.chooseImg}
+                    type="file"
+                    accept="image/png, image/jpeg"
+                  />
+                  <input type="button" value="选择文章已有图片" />
+                </div>
+                <img
+                  src={this.state.editImgUrl}
+                  alt=""
+                  className="edit-pop-img"
+                />
+                <input
+                  type="submit"
+                  className="edit-pop-cancel"
+                  onClick={this.handleClickImgButton}
+                  value="取消"
+                />
+              </div>
+            </div>
+          ) : null}
+        </div>
         <BraftEditor
           value={this.state.editorState}
           onChange={event => {

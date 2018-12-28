@@ -7,7 +7,6 @@ let uesrInfo = {
 const loginStore = (state = uesrInfo, action) => {
   switch (action.type) {
     case "USER_LOGIN":
-      console.log(state.login);
       return Object.assign({}, state, { login: !state.login });
     case "USER_NAME":
       sessionStorage.setItem("userName", action.data);

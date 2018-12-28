@@ -53,6 +53,7 @@ a {
 input,
 button {
   outline: none;
+  border: none;
 }
 
 /* 所有块级元素为border-box */
