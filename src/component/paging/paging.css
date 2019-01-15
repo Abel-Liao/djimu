@@ -2,6 +2,7 @@
 .djm-paging {
   margin: 20px 0;
   user-select: none;
+  position: relative;
 }
 .djm-paging span {
   display: inline-block;

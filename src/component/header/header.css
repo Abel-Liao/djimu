@@ -1,6 +1,7 @@
-/* header {
-  background: #999;
-} */
+header {
+  position: relative;
+  z-index: 9;
+}
 .djm-header-content {
   width: 1180px;
   margin: 0 auto;
