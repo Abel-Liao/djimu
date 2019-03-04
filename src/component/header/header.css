@@ -162,6 +162,7 @@ header {
 }
 .djm-header-search input:focus {
   width: 220px;
+  background: #ddd;
 }
 .djm-header-search i {
   position: absolute;
