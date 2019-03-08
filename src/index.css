@@ -87,3 +87,7 @@ body *.display {
 :-ms-input-placeholder {
   color: #ccc;
 }
+
+*[role="button"] {
+  outline: none;
+}

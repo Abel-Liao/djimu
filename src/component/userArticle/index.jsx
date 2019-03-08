@@ -1,31 +1,29 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+import { connect } from 'react-redux';
 
-import sortingFun from "../../public/sorting";
+import sortingFun from '../../public/sorting';
 
-import UserArticleList from "./ui";
+import UserArticleList from './ui';
 // import Paging from "../paging";
 
-import "./userArticle.css";
+import './userArticle.css';
 
 class UserArticle extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       userInfo: [],
-      displayList: "new",
-      contentNav: ["new", "hot", "myCollection"],
+      displayList: 'new',
+      contentNav: ['new', 'hot', 'myCollection'],
       chooseShare: null,
       timeShare: null,
       fixedShare: {
         bottom: 0,
-        left: -100
+        left: -100,
       },
       timeGivelike: null,
       chooseGivelike: -1,
-      pageNum: sessionStorage.getItem("pageNum")
-        ? sessionStorage.getItem("pageNum")
-        : 0
+      pageNum: sessionStorage.getItem('pageNum') ? sessionStorage.getItem('pageNum') : 0,
     };
     this.handleClickAction = this.handleClickAction.bind(this);
     this.changeItemFun = this.changeItemFun.bind(this);
@@ -36,29 +34,64 @@ class UserArticle extends React.Component {
     this.changePage = this.changePage.bind(this);
     this.collectionFun = this.collectionFun.bind(this);
   }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    // 这样实现有违 getDerivedStateFromProps 初衷
+    // if (prevState.displayList === "hot") {
+    //   return { userInfo: sortingFun(prevState.userInfo, "givelike") };
+    // }
+    // if (prevState.displayList !== "hot") {
+    //   return { userInfo: sortingFun(prevState.userInfo, "date") };
+    // }
+    if (
+      nextProps.articleStore.length !== prevState.userInfo.length
+      && prevState.displayList !== 'myCollection'
+    ) {
+      if (prevState.displayList === 'hot') {
+        return { userInfo: sortingFun(nextProps.articleStore, 'givelike') };
+      }
+      return { userInfo: sortingFun(nextProps.articleStore, 'date') };
+    }
+    return null;
+  }
+
+  componentWillUnmount() {
+    const { timeShare, timeGivelike } = this.state;
+    if (timeShare) {
+      clearTimeout(timeShare);
+    }
+    if (timeGivelike) {
+      clearTimeout(timeGivelike);
+    }
+  }
+
   changeItemFun(changeItem, key, value) {
     this.setState(
       Object.assign(changeItem, changeItem, {
-        [key]: value
-      })
+        [key]: value,
+      }),
     );
   }
+
   collectionFun() {
-    let temporary = [];
-    for (let i = 0; i < this.state.userInfo.length; i++) {
-      if (this.state.userInfo[i].collection.isChoose) {
-        temporary.push(this.state.userInfo[i]);
+    const temporary = [];
+    const { userInfo } = this.state;
+    for (let i = 0; i < userInfo.length; i += 1) {
+      if (userInfo[i].collection.isChoose) {
+        temporary.push(userInfo[i]);
       }
     }
-    this.setState({ userInfo: sortingFun(temporary, "date") });
+    this.setState({ userInfo: sortingFun(temporary, 'date') });
   }
+
   handleClickAction(dataName, stateId) {
-    this.props.dispatch({
-      type: "CHANGE_ARTICLE",
+    const propsObj = this.props;
+    propsObj.dispatch({
+      type: 'CHANGE_ARTICLE',
       dataNumber: stateId,
-      dataName: dataName
+      dataName,
     });
-    if (dataName === "collection") {
+    if (dataName === 'collection') {
       this.collectionFun();
     }
     // data来源于state
@@ -73,91 +106,88 @@ class UserArticle extends React.Component {
     //   this.changeItemFun(changeItem[dataName], "isChoose", true);
     // }
   }
+
   handleClickNav(displayName) {
-    if (displayName === "hot") {
-      this.setState({ userInfo: sortingFun(this.state.userInfo, "givelike") });
-    } else if (displayName === "myCollection") {
+    const { userInfo } = this.state;
+    if (displayName === 'hot') {
+      this.setState({ userInfo: sortingFun(userInfo, 'givelike') });
+    } else if (displayName === 'myCollection') {
       this.collectionFun();
     } else {
-      this.setState({ userInfo: sortingFun(this.state.userInfo, "date") });
+      this.setState({ userInfo: sortingFun(userInfo, 'date') });
     }
     this.setState({ displayList: displayName });
     this.setState({ pageNum: 0 });
   }
+
   handleClickLink(idNumber, indexNUmber) {
-    this.props.history.push(`/readArticle?id=${idNumber}&index=${indexNUmber}`);
+    const propsObj = this.props;
+    propsObj.history.push(`/readArticle?id=${idNumber}&index=${indexNUmber}`);
   }
+
   handleClickShare(number) {
-    setTimeout(this.state.timeShare);
-    const temporary = this["span" + number].getBoundingClientRect();
+    const { timeShare } = this.state;
+    setTimeout(timeShare);
+    const temporary = this[`span${number}`].getBoundingClientRect();
     this.setState({
       fixedShare: {
-        top: parseInt(temporary.y) - 4,
-        left: parseInt(temporary.x)
-      }
+        top: parseInt(temporary.y, 10) - 4,
+        left: parseInt(temporary.x, 10),
+      },
     });
     this.setState({ chooseShare: number });
     this.setState({
       timeShare: setTimeout(() => {
         this.setState({ chooseShare: null });
         this.setState({ fixedShare: { top: 0, left: -100 } });
-      }, 1000)
+      }, 1000),
     });
   }
+
   handleClickGivelike(number) {
-    clearTimeout(this.state.timeGivelike);
+    const { timeGivelike } = this.state;
+    if (timeGivelike) {
+      clearTimeout(timeGivelike);
+    }
     this.setState({ chooseGivelike: number });
     this.setState({
       timeGivelike: setTimeout(() => {
         this.setState({ chooseGivelike: null });
-      }, 200)
+      }, 200),
     });
   }
+
   changePage(pageNum) {
-    sessionStorage.setItem("pageNum", pageNum);
-    this.setState({ pageNum: pageNum });
+    sessionStorage.setItem('pageNum', pageNum);
+    this.setState({ pageNum });
   }
-  static getDerivedStateFromProps(nextProps, prevState) {
-    // 这样实现有违 getDerivedStateFromProps 初衷
-    // if (prevState.displayList === "hot") {
-    //   return { userInfo: sortingFun(prevState.userInfo, "givelike") };
-    // }
-    // if (prevState.displayList !== "hot") {
-    //   return { userInfo: sortingFun(prevState.userInfo, "date") };
-    // }
-    if (
-      nextProps.articleStore.length !== prevState.userInfo.length &&
-      prevState.displayList !== "myCollection"
-    ) {
-      if (prevState.displayList === "hot") {
-        return { userInfo: sortingFun(nextProps.articleStore, "givelike") };
-      } else {
-        return { userInfo: sortingFun(nextProps.articleStore, "date") };
-      }
-    }
-    return null;
-  }
-  componentWillUnmount() {
-    clearTimeout(this.state.timeShare);
-    clearTimeout(this.state.timeGivelike);
-  }
+
   render() {
-    const language = this.props.languageStore.language.userArticle;
-    const temporaryArr = this.state.userInfo;
-    const temporary = temporaryArr.slice(
-      this.state.pageNum * 8,
-      this.state.pageNum * 8 + 8
-    );
+    const {
+      displayList,
+      userInfo,
+      pageNum,
+      contentNav,
+      chooseShare,
+      chooseGivelike,
+      fixedShare,
+    } = this.state;
+    const propsObj = this.props;
+    const language = propsObj.languageStore.language.userArticle;
+    const temporary = userInfo.slice(pageNum * 8, pageNum * 8 + 8);
     return (
       <div className="djm-index-content">
         <ul className="djm-index-content-nav clearfloat">
-          {this.state.contentNav.map(item => (
+          {contentNav.map(item => (
             <li
               key={item}
               onClick={event => this.handleClickNav(item, event)}
-              className={
-                this.state.displayList === item ? "choose-class" : null
-              }
+              onKeyDown={event => this.handleClickNav(item, event)}
+              /* eslint-disable */
+              role="button"
+              /* eslint-enable */
+              tabIndex={0}
+              className={displayList === item ? 'choose-class' : null}
             >
               {language[item]}
               <span className="under-line" />
@@ -168,30 +198,30 @@ class UserArticle extends React.Component {
         <UserArticleList
           {...this.props}
           userInfo={temporary}
-          uesrArr={temporaryArr}
+          uesrArr={userInfo}
           handleClickAction={this.handleClickAction}
           changePage={this.changePage}
           language={language}
-          displayList={this.state.displayList}
+          displayList={displayList}
           handleClickLink={this.handleClickLink}
           handleClickShare={this.handleClickShare}
-          chooseShare={this.state.chooseShare}
-          shareRef={index => ele => {
+          chooseShare={chooseShare}
+          shareRef={index => (ele) => {
             this[index] = ele;
           }}
           handleClickGivelike={this.handleClickGivelike}
-          givelikeRef={index => ele => {
+          givelikeRef={index => (ele) => {
             this[index] = ele;
           }}
-          chooseGivelike={this.state.chooseGivelike}
+          chooseGivelike={chooseGivelike}
         />
         {/* <span className="separated-line" />
         </ul> */}
         <i
           className={`share-animation iconfont icon-plane ${
-            this.state.chooseShare !== null ? "click-share" : ""
+            chooseShare !== null ? 'click-share' : ''
           }`}
-          style={this.state.fixedShare}
+          style={fixedShare}
         />
         {/* {temporary.length === 0 ? null : (
           <Paging
@@ -205,7 +235,7 @@ class UserArticle extends React.Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return state;
 }
 

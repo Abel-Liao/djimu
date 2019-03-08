@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 
-import Routers from "./router";
+import Routers from './router';
 
-class Webpage extends Component {
+function Webpage() {
   // constructor(props) {
   //   super(props);
   //   this.state = {
@@ -18,18 +18,16 @@ class Webpage extends Component {
   //   }
   //   return null;
   // }
-  render() {
-    return (
-      <React.Fragment>
-        <Router>
-          <Routers />
-        </Router>
-      </React.Fragment>
-    );
-  }
+  return (
+    <React.Fragment>
+      <Router>
+        <Routers />
+      </Router>
+    </React.Fragment>
+  );
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return state;
 }
 

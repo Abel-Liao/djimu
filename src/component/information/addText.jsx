@@ -1,16 +1,19 @@
-import React from "react";
+import React from 'react';
 
 function AddText(props) {
+  const propsObj = props;
+  const { language, title, index } = propsObj;
   return (
-    <p
-      onClick={event =>
-        props.handleClickChange(props.title, props.index, false, event)
-      }
+    <span
+      onClick={event => propsObj.handleClickChange(title, index, false, event)}
+      onKeyDown={event => propsObj.handleClickChange(title, index, false, event)}
+      role="button"
+      tabIndex={0}
       className="djm-information-add"
     >
       <span className="djm-information-addButton">+</span>
-      {props.language.addText}
-    </p>
+      {language.addText}
+    </span>
   );
 }
 export default AddText;

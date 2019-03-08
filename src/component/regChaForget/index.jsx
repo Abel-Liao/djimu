@@ -1,27 +1,19 @@
-import React from "react";
+import React from 'react';
 
-import PublicForm from "../withSubscription/publicForm";
+import PublicForm from '../withSubscription/publicForm';
 
 function ChangePaw(props) {
-  return (
-    <PublicForm
-      data={["email", "password", "newPassword"]}
-      pageName="changepaw"
-      {...props}
-    />
-  );
+  return <PublicForm data={['email', 'password', 'newPassword']} pageName="changepaw" {...props} />;
 }
 
 function ForgetPaw(props) {
-  return (
-    <PublicForm data={["email", "dynamicCode"]} pageName="forget" {...props} />
-  );
+  return <PublicForm data={['email', 'dynamicCode']} pageName="forget" {...props} />;
 }
 
 function Register(props) {
   return (
     <PublicForm
-      data={["email", "password", "againPassword", "dynamicCode"]}
+      data={['email', 'password', 'againPassword', 'dynamicCode']}
       pageName="register"
       {...props}
     />

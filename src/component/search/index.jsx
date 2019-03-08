@@ -1,7 +1,7 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+import { connect } from 'react-redux';
 
-import "./search.css";
+import './search.css';
 
 class Search extends React.Component {
   constructor(props) {
@@ -10,40 +10,49 @@ class Search extends React.Component {
       chooseSearch: {
         destination: true,
         strategy: false,
-        group: false
+        group: false,
       },
-      displayName: "destinationDis"
+      displayName: 'destinationDis',
     };
     this.onClickSearch = this.onClickSearch.bind(this);
   }
+
   onClickSearch(searchName) {
-    this.setState({ displayName: searchName + "Dis" });
-    for (const key in this.state.chooseSearch) {
+    this.setState({ displayName: `${searchName}Dis` });
+    const { chooseSearch } = this.state;
+    /* eslint-disable */
+    for (const key in chooseSearch) {
       if (key === searchName) {
         this.setState(
-          Object.assign(this.state.chooseSearch, this.state.chooseSearch, {
-            [searchName]: true
-          })
+          Object.assign(chooseSearch, chooseSearch, {
+            [searchName]: true,
+          }),
         );
       } else {
         this.setState(
-          Object.assign(this.state.chooseSearch, this.state.chooseSearch, {
-            [key]: false
-          })
+          Object.assign(chooseSearch, chooseSearch, {
+            [key]: false,
+          }),
         );
       }
     }
+    /* eslint-enable */
   }
+
   render() {
-    const language = this.props.languageStore.language.indexSearch;
+    const { displayName, chooseSearch } = this.state;
+    const propsObj = this.props;
+    const language = propsObj.languageStore.language.indexSearch;
     return (
       <div className="djm-index-search">
         <ul className="djm-index-search-choose clearfloat">
           <li
-            className={
-              this.state.chooseSearch.destination ? "choose-search" : null
-            }
-            onClick={event => this.onClickSearch("destination", event)}
+            /* eslint-disable */
+            className={chooseSearch.destination ? 'choose-search' : null}
+            onClick={event => this.onClickSearch('destination', event)}
+            onKeyDown={event => this.onClickSearch('destination', event)}
+            role="button"
+            tabIndex={0}
           >
             <span className="choose-search-round">
               <i />
@@ -51,10 +60,11 @@ class Search extends React.Component {
             {language.destination}
           </li>
           <li
-            className={
-              this.state.chooseSearch.strategy ? "choose-search" : null
-            }
-            onClick={event => this.onClickSearch("strategy", event)}
+            className={chooseSearch.strategy ? 'choose-search' : null}
+            onClick={event => this.onClickSearch('strategy', event)}
+            onKeyDown={event => this.onClickSearch('strategy', event)}
+            role="button"
+            tabIndex={0}
           >
             <span className="choose-search-round">
               <i />
@@ -62,8 +72,12 @@ class Search extends React.Component {
             {language.strategy}
           </li>
           <li
-            className={this.state.chooseSearch.group ? "choose-search" : null}
-            onClick={event => this.onClickSearch("group", event)}
+            className={chooseSearch.group ? 'choose-search' : null}
+            onClick={event => this.onClickSearch('group', event)}
+            onKeyDown={event => this.onClickSearch('group', event)}
+            role="button"
+            tabIndex={0}
+            /* eslint-enable */
           >
             <span className="choose-search-round">
               <i />
@@ -72,14 +86,14 @@ class Search extends React.Component {
           </li>
         </ul>
         <div className="djm-index-search-input">
-          <input type="text" placeholder={language[this.state.displayName]} />
+          <input type="text" placeholder={language[displayName]} />
           <i className="iconfont icon-search" />
         </div>
       </div>
     );
   }
 }
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return state;
 }
 export default connect(mapStateToProps)(Search);

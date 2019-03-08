@@ -1,32 +1,51 @@
-import React from "react";
+import React from 'react';
 
-import Banner from "../../banner";
+import Banner from '../../banner';
 
 function ReadPageRight(props) {
+  const propsObj = props;
+  const {
+    scrollTop,
+    language,
+    wordCount,
+    imgCount,
+    mouseDis,
+    childHeight,
+    refScroll,
+    onMouseEnter,
+    ulStyle,
+    onMouseLeave,
+    h2Elevator,
+  } = propsObj;
   return (
-    <div
-      className={`djm-readpage-content-right ${
-        props.scrollTop > 556 ? "right-fixed" : ""
-      }`}
-    >
+    <div className={`djm-readpage-content-right ${scrollTop > 556 ? 'right-fixed' : ''}`}>
       <div className="djm-rcr-top">
-        {props.language.words}
-        <span> {props.wordCount} </span>
-        {props.language.and}
-        <span> {props.imgCount.length} </span>
-        {props.language.pictures}
+        {language.words}
+        <span>
+          {' '}
+          {wordCount}
+          {' '}
+        </span>
+        {language.and}
+        <span>
+          {' '}
+          {imgCount.length}
+          {' '}
+        </span>
+        {language.pictures}
       </div>
-      <div className="djm-rcr-banner" onClick={props.handleClickLookImg}>
-        <Banner
-          bannerUrl={props.imgCount}
-          dots={false}
-          switchTime={2000}
-          {...props}
-        />
+      <div
+        className="djm-rcr-banner"
+        onClick={propsObj.handleClickLookImg}
+        onKeyDown={propsObj.handleClickLookImg}
+        role="button"
+        tabIndex={0}
+      >
+        <Banner bannerUrl={imgCount} dots={false} switchTime={2000} {...props} />
       </div>
       {/* <div className="djm-rcr-elevator" onScroll={props.onScrollHeight}> */}
       <div className="djm-rcr-elevator">
-        <h3>{props.language.directory}</h3>
+        <h3>{language.directory}</h3>
         <div className="djm-rcr-elevator-div">
           {/* <p
             className={`djm-rcr-elevator-scroll ${
@@ -37,21 +56,26 @@ function ReadPageRight(props) {
           </p> */}
           <p
             className={`iconfont icon-mouse djm-rcr-elevator-mouse ${
-              props.childHeight > 500 && props.mouseDis ? "mouse-display" : ""
+              childHeight > 500 && mouseDis ? 'mouse-display' : ''
             }`}
           />
           <ul
             className="djm-rcr-elevator-ul"
-            ref={props.refScroll}
-            onMouseEnter={props.onMouseEnter}
-            style={props.ulStyle}
-            onMouseLeave={props.onMouseLeave}
+            ref={refScroll}
+            onMouseEnter={onMouseEnter}
+            style={ulStyle}
+            onMouseLeave={onMouseLeave}
           >
-            {props.h2Elevator.map((item, index) => (
+            {h2Elevator.map((item, index) => (
               <li
-                className={props.elevatorNum === index ? "choose-elevator" : ""}
-                key={index}
-                onClick={event => props.handleClickElevator(item.index, event)}
+                /* eslint-disable */
+                className={propsObj.elevatorNum === index ? 'choose-elevator' : ''}
+                key={item.index}
+                onClick={event => propsObj.handleClickElevator(item.index, event)}
+                onKeyDown={event => propsObj.handleClickElevator(item.index, event)}
+                role="button"
+                tabIndex={0}
+                /* eslint-enable */
               >
                 <span>
                   <i />

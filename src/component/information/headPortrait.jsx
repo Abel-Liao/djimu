@@ -1,18 +1,14 @@
-import React from "react";
+import React from 'react';
 
 function HeadPortrait(props) {
+  const propsObj = props;
+  const { headPortraitUrl, handleChangeImg, language } = propsObj;
   return (
     <div className="djm-information-userImg">
-      <img src={props.headPortraitUrl} alt="" />
+      <img src={headPortraitUrl} alt="" />
       <span className="djm-information-head-portrait iconfont icon-camera">
-        <span className="djm-information-hp-text">
-          {props.language.changePortrait}
-        </span>
-        <input
-          onChange={props.handleChangeImg}
-          type="file"
-          accept="image/png, image/jpeg"
-        />
+        <span className="djm-information-hp-text">{language.changePortrait}</span>
+        <input onChange={handleChangeImg} type="file" accept="image/png, image/jpeg" />
       </span>
     </div>
   );

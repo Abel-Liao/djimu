@@ -1,11 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import "./animation.css";
+import './animation.css';
 
-class Animation extends React.Component {
-  render() {
-    return <div className="djm-animation" />;
-  }
+function Animation() {
+  return <div className="djm-animation" />;
 }
 
 export default Animation;

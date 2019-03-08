@@ -28,7 +28,7 @@ li.choose-search i::before {
   font-size: 16px;
   padding-left: 10px;
   border-radius: 5px;
-  border-color: #e51a48;
+  border: 2px solid #e51a48;
   color: #666;
   background: none;
   margin-top: 10px;

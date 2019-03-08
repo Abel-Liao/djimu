@@ -1,31 +1,39 @@
-import React from "react";
+import React from 'react';
 
 function EmailPaw(props) {
+  const propsObj = props;
+  const { userInfo, language } = propsObj;
   return (
     <label className="djm-login-userpaw" htmlFor="userPassword">
       <input
         id="userPassword"
-        value={props.userInfo.password}
+        value={userInfo.password}
         autoComplete="off"
         type="password"
-        placeholder={props.language.password}
+        placeholder={language.password}
         // ref="password"
-        onChange={event => props.changeInput("password", event)}
-        onBlur={event => props.handleOnBlur("password", event)}
+        onChange={event => propsObj.changeInput('password', event)}
+        onBlur={event => propsObj.handleOnBlur('password', event)}
       />
       <span
-        onClick={e => props.clearAll("password", e)}
-        className={`clear-all-value ${
-          props.userInfo.password ? "display" : null
-        }`}
+        onClick={e => propsObj.clearAll('password', e)}
+        onKeyDown={e => propsObj.clearAll('password', e)}
+        role="button"
+        tabIndex={0}
+        className={`clear-all-value ${userInfo.password ? 'display' : null}`}
+        /* eslint-disable */
       >
         x
       </span>
       <span
+        /* eslint-enable */
         className="djm-login-forget"
-        onClick={event => props.handleClickJump("forget", event)}
+        onClick={event => propsObj.handleClickJump('forget', event)}
+        onKeyDown={event => propsObj.handleClickJump('forget', event)}
+        role="button"
+        tabIndex={0}
       >
-        {props.language.forgetPaw}
+        {language.forgetPaw}
       </span>
     </label>
   );

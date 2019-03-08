@@ -1,21 +1,19 @@
-import React from "react";
+import React from 'react';
 
-import Banner from "../../banner";
+import Banner from '../../banner';
 
 function LookImg(props) {
+  const { handleClickLookImg, imgCount } = props;
   return (
     <div className="djm-look-img">
       <span
         className="djm-look-img-close iconfont icon-close"
-        onClick={props.handleClickLookImg}
+        onClick={handleClickLookImg}
+        onKeyDown={handleClickLookImg}
+        role="button"
+        tabIndex={0}
       />
-      <Banner
-        bannerUrl={props.imgCount}
-        loop={false}
-        dots={false}
-        toggleButton={true}
-        {...props}
-      />
+      <Banner bannerUrl={imgCount} loop={false} dots={false} toggleButton {...props} />
     </div>
   );
 }

@@ -100,7 +100,7 @@
 .djm-login-dynamicCode input {
   width: 125px;
 }
-.djm-login-dynamicCode p {
+.countdown {
   float: right;
   height: 35;
   width: 120px;
@@ -111,7 +111,7 @@
   cursor: pointer;
   color: #fff;
 }
-.djm-login-dynamicCode p.dont-click {
+.countdown.dont-click {
   background: #444;
 }
 .djm-login-from .djm-login-dynamicCode span {

@@ -1,7 +1,7 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+import { connect } from 'react-redux';
 
-import "./banner.css";
+import './banner.css';
 
 class Banner extends React.Component {
   constructor(props) {
@@ -9,132 +9,161 @@ class Banner extends React.Component {
     this.state = {
       bannerIndex: 0,
       bannerTime: null,
-      dots: props.dots === false ? props.dots : true,
-      loop: props.loop === false ? props.loop : true,
-      switchTime: props.switchTime ? props.switchTime : 3000,
-      toggleButton: props.toggleButton ? props.toggleButton : false,
       ulTransform: 0,
       ulStyle: {
-        width: props.bannerUrl ? props.bannerUrl.length * 100 + "%" : null,
-        transform: "translateX(0)"
+        width: null,
+        transform: 'translateX(0)',
       },
       liStyle: {
-        width: props.bannerUrl ? 100 / props.bannerUrl.length + "%" : null
+        width: null,
       },
-      bannerUrl: props.bannerUrl
-        ? props.bannerUrl
-        : [
-            require("./images/index_banner1.jpg"),
-            require("./images/index_banner2.jpg"),
-            require("./images/index_banner3.jpg"),
-            require("./images/index_banner4.jpg")
-          ]
+      bannerUrl: [
+        require('./images/index_banner1.jpg'),
+        require('./images/index_banner2.jpg'),
+        require('./images/index_banner3.jpg'),
+        require('./images/index_banner4.jpg'),
+      ],
     };
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
     this.bannerFun = this.bannerFun.bind(this);
     this.handleClcikNP = this.handleClcikNP.bind(this);
   }
-  bannerFun() {
-    this.setState({
-      bannerTime: setInterval(() => {
-        this.setState({
-          bannerIndex:
-            this.state.bannerIndex + 1 > this.state.bannerUrl.length - 1
-              ? 0
-              : this.state.bannerIndex + 1
-        });
-      }, this.state.switchTime)
-    });
-  }
-  handleMouseEnter(index) {
-    clearInterval(this.state.bannerTime);
-    this.setState({ bannerIndex: index });
-  }
-  handleMouseLeave() {
-    if (this.state.loop) {
-      this.bannerFun();
-    }
-  }
-  handleClcikNP(number) {
-    this.setState(
-      {
-        ulTransform: this.state.ulTransform + (number ? 1 : -1)
-      },
-      () =>
-        this.setState({
-          ulStyle: {
-            width: this.props.bannerUrl
-              ? this.props.bannerUrl.length * 100 + "%"
-              : null,
-            transform: `translateX(${this.state.ulTransform *
-              (100 / this.props.bannerUrl.length)}%)`
-          }
-        })
-    );
-  }
+
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.bannerUrl !== prevState.bannerUrl && nextProps.bannerUrl) {
       return { bannerUrl: nextProps.bannerUrl };
     }
     return null;
   }
+
   componentDidMount() {
-    if (this.state.loop) {
+    const propsObj = this.props;
+    const loop = propsObj.loop !== undefined ? propsObj.loop : true;
+    if (loop) {
+      this.bannerFun();
+    }
+    if (propsObj.bannerUrl !== undefined) {
+      this.setState({ bannerUrl: propsObj.bannerUrl });
+      const ulStyleWidth = `${propsObj.bannerUrl.length * 100}%`;
+      const liStyleWidth = `${100 / propsObj.bannerUrl.length}%`;
+      this.setState({
+        ulStyle: {
+          width: ulStyleWidth,
+          transform: 'translateX(0)',
+        },
+      });
+      this.setState({
+        liStyle: { width: liStyleWidth },
+      });
+    }
+  }
+
+  componentWillUnmount() {
+    const { bannerTime } = this.state;
+    clearInterval(bannerTime);
+  }
+
+  bannerFun() {
+    const propsObj = this.props;
+    const switchTime = propsObj.switchTime !== undefined ? propsObj.switchTime : 3000;
+    this.setState({
+      bannerTime: setInterval(() => {
+        const { bannerIndex, bannerUrl } = this.state;
+        this.setState({
+          bannerIndex: bannerIndex + 1 > bannerUrl.length - 1 ? 0 : bannerIndex + 1,
+        });
+      }, switchTime),
+    });
+  }
+
+  handleMouseEnter(index) {
+    const { bannerTime } = this.state;
+    clearInterval(bannerTime);
+    this.setState({ bannerIndex: index });
+  }
+
+  handleMouseLeave() {
+    const propsObj = this.props;
+    const loop = propsObj.loop !== undefined ? propsObj.loop : true;
+    if (loop) {
       this.bannerFun();
     }
   }
-  componentWillUnmount() {
-    clearInterval(this.state.bannerTime);
+
+  handleClcikNP(number) {
+    const { ulTransform } = this.state;
+    this.setState(
+      {
+        ulTransform: ulTransform + (number ? 1 : -1),
+      },
+      () => {
+        const propsObj = this.props;
+        this.setState({
+          ulStyle: {
+            width: propsObj.bannerUrl ? `${propsObj.bannerUrl.length * 100}%` : null,
+            /* eslint-disable */
+            transform: `translateX(${this.state.ulTransform * (100 / propsObj.bannerUrl.length)}%)`,
+            /* eslint-enable */
+          },
+        });
+      },
+    );
   }
+
   render() {
+    const {
+      ulStyle, liStyle, bannerIndex, bannerUrl, ulTransform,
+    } = this.state;
+    const propsObj = this.props;
+    const toggleButton = propsObj.toggleButton !== undefined ? propsObj.toggleButton : false;
+    const dots = propsObj.dots !== undefined ? propsObj.dots : true;
     return (
       <div className="djm-banner">
         <ul
-          className={`djm-banner-img ${
-            this.state.toggleButton ? "img-float clearfloat" : "img-pos"
-          }`}
-          style={this.state.toggleButton ? this.state.ulStyle : null}
+          className={`djm-banner-img ${toggleButton ? 'img-float clearfloat' : 'img-pos'}`}
+          style={toggleButton ? ulStyle : null}
         >
-          {this.state.bannerUrl.map((url, index) => (
+          {bannerUrl.map((url, index) => (
             <li
-              key={index}
-              className={
-                this.state.bannerIndex === index ? "djm-ibi-display" : null
-              }
-              style={this.state.toggleButton ? this.state.liStyle : null}
+              key={url}
+              className={bannerIndex === index ? 'djm-ibi-display' : null}
+              style={toggleButton ? liStyle : null}
             >
               <img src={url} alt="banner" />
             </li>
           ))}
         </ul>
-        {this.state.dots ? (
+        {dots ? (
           <ul className="djm-banner-indicator clearfloat">
-            {this.state.bannerUrl.map((url, index) => (
+            {bannerUrl.map((url, index) => (
               <li
                 onMouseEnter={enve => this.handleMouseEnter(index, enve)}
                 onMouseLeave={enve => this.handleMouseLeave(index, enve)}
-                key={index}
-                className={
-                  this.state.bannerIndex === index ? "djm-ibi-choose" : null
-                }
+                key={url}
+                className={bannerIndex === index ? 'djm-ibi-choose' : null}
               />
             ))}
           </ul>
         ) : null}
-        {!this.state.toggleButton ? null : (
+        {!toggleButton ? null : (
           <React.Fragment>
-            {this.state.ulTransform >= 0 ? null : (
+            {ulTransform >= 0 ? null : (
               <span
                 className="djm-banner-prev iconfont icon-previous"
                 onClick={event => this.handleClcikNP(true, event)}
+                onKeyDown={event => this.handleClcikNP(true, event)}
+                role="button"
+                tabIndex={0}
               />
             )}
-            {this.state.ulTransform <=
-            -this.props.bannerUrl.length + 1 ? null : (
+            {ulTransform <= -propsObj.bannerUrl.length + 1 ? null : (
               <span
                 className="djm-banner-next iconfont icon-next"
                 onClick={event => this.handleClcikNP(false, event)}
+                onKeyDown={event => this.handleClcikNP(false, event)}
+                role="button"
+                tabIndex={0}
               />
             )}
           </React.Fragment>
@@ -143,7 +172,7 @@ class Banner extends React.Component {
     );
   }
 }
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return state;
 }
 export default connect(mapStateToProps)(Banner);

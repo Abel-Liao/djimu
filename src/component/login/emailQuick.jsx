@@ -1,34 +1,42 @@
-import React from "react";
+import React from 'react';
 
 function EmailQuick(props) {
+  const propsObj = props;
+  const {
+    userInfo, language, changeInput, handleOnBlur, codeNumber, dynamicCode,
+  } = propsObj;
   return (
     <label className="djm-login-dynamicCode" htmlFor="DynamicCode">
       <input
         id="DynamicCode"
-        value={props.userInfo.dynamicCode}
+        value={userInfo.dynamicCode}
         autoComplete="off"
         type="text"
-        placeholder={props.language.dynamicCode}
+        placeholder={language.dynamicCode}
         // ref="dynamicCode"
-        onChange={props.changeInput.bind(this, "dynamicCode")}
-        onBlur={props.handleOnBlur.bind(this, "dynamicCode")}
+        onChange={changeInput.bind(this, 'dynamicCode')}
+        onBlur={handleOnBlur.bind(this, 'dynamicCode')}
       />
       <span
-        onClick={e => props.clearAll("dynamicCode", e)}
-        className={`clear-all-value ${
-          props.userInfo.dynamicCode ? "display" : null
-        }`}
+        onClick={e => propsObj.clearAll('dynamicCode', e)}
+        onKeyDown={e => propsObj.clearAll('dynamicCode', e)}
+        role="button"
+        tabIndex={0}
+        className={`clear-all-value ${userInfo.dynamicCode ? 'display' : null}`}
+        /* eslint-disable */
       >
         x
       </span>
-      <p
-        className={props.codeNumber === 60 ? null : "dont-click"}
-        onClick={props.dynamicCode}
+      <span
+        /* eslint-enable */
+        className={codeNumber === 60 ? 'countdown' : 'countdown dont-click'}
+        onClick={dynamicCode}
+        onKeyDown={dynamicCode}
+        role="button"
+        tabIndex={0}
       >
-        {props.codeNumber === 60
-          ? props.language.sendDynamicCode
-          : props.codeNumber + " S"}
-      </p>
+        {codeNumber === 60 ? language.sendDynamicCode : `${codeNumber} S`}
+      </span>
     </label>
   );
 }

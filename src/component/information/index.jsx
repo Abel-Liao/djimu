@@ -1,41 +1,41 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+import { connect } from 'react-redux';
 
-import HeadPortrait from "./headPortrait";
-import AddText from "./addText";
-import UserText from "./userText";
-import ChangeText from "./changeText";
+import HeadPortrait from './headPortrait';
+import AddText from './addText';
+import UserText from './userText';
+import ChangeText from './changeText';
 
-import "./information.css";
+import './information.css';
 
-import firstImg from "./images/logo.png";
+import firstImg from './images/logo.png';
 
 class Information extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: props.loginStore.userName || sessionStorage.getItem("userName"),
+      userName: props.loginStore.userName || sessionStorage.getItem('userName'),
       isChangeName: false,
-      newUserName: "",
+      newUserName: '',
       changeInfo: {
         email: true,
         describeYourself: true,
         wantPlace: true,
-        impressionPlace: true
+        impressionPlace: true,
       },
       headPortraitUrl: firstImg,
       userInfoArr: [
-        { title: "email", content: "sdas@adas.com" },
-        { title: "describeYourself", content: "abcdefg" },
-        { title: "wantPlace", content: "西藏" },
-        { title: "impressionPlace", content: "" }
+        { title: 'email', content: 'sdas@adas.com' },
+        { title: 'describeYourself', content: 'abcdefg' },
+        { title: 'wantPlace', content: '西藏' },
+        { title: 'impressionPlace', content: '' },
       ],
       oldInfoArr: [
-        { title: "email", content: "sdas@adas.com" },
-        { title: "describeYourself", content: "abcdefg" },
-        { title: "wantPlace", content: "西藏" },
-        { title: "impressionPlace", content: "" }
-      ]
+        { title: 'email', content: 'sdas@adas.com' },
+        { title: 'describeYourself', content: 'abcdefg' },
+        { title: 'wantPlace', content: '西藏' },
+        { title: 'impressionPlace', content: '' },
+      ],
     };
     this.handleClickChange = this.handleClickChange.bind(this);
     this.handleChangeImg = this.handleChangeImg.bind(this);
@@ -46,110 +46,125 @@ class Information extends React.Component {
     this.handleClickNameButton = this.handleClickNameButton.bind(this);
     this.handleChangeUser = this.handleChangeUser.bind(this);
   }
+
   changeObjectFun(stateName, key, value, stateIndex) {
     this.setState(
-      Object.assign(
-        this.state[stateName][stateIndex],
-        this.state[stateName][stateIndex],
-        {
-          [key]: value
-        }
-      )
+      /* eslint-disable */
+      Object.assign(this.state[stateName][stateIndex], this.state[stateName][stateIndex], {
+        [key]: value,
+      }),
+      /* eslint-enable */
     );
   }
+
   handleClickChange(changeName, changeIndex, isCancel) {
+    const { changeInfo } = this.state;
     this.setState(
-      Object.assign(this.state.changeInfo, this.state.changeInfo, {
-        [changeName]: !this.state.changeInfo[changeName]
+      Object.assign(changeInfo, changeInfo, {
+        [changeName]: !changeInfo[changeName],
       }),
       () => {
+        const { oldInfoArr } = this.state;
+        /* eslint-disable */
         if (this.state.changeInfo[changeName] && isCancel) {
+          /* eslint-enable */
           this.changeObjectFun(
-            "userInfoArr",
-            "content",
-            this.state.oldInfoArr[changeIndex].content,
-            changeIndex
+            'userInfoArr',
+            'content',
+            oldInfoArr[changeIndex].content,
+            changeIndex,
           );
         }
-      }
+      },
     );
   }
+
   handleClickSure(changeName, changeIndex, element) {
-    this.changeObjectFun("userInfoArr", "content", element.value, changeIndex);
-    this.changeObjectFun("oldInfoArr", "content", element.value, changeIndex);
+    this.changeObjectFun('userInfoArr', 'content', element.value, changeIndex);
+    this.changeObjectFun('oldInfoArr', 'content', element.value, changeIndex);
   }
+
   handleChangeValue(changeIndex, event) {
-    this.changeObjectFun(
-      "userInfoArr",
-      "content",
-      event.target.value,
-      changeIndex
-    );
+    this.changeObjectFun('userInfoArr', 'content', event.target.value, changeIndex);
   }
+
   handleChangeImg(event) {
     const fileReader = new FileReader();
     const temporary = event.target.files[0];
     if (
-      (temporary.type === "image/jpeg" ||
-        temporary.type === "image/png" ||
-        temporary.type === "image/jpg") &&
-      parseInt(temporary.size / 1024) < 1024
+      (temporary.type === 'image/jpeg'
+        || temporary.type === 'image/png'
+        || temporary.type === 'image/jpg')
+      && parseInt(temporary.size / 1024, 10) < 1024
     ) {
       fileReader.readAsDataURL(temporary);
-      fileReader.onload = event => {
+      fileReader.onload = () => {
         this.setState({ headPortraitUrl: event.target.result });
       };
     } else {
-      console.log("图片太大，或者格式不正确");
-      return;
+      console.log('图片太大，或者格式不正确');
     }
   }
+
   handleClickUserName() {
-    this.setState({ isChangeName: !this.state.isChangeName });
+    const { isChangeName } = this.state;
+    this.setState({ isChangeName: !isChangeName });
   }
+
   handleChangeUser(event) {
     this.setState({ newUserName: event.target.value });
   }
-  handleClickNameButton(isSure, event) {
+
+  handleClickNameButton(isSure) {
+    const { newUserName, isChangeName } = this.state;
     if (isSure) {
-      const newUserName = this.state.newUserName;
-      sessionStorage.setItem("userName", newUserName);
-      this.props.dispatch({
-        type: "USER_NAME",
-        data: newUserName
+      const propsObj = this.props;
+      sessionStorage.setItem('userName', newUserName);
+      propsObj.dispatch({
+        type: 'USER_NAME',
+        data: newUserName,
       });
       this.setState({ userName: newUserName });
-      this.setState({ isChangeName: !this.state.isChangeName });
+      this.setState({ isChangeName: !isChangeName });
     } else {
-      this.setState({ isChangeName: !this.state.isChangeName });
+      this.setState({ isChangeName: !isChangeName });
     }
   }
-  static getDerivedStateFromProps(nextProps, prevState) {
-    return null;
-  }
+
   render() {
-    const language = this.props.languageStore.language.information;
+    const propsObj = this.props;
+    const language = propsObj.languageStore.language.information;
+    const {
+      headPortraitUrl,
+      isChangeName,
+      userName,
+      userInfoArr,
+      changeInfo,
+    } = this.state;
     return (
       <div className="djm-information">
         <div className="djm-information-main">
           <div className="djm-information-top">
-            <img src={require("./images/top_img.jfif")} alt="img" />
+            <img src={require('./images/top_img.jfif')} alt="img" />
           </div>
           <div className="djm-information-content">
             <HeadPortrait
               handleChangeImg={this.handleChangeImg}
-              headPortraitUrl={this.state.headPortraitUrl}
+              headPortraitUrl={headPortraitUrl}
               language={language}
               {...this.props}
             />
             <div className="djm-information-userName">
               <h2 className="djm-information-userName-h2">
-                {!this.state.isChangeName ? (
+                {!isChangeName ? (
                   <React.Fragment>
-                    {this.state.userName}
+                    {userName}
                     <span
                       className="djm-information-change"
                       onClick={this.handleClickUserName}
+                      onKeyDown={this.handleClickUserName}
+                      role="button"
+                      tabIndex={0}
                     >
                       <i className="iconfont icon-pen" />
                       {language.changeText}
@@ -164,14 +179,18 @@ class Information extends React.Component {
                     />
                     <span
                       onClick={event => this.handleClickNameButton(true, event)}
+                      onKeyDown={event => this.handleClickNameButton(true, event)}
+                      role="button"
+                      tabIndex={0}
                       className="djm-information-sure"
                     >
                       {language.changeSure}
                     </span>
                     <span
-                      onClick={event =>
-                        this.handleClickNameButton(false, event)
-                      }
+                      onClick={event => this.handleClickNameButton(false, event)}
+                      onKeyDown={event => this.handleClickNameButton(false, event)}
+                      role="button"
+                      tabIndex={0}
                       className="djm-information-cancel"
                     >
                       {language.changeCancel}
@@ -180,11 +199,11 @@ class Information extends React.Component {
                 )}
               </h2>
               <ul className="djm-information-userInfoList">
-                {this.state.userInfoArr.map((item, index) => (
-                  <li key={index}>
+                {userInfoArr.map((item, index) => (
+                  /* eslint-disable */
+                  <li key={item.title}>
                     <b>{language[item.title]}</b>
-                    {item.content === "" &&
-                    this.state.changeInfo[item.title] ? (
+                    {item.content === '' && changeInfo[item.title] ? (
                       <AddText
                         {...this.props}
                         handleClickChange={this.handleClickChange}
@@ -192,7 +211,7 @@ class Information extends React.Component {
                         language={language}
                         index={index}
                       />
-                    ) : this.state.changeInfo[item.title] ? (
+                    ) : changeInfo[item.title] ? (
                       <UserText
                         {...this.props}
                         content={item.content}
@@ -214,6 +233,7 @@ class Information extends React.Component {
                       />
                     )}
                   </li>
+                  /* eslint-enable */
                 ))}
               </ul>
             </div>
@@ -224,7 +244,7 @@ class Information extends React.Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return state;
 }
 export default connect(mapStateToProps)(Information);

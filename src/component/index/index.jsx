@@ -1,11 +1,11 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+import { connect } from 'react-redux';
 
-import Banner from "../banner";
-import UserArticle from "../userArticle";
-import Search from "../search";
+import Banner from '../banner';
+import UserArticle from '../userArticle';
+import Search from '../search';
 
-import "./index.css";
+import './index.css';
 
 function Index(props) {
   return (
@@ -20,7 +20,7 @@ function Index(props) {
     </div>
   );
 }
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return state;
 }
 export default connect(mapStateToProps)(Index);

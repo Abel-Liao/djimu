@@ -1,17 +1,24 @@
-import React from "react";
+import React from 'react';
 
 function UserText(props) {
+  const propsObj = props;
+  const {
+    content, title, index, language,
+  } = propsObj;
   return (
     <React.Fragment>
-      <span>{props.content}</span>
+      <span>{content}</span>
       <span
-        onClick={event =>
-          props.handleClickChange(props.title, props.index, false, event)
-        }
+        /* eslint-disable */
+        onClick={event => propsObj.handleClickChange(title, index, false, event)}
+        onKeyDown={event => propsObj.handleClickChange(title, index, false, event)}
+        /* eslint-enable */
+        role="button"
+        tabIndex={0}
         className="djm-information-change"
       >
         <i className="iconfont icon-pen" />
-        {props.language.changeText}
+        {language.changeText}
       </span>
     </React.Fragment>
   );

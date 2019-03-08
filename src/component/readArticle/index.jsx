@@ -1,19 +1,19 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+import { connect } from 'react-redux';
 
-import dateFun from "../../public/date";
-import Banner from "../banner";
+import dateFun from '../../public/date';
+import Banner from '../banner';
 
-import ReadPageRight from "./readPageRight";
-import LookImg from "./lookImg";
+import ReadPageRight from './readPageRight';
+import LookImg from './lookImg';
 
-import "./readArticle.css";
+import './readArticle.css';
 
 class ReadArticle extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      articleNumber: props.location.search.split("&")[0].split("=")[1],
+      articleNumber: props.location.search.split('&')[0].split('=')[1],
       articleInfo: null,
       lookImg: false,
       wordCount: null,
@@ -22,6 +22,7 @@ class ReadArticle extends React.Component {
       elevatorNum: 0,
       scrollTop: 0,
       timeScroll: null,
+      /* eslint-disable */
       listenScroll: null,
       elementNode: null,
       ulClientHeight: null,
@@ -32,20 +33,21 @@ class ReadArticle extends React.Component {
       timerClicdH: null,
       ulNode: null,
       bannerUrl: [
-        require("./images/banner/read_banner1.jpg"),
-        require("./images/banner/read_banner2.jpg"),
-        require("./images/banner/read_banner3.jpg"),
-        require("./images/banner/read_banner4.jpg")
+        require('./images/banner/read_banner1.jpg'),
+        require('./images/banner/read_banner2.jpg'),
+        require('./images/banner/read_banner3.jpg'),
+        require('./images/banner/read_banner4.jpg'),
       ],
       scrollNumber: 0,
       stepNum: 0,
+      /* eslint-enable */
       // pStyle: {
       //   // height: "70%",
       //   transform: "translateY(0)"
       // },
       ulStyle: {
-        transform: "translateY(0)"
-      }
+        transform: 'translateY(0)',
+      },
     };
     this.handleClickCollection = this.handleClickCollection.bind(this);
     this.handleClickLookImg = this.handleClickLookImg.bind(this);
@@ -56,16 +58,51 @@ class ReadArticle extends React.Component {
     this.onMouseEnter = this.onMouseEnter.bind(this);
     this.onMouseLeave = this.onMouseLeave.bind(this);
   }
-  handleClickCollection() {
-    this.props.dispatch({
-      type: "CHANGE_ARTICLE",
-      dataNumber: this.props.location.search.split("&")[1].split("=")[1],
-      dataName: "collection",
-      dataValue: !this.state.articleInfo.collection.isChoose
+
+  componentDidMount() {
+    window.scrollTo(0, 0);
+    this.setState({ elementNode: this.childEle.children }, () => this.scrollFun());
+    window.addEventListener('scroll', this.handleScroll);
+    /* eslint-disable */
+    this.setState({
+      timerClicdH: setTimeout(() => {
+        this.setState({ childHeight: this.refScroll.scrollHeight });
+      }, 10),
     });
+    /* eslint-enable */
   }
-  handleClickLookImg() {
-    this.setState(state => ({ lookImg: !state.lookImg }));
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    // if (this.chooseContent(nextProps.articleStore) !== prevState.articleInfo) {
+    //   return { articleInfo: nextProps.articleStore[prevState.articleNumber] };
+    // }
+    /* eslint-disable */
+    const chooseContentFun = function(arr) {
+      let temporary = null;
+      for (let i = 0; i < arr.length; i += 1) {
+        if (arr[i].id === parseInt(prevState.articleNumber, 10)) {
+          return (temporary = arr[i]);
+        }
+      }
+      return temporary;
+      /* eslint-enable */
+    };
+    if (prevState.articleInfo === null) {
+      return { articleInfo: chooseContentFun(nextProps.articleStore) };
+    }
+    if (chooseContentFun(nextProps.articleStore) !== prevState.articleInfo) {
+      return { articleInfo: chooseContentFun(nextProps.articleStore) };
+    }
+    return null;
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+    // this.refScroll.removeEventListener("scroll", this.onScrollHeight);
+    const { timeScroll } = this.state;
+    if (timeScroll) {
+      clearInterval(timeScroll);
+    }
   }
 
   // 注释部分为自定义滚动条
@@ -137,148 +174,140 @@ class ReadArticle extends React.Component {
     // }
     this.setState(state => ({ mouseDis: !state.mouseDis }));
   }
+
   onMouseLeave() {
     // this.setState({ childHeight: 0 });
     this.setState(state => ({ mouseDis: !state.mouseDis }));
   }
+
+  handleClickLookImg() {
+    this.setState(state => ({ lookImg: !state.lookImg }));
+  }
+
+  handleClickCollection() {
+    const propsObj = this.props;
+    propsObj.dispatch({
+      type: 'CHANGE_ARTICLE',
+      dataNumber: propsObj.location.search.split('&')[1].split('=')[1],
+      dataName: 'collection',
+      dataValue: !propsObj.articleInfo.collection.isChoose,
+    });
+  }
+
   handleClickElevator(index) {
-    clearInterval(this.state.timeScroll);
-    let temporaryScroll =
-      document.body.scrollTop || document.documentElement.scrollTop;
-    const temporary = this.state.elementNode[index].offsetTop + 330;
+    const { timeScroll, elementNode } = this.state;
+    clearInterval(timeScroll);
+    let temporaryScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const temporary = elementNode[index].offsetTop + 330;
     this.setState({
       timeScroll: setInterval(() => {
         if (temporaryScroll < temporary) {
           temporaryScroll += 200;
           window.scrollTo(0, temporaryScroll);
           if (temporaryScroll >= temporary) {
+            /* eslint-disable */
             clearInterval(this.state.timeScroll);
+            /* eslint-enable */
           }
         } else {
           temporaryScroll -= 200;
           window.scrollTo(0, temporaryScroll);
           if (temporaryScroll <= temporary) {
+            /* eslint-disable */
             clearInterval(this.state.timeScroll);
+            /* eslint-enable */
           }
         }
-      }, 10)
+      }, 10),
     });
   }
+
   handleScroll() {
-    const temporary =
-      document.body.scrollTop || document.documentElement.scrollTop;
-    const temporaryH2 = this.state.h2Elevator;
-    const temporaryEle = this.state.elementNode;
-    for (let i = 0; i < temporaryH2.length - 1; i++) {
+    const temporary = document.body.scrollTop || document.documentElement.scrollTop;
+    const { h2Elevator, elementNode } = this.state;
+    for (let i = 0; i < h2Elevator.length - 1; i += 1) {
       if (
-        temporary >= temporaryEle[temporaryH2[i].index].offsetTop &&
-        temporary <= temporaryEle[temporaryH2[i + 1].index].offsetTop
+        temporary >= elementNode[h2Elevator[i].index].offsetTop
+        && temporary <= elementNode[h2Elevator[i + 1].index].offsetTop
       ) {
         this.setState({ elevatorNum: i });
       }
     }
     if (
-      temporaryH2.length > 0 &&
-      temporary >=
-        temporaryEle[temporaryH2[temporaryH2.length - 1].index].offsetTop
+      h2Elevator.length > 0
+      && temporary >= elementNode[h2Elevator[h2Elevator.length - 1].index].offsetTop
     ) {
-      this.setState({ elevatorNum: temporaryH2.length - 1 });
+      this.setState({ elevatorNum: h2Elevator.length - 1 });
     }
     this.setState({ scrollTop: temporary });
   }
+
   scrollFun() {
-    const temporary = this.state.elementNode;
+    const { elementNode } = this.state;
     let wordCount = 0;
-    let imgCount = [];
-    let h2Elevator = [];
-    for (let i = 0; i < temporary.length; i++) {
-      if (temporary[i].nodeName !== "IMG") {
-        if (temporary[i].nodeName === "H2") {
+    const imgCount = [];
+    const h2Elevator = [];
+    for (let i = 0; i < elementNode.length; i += 1) {
+      if (elementNode[i].nodeName !== 'IMG') {
+        if (elementNode[i].nodeName === 'H2') {
           h2Elevator.push({
-            content: temporary[i].innerText,
-            index: i
+            content: elementNode[i].innerText,
+            index: i,
           });
         }
-        wordCount += temporary[i].innerText.length;
+        wordCount += elementNode[i].innerText.length;
       } else {
-        imgCount.push(temporary[i].src);
+        imgCount.push(elementNode[i].src);
       }
     }
-    this.setState({ wordCount: wordCount });
-    this.setState({ imgCount: imgCount });
-    this.setState({ h2Elevator: h2Elevator });
+    this.setState({ wordCount });
+    this.setState({ imgCount });
+    this.setState({ h2Elevator });
   }
-  componentDidMount() {
-    window.scrollTo(0, 0);
-    this.setState({ elementNode: this.childEle.children }, () => {
-      return this.scrollFun();
-    });
-    window.addEventListener("scroll", this.handleScroll);
-    this.setState({
-      timerClicdH: setTimeout(() => {
-        this.setState({ childHeight: this.refScroll.scrollHeight });
-      }, 10)
-    });
-  }
-  getSnapshotBeforeUpdate(prevProps, prevState) {
-    return null;
-  }
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    return null;
-  }
-  static getDerivedStateFromProps(nextProps, prevState) {
-    // if (this.chooseContent(nextProps.articleStore) !== prevState.articleInfo) {
-    //   return { articleInfo: nextProps.articleStore[prevState.articleNumber] };
-    // }
-    const chooseContentFun = function(arr) {
-      let temporary = null;
-      for (let i = 0; i < arr.length; i++) {
-        if (arr[i].id === parseInt(prevState.articleNumber)) {
-          return (temporary = arr[i]);
-        }
-      }
-      return temporary;
-    };
-    if (prevState.articleInfo === null) {
-      return { articleInfo: chooseContentFun(nextProps.articleStore) };
-    }
-    if (chooseContentFun(nextProps.articleStore) !== prevState.articleInfo) {
-      return { articleInfo: chooseContentFun(nextProps.articleStore) };
-    }
-    return null;
-  }
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
-    // this.refScroll.removeEventListener("scroll", this.onScrollHeight);
-    clearInterval(this.state.timeScroll);
-  }
+
   render() {
-    const temporary = this.state.articleInfo;
-    const language = this.props.languageStore.language.readArticle;
+    const {
+      articleInfo,
+      bannerUrl,
+      wordCount,
+      imgCount,
+      h2Elevator,
+      elevatorNum,
+      scrollTop,
+      ulStyle,
+      childHeight,
+      mouseDis,
+      lookImg,
+    } = this.state;
+    const propsObj = this.props;
+    const language = propsObj.languageStore.language.readArticle;
     // console.log(this.state.ulClientHeight);
     return (
       <div className="djm-readPage">
         <div className="djm-readPage-banner">
-          <Banner bannerUrl={this.state.bannerUrl} {...this.props} />
+          <Banner bannerUrl={bannerUrl} {...this.props} />
         </div>
         <div className="djm-readPage-main">
           <div className="djm-readPage-header">
-            <img src={require("./images/user_img.jpg")} alt="Head portrait" />
+            <img src={require('./images/user_img.jpg')} alt="Head portrait" />
             <div className="title-author">
-              <h1>{temporary.title}</h1>
+              <h1>{articleInfo.title}</h1>
               <p>
-                <span className="article-author">{temporary.authorName}</span>
+                <span className="article-author">{articleInfo.authorName}</span>
                 <span className="focusOn-author">{language.focusOn}</span>
-                <span>{dateFun("2018-10-15", "YYYY-MM-DD")}</span>
+                <span>{dateFun('2018-10-15', 'YYYY-MM-DD')}</span>
                 <span className="iconfont icon-eyes">
                   {language.readNumber}
-                  {temporary.readNumber}
+                  {articleInfo.readNumber}
                 </span>
                 <span
                   className={`iconfont icon-collection ${
-                    temporary.collection.isChoose ? "collection-article" : null
+                    articleInfo.collection.isChoose ? 'collection-article' : null
                   }`}
                   onClick={this.handleClickCollection}
+                  onKeyDown={this.handleClickCollection}
+                  role="button"
+                  tabIndex={0}
                 >
                   {language.collection}
                 </span>
@@ -289,57 +318,59 @@ class ReadArticle extends React.Component {
           <ul className="djm-readPage-travel-info clearfloat">
             <li>
               <span>{language.time}</span>
-              {dateFun(temporary.date, "YYYY-MM-DD")}
+              {dateFun(articleInfo.date, 'YYYY-MM-DD')}
             </li>
             <li>
               <span>{language.days}</span>
-              {temporary.days}
+              {articleInfo.days}
               {language.dayUnit}
             </li>
             <li>
               <span>{language.peoples}</span>
-              {temporary.peoples}
+              {articleInfo.peoples}
               {language.PeopleUnit}
             </li>
             <li>
               <span>{language.money}</span>
-              {temporary.cost}
+              {articleInfo.cost}
               {language.moneyUnit}
             </li>
           </ul>
           <div className="djm-readPage-content clearfloat">
             <div
               className="djm-readPage-content-left"
-              dangerouslySetInnerHTML={{ __html: temporary.content }}
-              ref={ele => (this.childEle = ele)}
+              dangerouslySetInnerHTML={{ __html: articleInfo.content }}
+              ref={(ele) => {
+                this.childEle = ele;
+              }}
             />
             <ReadPageRight
               {...this.props}
-              wordCount={this.state.wordCount}
-              imgCount={this.state.imgCount}
+              wordCount={wordCount}
+              imgCount={imgCount}
               handleClickLookImg={this.handleClickLookImg}
-              h2Elevator={this.state.h2Elevator}
-              elevatorNum={this.state.elevatorNum}
+              h2Elevator={h2Elevator}
+              elevatorNum={elevatorNum}
               handleClickElevator={this.handleClickElevator}
               // onScrollHeight={this.onScrollHeight}
-              scrollTop={this.state.scrollTop}
+              scrollTop={scrollTop}
               language={language}
-              refScroll={ele => {
+              refScroll={(ele) => {
                 this.refScroll = ele;
               }}
               onMouseEnter={this.onMouseEnter}
               onMouseLeave={this.onMouseLeave}
               // pStyle={this.state.pStyle}
-              ulStyle={this.state.ulStyle}
-              childHeight={this.state.childHeight}
-              mouseDis={this.state.mouseDis}
+              ulStyle={ulStyle}
+              childHeight={childHeight}
+              mouseDis={mouseDis}
             />
           </div>
         </div>
-        {this.state.lookImg ? (
+        {lookImg ? (
           <LookImg
             {...this.props}
-            imgCount={this.state.imgCount}
+            imgCount={imgCount}
             handleClickLookImg={this.handleClickLookImg}
           />
         ) : null}
@@ -348,7 +379,7 @@ class ReadArticle extends React.Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return state;
 }
 

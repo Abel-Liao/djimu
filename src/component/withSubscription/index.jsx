@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import regexFun from "../../public/regex";
+import regexFun from '../../public/regex';
 
 function withSubscription(WrappedComponent) {
   return class extends React.Component {
@@ -16,82 +16,97 @@ function withSubscription(WrappedComponent) {
       this.forUserInfo = this.forUserInfo.bind(this);
       this.handleClickJump = this.handleClickJump.bind(this);
     }
-    handleClickJump(pageName) {
-      this.props.history.push(`/${pageName}`);
+
+    componentWillUnmount() {
+      const { codeTime } = this.state;
+      if (codeTime) {
+        clearInterval(codeTime);
+      }
     }
+
     setUserInfoFun(stateName, element, content) {
-      if (element === "dynamicCode" && (isNaN(content) || content.length > 4)) {
+      /* eslint-disable */
+      if (element === 'dynamicCode' && (isNaN(content) || content.length > 4)) {
         return;
       }
       this.setState(
         Object.assign(this.state[stateName], this.state[stateName], {
-          [element]: content
-        })
+          [element]: content,
+        }),
       );
+      /* eslint-enable */
     }
+
+    handleClickJump(pageName) {
+      const propsObj = this.props;
+      propsObj.history.push(`/${pageName}`);
+    }
+
     forUserInfo() {
+      /* eslint-disable */
       for (const key in this.state.userInfo) {
-        if (this.state.userInfo[key] === "") {
-          this.setState({ errorText: [key] + "Null" });
+        if (this.state.userInfo[key] === '') {
+          this.setState({ errorText: `${[key]}Null` });
           return false;
         }
       }
+      /* eslint-enable */
       return true;
     }
+
     handleClickregister() {
       const isNull = this.forUserInfo();
       if (isNull) {
+        const propsObj = this.props;
         // this.props.history.push("/");
-        this.props.history.goBack(-1);
+        propsObj.history.goBack(-1);
       }
     }
+
     handleOnBlur(element, event) {
-      if (this.state.userInfo[element] === "") {
+      const { userInfo } = this.state;
+      if (userInfo[element] === '') {
         this.forUserInfo();
         return;
       }
       if (!regexFun(element, event.target.value)) {
-        this.setState({ errorText: [element] + "Text" });
-        return;
+        this.setState({ errorText: `${[element]}Text` });
       }
     }
+
     handleChangeInput(element, event) {
-      this.setUserInfoFun("userInfo", element, event.target.value);
+      this.setUserInfoFun('userInfo', element, event.target.value);
       if (regexFun(element, event.target.value)) {
-        this.setUserInfoFun("errorInfo", element, true);
+        this.setUserInfoFun('errorInfo', element, true);
         this.setState({ errorText: null });
+        const { errorInfo } = this.state;
         this.setState({
-          error:
-            this.state.errorInfo.email &&
-            this.state.errorInfo.password &&
-            this.state.errorInfo.dynamicCode
+          error: errorInfo.email && errorInfo.password && errorInfo.dynamicCode,
         });
       } else {
-        this.setUserInfoFun("errorInfo", element, false);
+        this.setUserInfoFun('errorInfo', element, false);
       }
     }
+
     handleClickClear(element) {
       this.setState({ error: false });
-      this.setUserInfoFun("userInfo", element, "");
+      this.setUserInfoFun('userInfo', element, '');
     }
+
     handleClickDynamicCode() {
       this.setState({ codeNumber: 59 });
       this.setState({
         codeTime: setInterval(() => {
-          this.setState({ codeNumber: this.state.codeNumber - 1 });
-          if (this.state.codeNumber === -1) {
-            clearInterval(this.state.codeTime);
+          const { codeNumber, codeTime } = this.state;
+          this.setState({ codeNumber: codeNumber - 1 });
+          if (codeNumber === -1) {
+            clearInterval(codeTime);
             this.setState({ codeNumber: 60 });
           }
-        }, 1000)
+        }, 1000),
       });
     }
-    componentWillUnmount() {
-      clearInterval(this.state.codeTime);
-    }
-    static getDerivedStateFromProps(nextProps, prevState) {
-      return null;
-    }
+
     render() {
       // const clickFun = {
       //   handleClickregister: this.handleClickregister,
