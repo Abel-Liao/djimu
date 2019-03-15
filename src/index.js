@@ -1,9 +1,10 @@
+// 兼容ie浏览器
+import '@babel/polyfill';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
-// 兼容ie浏览器
-import '@babel/polyfill';
 
 import createStore from './redux';
 
